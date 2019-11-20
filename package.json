@@ -1,0 +1,24 @@
+{
+  "name": "stuath-success-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uww-student-athlete-success/stuath-success-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uww-student-athlete-success/stuath-success-web/issues"
+  },
+  "homepage": "https://github.com/uww-student-athlete-success/stuath-success-web#readme",
+  "proxy": "http://localhost:5000",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
