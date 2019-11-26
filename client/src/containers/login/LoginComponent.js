@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
@@ -10,6 +10,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import FormControl from '@material-ui/core/FormControl'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputAdornment from '@material-ui/core/InputAdornment'
+import { Link } from 'react-router-dom'
 
 import { withStyles } from '@material-ui/core/styles'
 
@@ -60,7 +61,7 @@ const styles = (theme) => ({
 })
 
 
-class LoginComponent extends React.Component {
+class LoginComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -113,13 +114,33 @@ class LoginComponent extends React.Component {
         })
     }
 
+    buttonsDisplay = () => {
+        const { classes } = this.props
+        const StudentLink = () => <Link to="/signUpStudent" />
+        const CoachLink = () => <Link to="/signUpCoach" />
+
+        return(
+            <div>
+                <Button
+                    component={StudentLink}
+                    className={classes.button}
+                >I am a student</Button>
+                <Button
+                    component={CoachLink}
+                    className={classes.button}
+                >I am a choach
+                </Button>
+            </div>
+        )
+    }
+
     render() {
         const { classes } = this.props
 
         return(
             <div>
                 <div className={classes.left}>
-                    <img src={require("../../assets/new-hall.jpg")} className={classes.image}/>
+                    <img src={require("../../assets/new-hall.jpg")} className={classes.image} alt="New hall" />
                 </div>
                 <div id="right-container">
                     <Grid container spacing={2} className={classes.contain}>
@@ -162,15 +183,33 @@ class LoginComponent extends React.Component {
                                 color="primary" 
                                 className={classes.button}
                                 >Sign in</Button>
-                            <Typography>Don't have an account? <Typography onClick={this.handleSignUpClick} color="primary">Sign up</Typography></Typography> 
+                            <Typography>Don't have an account? 
+                                <Typography 
+                                    color="primary" 
+                                    onClick={this.handleSignUpClick}
+                                    style={{display: 'inline-block', marginLeft: '6px'}}>Sign up
+                                </Typography>
+                            </Typography>
                         </Grid>
                         }
                         {this.state.showSignUpOptions && 
                             <Grid item xs={6} className={classes.gridItem}>
                                 <Typography variant="h4" style={{marginBottom: "32px"}}>Are you a student or coach?</Typography>
-                                <Button variant="contained" color="primary" className={classes.button}>I am a student</Button>
-                                <Button variant="contained" color="secondary" className={classes.button}>I am a coach</Button>
-                                <Typography>Have an account? <a href="">Sign in</a></Typography>
+                                <Button 
+                                    variant="contained"
+                                    style={{marginBottom: '16px', width: '100%'}}
+                                    color="primary" 
+                                    component={Link} 
+                                    to="/signUpStudent">I am a student
+                                </Button>
+                                <Button 
+                                    variant="contained"
+                                    style={{marginBottom: '32px', width: '100%'}}
+                                    color="secondary"
+                                    component={Link}
+                                    to="/signUpCoach">I am a coach
+                                </Button>
+                                <Typography>Have an account? <a href="/login">Sign in</a></Typography>
                             </Grid>
                         }
                     </Grid>
