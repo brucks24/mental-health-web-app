@@ -10,7 +10,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import FormControl from '@material-ui/core/FormControl'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import { Link } from 'react-router-dom'
+import Link from '@material-ui/core/Link'
 
 import { withStyles } from '@material-ui/core/styles'
 
