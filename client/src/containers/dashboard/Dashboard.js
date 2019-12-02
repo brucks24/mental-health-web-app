@@ -5,15 +5,17 @@ import useStyles from './styles'
 
 import { useLayoutState } from '../../context/LayoutContext'
 
-export default function Dashboard(props) {
+function Dashboard(props) {
   const classes = useStyles()
 
   var [isAuthed, setIsAuth] = useState(false)
   var [isLoading, setIsLoading] = useState(false)
 
   return (
-    <Header />
+    <div className={classes.root}>
+      <Header history={props.history}/>
+    </div>
   )
 }
 
-//export default withRouter(Dashboard)
+export default Dashboard

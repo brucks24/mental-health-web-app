@@ -1,40 +1,48 @@
-import AppBar from '@material-ui/core/AppBar'
-import IconButton from '@material-ui/core/IconButton'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import { makeStyles } from '@material-ui/core/styles'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import AccountCircle from '@material-ui/icons/AccountCircle'
-import MenuIcon from '@material-ui/icons/Menu'
-import React from 'react'
+import React, { useState } from 'react'
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  InputBase,
+  Menu,
+  MenuItem,
+  Fab,
+  Link,
+  Button,
+  Typography,
+  Badge
+} from "@material-ui/core";
+import {
+  Menu as MenuIcon,
+  MailOutline as MailIcon,
+  NotificationsNone as NotificationsIcon,
+  Person as AccountIcon,
+  Search as SearchIcon,
+  Send as SendIcon,
+  ArrowBack as ArrowBackIcon,
+} from "@material-ui/icons";
+
 import useStyles from './styles'
+import classNames from 'classnames'
 
 import {
   useLayoutState,
   useLayoutDispatch,
   toggleSidebar
 } from '../../context/LayoutContext'
-import { useUserDispatch, signOut } from '../../context/UserContext'
- 
-export default function Header() {
+import { useUserDispatch, signOut, useUserState } from '../../context/UserContext'
+
+export default function Header(props) {
   const classes = useStyles();
+  var { isAuthenticated } = useUserState()
+  console.log(isAuthenticated)
+  isAuthenticated = true
+
+  var layoutState = useLayoutState()
+  var layoutDispatch = useLayoutDispatch()
+  var userDispatch = useUserDispatch()
   
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleChange = event => {
-    setAuth(event.target.checked);
-  };
-
-  const handleMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  var [profileMenu, setProfileMenu] = useState(null)
 
   return (
     <div className={classes.root}>
@@ -44,37 +52,19 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Photos
-            </Typography>
-          {auth && (
+            UWW Student Athlete System
+          </Typography>
+          {isAuthenticated && (
             <div>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={handleMenu}
+                onClick={e => setProfileMenu(e.currentTarget)}
                 color="inherit"
               >
-                <AccountCircle />
+                <AccountIcon />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
             </div>
           )}
         </Toolbar>

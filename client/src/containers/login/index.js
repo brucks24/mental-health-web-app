@@ -1,2 +1,2 @@
-import LoginComponent from './LoginComponent'
-export default LoginComponent
+import Login from './Login'
+export default Login
