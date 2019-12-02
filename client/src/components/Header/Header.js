@@ -41,34 +41,101 @@ export default function Header(props) {
   var layoutState = useLayoutState()
   var layoutDispatch = useLayoutDispatch()
   var userDispatch = useUserDispatch()
-  
+
   var [profileMenu, setProfileMenu] = useState(null)
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            UWW Student Athlete System
-          </Typography>
-          {isAuthenticated && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={e => setProfileMenu(e.currentTarget)}
-                color="inherit"
-              >
-                <AccountIcon />
-              </IconButton>
-            </div>
+    <AppBar position="fixed" className={classes.appBar}>
+      <Toolbar className={classes.toolbar}>
+        <IconButton
+          color="inherit"
+          onClick={() => toggleSidebar(layoutDispatch)}
+          className={classNames(
+            classes.headerMenuButton,
+            classes.headerMenuButtonCollapse,
           )}
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+        >
+          {layoutState.isSidebarOpened ? (
+            <ArrowBackIcon
+              classes={{
+                root: classNames(
+                  classes.headerIcon,
+                  classes.headerIconCollapse,
+                ),
+              }}
+            />
+          ) : (
+              <MenuIcon
+                classes={{
+                  root: classNames(
+                    classes.headerIcon,
+                    classes.headerIconCollapse,
+                  ),
+                }}
+              />
+            )}
+        </IconButton>
+        <Typography variant="h6" weight="medium" className={classes.logotype}>
+          UWW Student Athlete Support
+        </Typography>
+        <div className={classes.grow} />
+        <Menu
+          id="profile-menu"
+          open={Boolean(profileMenu)}
+          anchorEl={profileMenu}
+          onClose={() => setProfileMenu(null)}
+          className={classes.headerMenu}
+          classes={{ paper: classes.profileMenu }}
+          disableAutoFocusItem
+        >
+          <div className={classes.profileMenuUser}>
+            <Typography variant="h4" weight="medium">
+              John Smith
+            </Typography>
+            <Typography
+              className={classes.profileMenuLink}
+              component="a"
+              color="primary"
+              href="https://flatlogic.com"
+            >
+              Flalogic.com
+            </Typography>
+          </div>
+          <MenuItem
+            className={classNames(
+              classes.profileMenuItem,
+              classes.headerMenuItem,
+            )}
+          >
+            <AccountIcon className={classes.profileMenuIcon} /> Profile
+          </MenuItem>
+          <MenuItem
+            className={classNames(
+              classes.profileMenuItem,
+              classes.headerMenuItem,
+            )}
+          >
+            <AccountIcon className={classes.profileMenuIcon} /> Tasks
+          </MenuItem>
+          <MenuItem
+            className={classNames(
+              classes.profileMenuItem,
+              classes.headerMenuItem,
+            )}
+          >
+            <AccountIcon className={classes.profileMenuIcon} /> Messages
+          </MenuItem>
+          <div className={classes.profileMenuUser}>
+            <Typography
+              className={classes.profileMenuLink}
+              color="primary"
+              onClick={() => signOut(userDispatch, props.history)}
+            >
+              Sign Out
+            </Typography>
+          </div>
+        </Menu>
+      </Toolbar>
+    </AppBar>
+  )
 }

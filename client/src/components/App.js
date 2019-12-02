@@ -11,7 +11,7 @@ import { useUserState } from '../context/UserContext'
 
 export default function App() {
   var { isAuthenticated } = useUserState()
-  isAuthenticated = false
+  isAuthenticated = true
   console.log(isAuthenticated)
 
   return (

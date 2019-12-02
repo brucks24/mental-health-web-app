@@ -70,7 +70,7 @@ export default function Login() {
 						<Grid item xs={6} className={classes.gridItem}>
 							<Typography variant="h4">Sign in</Typography>
 							<Typography style={{ marginBottom: "32px" }}>Sign in with email and password</Typography>
-							<form>
+							<form action="/login" method="POST">
 								<TextField
 									className={classes.textInput}
 									required
@@ -97,12 +97,13 @@ export default function Login() {
 											</InputAdornment>
 									}}
 								/>
+								<Button
+									type="submit"
+									variant="contained"
+									color="primary"
+									className={classes.button}
+								>Sign in</Button>
 							</form>
-							<Button
-								variant="contained"
-								color="primary"
-								className={classes.button}
-							>Sign in</Button>
 							<Typography>Don't have an account?
 							<Typography
 									color="primary"
@@ -116,6 +117,7 @@ export default function Login() {
 						<Grid item xs={6} className={classes.gridItem}>
 							<Typography variant="h4" style={{ marginBottom: "32px" }}>Are you a student or coach?</Typography>
 							<Button
+								className={classes.button}
 								variant="contained"
 								style={{ marginBottom: '16px', width: '100%' }}
 								color="primary"
@@ -123,6 +125,7 @@ export default function Login() {
 								to="/signUpStudent">I am a student
                                 </Button>
 							<Button
+								className={classes.button}
 								variant="contained"
 								style={{ marginBottom: '32px', width: '100%' }}
 								color="secondary"

@@ -38,8 +38,8 @@ function useLayoutDispatch() {
 	var context = React.useContext(LayoutDispatchContext)
 	if(context === undefined) {
 		throw new Error("useLayoutDispatch must be used within a LayoutProvider")
-		return context
 	}
+	return context
 }
 
 export { LayoutProvider, useLayoutState, useLayoutDispatch, toggleSidebar }

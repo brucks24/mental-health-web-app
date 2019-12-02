@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import Header from '../../components/Header'
 import useStyles from './styles'
+
+import Header from '../../components/Header'
+import Sidebar from '../../components/Sidebar'
 
 import { useLayoutState } from '../../context/LayoutContext'
 
@@ -14,6 +16,7 @@ function Dashboard(props) {
   return (
     <div className={classes.root}>
       <Header history={props.history}/>
+      <Sidebar />
     </div>
   )
 }
