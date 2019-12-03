@@ -1,9 +1,8 @@
 import React from 'react';
 import { Switch, Route, Redirect, HashRouter } from 'react-router-dom'
-import LoginComponent from '../containers/login'
 import { SignUpStudent, SignUpCoach } from '../containers/signup'
 
-import Login from '../containers/login'
+import NewLogin from '../containers/login'
 import Dashboard from '../containers/dashboard'
 import Error from '../containers/error'
 
@@ -11,7 +10,7 @@ import { useUserState } from '../context/UserContext'
 
 export default function App() {
   var { isAuthenticated } = useUserState()
-  isAuthenticated = true
+  //isAuthenticated = false
   console.log(isAuthenticated)
 
   return (
@@ -25,7 +24,7 @@ export default function App() {
         />
 
         <PrivateRoute path="/app" component={Dashboard} />
-        <PublicRoute path="/login" component={Login} />
+        <PublicRoute path="/login" component={NewLogin} />
         <Route component={Error} />
       </Switch>
     </HashRouter>

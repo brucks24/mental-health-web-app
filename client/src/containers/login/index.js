@@ -1,2 +1,2 @@
-import Login from './Login'
-export default Login
+import NewLogin from './NewLogin'
+export default NewLogin
