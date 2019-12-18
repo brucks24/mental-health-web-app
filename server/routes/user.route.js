@@ -4,7 +4,8 @@ import * as panicCtrl from '../controllers/panic.controller';
 import isAuthenticated from '../middlewares/authenticate';
 import validate from '../config/joi.validate';
 import schema from '../utils/validator';
-import { sendPanicEmail } from '../config/mail';
+require('dotenv').config()
+
 
 var nodemailer = require('nodemailer');
 
@@ -91,37 +92,37 @@ const router = express.Router();
 
 router.route('/')
 
-/**
- * @swagger
- * /users:
- *   post:
- *     tags:
- *       - user
- *     summary: "Create a new user"
- *     security:
- *        - Bearer: []
- *     operationId: storeUser
- *     consumes:
- *       - application/json
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: body
- *         in: body
- *         description: Created user object
- *         required: true
- *         schema:
- *           $ref: "#/definitions/User"
- *     responses:
- *       200:
- *         description: OK
- *         schema:
- *           $ref: "#/definitions/User"
- *       403:
- *          description: User not found
- *          schema:
- *             $ref: '#/definitions/Error'
- */
+    /**
+     * @swagger
+     * /users:
+     *   post:
+     *     tags:
+     *       - user
+     *     summary: "Create a new user"
+     *     security:
+     *        - Bearer: []
+     *     operationId: storeUser
+     *     consumes:
+     *       - application/json
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: body
+     *         in: body
+     *         description: Created user object
+     *         required: true
+     *         schema:
+     *           $ref: "#/definitions/User"
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           $ref: "#/definitions/User"
+     *       403:
+     *          description: User not found
+     *          schema:
+     *             $ref: '#/definitions/Error'
+     */
 
     .post(validate(schema.storeUser), (req, res) => {
         userCtrl.store(req, res);
@@ -147,43 +148,43 @@ router.route('/')
      *            type: object
      */
 
-    .get( (req, res) => {
+    .get((req, res) => {
         userCtrl.findAll(req, res);
     });
 
 
 router.route('/:id')
 
-/**
- * @swagger
- * /users/{id}:
- *   get:
- *     tags:
- *       - user
- *     summary: Find the user by ID
- *     operationId: findById
- *     consumes:
- *       - application/json
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: id
- *         in: path
- *         description: id of user that needs to be fetched
- *         required: true
- *         type: integer
- *     responses:
- *       200:
- *         description: OK
- *         schema:
- *           $ref: "#/definitions/User"
- *       404:
- *          description: User not found
- *          schema:
- *             $ref: '#/definitions/Error'
- */
+    /**
+     * @swagger
+     * /users/{id}:
+     *   get:
+     *     tags:
+     *       - user
+     *     summary: Find the user by ID
+     *     operationId: findById
+     *     consumes:
+     *       - application/json
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: id
+     *         in: path
+     *         description: id of user that needs to be fetched
+     *         required: true
+     *         type: integer
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           $ref: "#/definitions/User"
+     *       404:
+     *          description: User not found
+     *          schema:
+     *             $ref: '#/definitions/Error'
+     */
 
-    .get( (req, res) => {
+    .get((req, res) => {
         userCtrl.findById(req, res);
     })
 
@@ -255,46 +256,18 @@ router.route('/:id')
         userCtrl.destroy(req, res);
     });
 
-    /**
-     * @swagger
-     * /user/panic:
-     *  panic:
-     *      tags:
-     *          - user
-     *      summary: User presses the panic button
-     *      security:
-     *          - 
-     */
+/**
+ * @swagger
+ * /user/panic:
+ *  panic:
+ *      tags:
+ *          - user
+ *      summary: User presses the panic button
+ *      security:
+ *          - 
+ */
 router.route('/panic').post((req, res) => {
-    var transport = nodemailer.createTransport({
-        host: "smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-          user: "763a1145ed6ff9",
-          pass: "590d7a828893fa"
-        }
-      });
-    
-    const mailOptions = {
-        from: req.body.email,
-        to: 'butlerja23@uww.edu',
-        subject: '(TEST) PANIC BUTTON HAS BEEN PRESSED',
-        text: `${req.body.name} has clicked the panic button`
-    }
-    
-    transport.sendMail(mailOptions, (err, info) => {
-        if (err) {
-            console.log(err)
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                error: err
-            });
-        } else {
-            console.log(`Email sent: ${info.response}`);
-            res.status(HttpStatus.OK).json({
-                info: info.response
-            });
-        }
-    });
-})
+    panicCtrl.sendPanic(req, res);
+});
 
 export default router;

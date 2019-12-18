@@ -1,32 +1,32 @@
-import HttpStatus from 'http-status-codes';
+require('dotenv').config();
 import nodemailer from 'nodemailer';
 
 export function sendPanic(req, res) {
+    console.log('---', req.body);
     var transport = nodemailer.createTransport({
-        host: "smtp.mailtrap.io",
-        port: 2525,
+        service: process.env.SERVICE,
         auth: {
-          user: "763a1145ed6ff9",
-          pass: "590d7a828893fa"
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
         }
-      });
+    })
 
     const mailOptions = {
-        from: 'guitar423@gmail.com',
+        from: `[CRITICAL] UWW SAS <${process.env.EMAIL}>`,
         to: 'butlerja23@uww.edu',
         subject: '(TEST) PANIC BUTTON HAS BEEN PRESSED',
-        text: `Someone has clicked the panic button`
+        text: `${req.body.name} has clicked the panic button`,
     }
 
     transport.sendMail(mailOptions, (err, info) => {
         if (err) {
             console.log(err)
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+            res.status(500).json({
                 error: err
             });
         } else {
             console.log(`Email sent: ${info.response}`);
-            res.status(HttpStatus.OK).json({
+            res.status(200).json({
                 info: info.response
             });
         }

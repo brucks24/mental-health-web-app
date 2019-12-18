@@ -1,55 +1,211 @@
-MySQL, Express, React/Redux and Node Boilerplate in ES6/ES7
+# UWW Student Athlete Support System
 
-## Get Started
+UWW SASS is a information/social media support platform for student athletes and coaches built on:
+  - React
+  - NodeJS
+  - MySQL
+  - Express
+  - Webpack
+  - And more..
 
-### 1. Prerequisites
+# New Features!
+  - Panic button to alert coaches or staff of a critical event
+  - Blank pages in the sidebar for content related to the side (boilerplate code)
 
-- [NodeJs](https://nodejs.org/en/)
-- [NPM](https://npmjs.org/) - Node package manager
+### Installation
 
-### 2. Installation
+UWW SASS requires [Node.js](https://nodejs.org/) v10+ to run.
 
-On the command prompt run the following commands:
+Install the dependencies and start the DEVELOPMENT server.
 
-``` 
- $ git clone https://github.com/Bikranshu/express-react-boilerplate.git
- $ cd express-react-boilerplate
- $ cp .env.example .env (edit it with your secret key and database information)
- $ npm install
- $ npm run migrate
- ```
- Finally, start and build the application:
- 
- ```
- $ npm run build (For development)
- $ npm run build:prod (For production)
+```sh
+$ cd stuath-system-web
+$ npm install
+$ npm run build
 ```
 
-List of NPM Commands:
- 
-  ```
-  $ npm run lint       # linting
-  $ npm run clean      # remove dist and node_modules folder and install dependencies
- ```
+For production environments...
 
-### 3. Usage
+```sh
+$ npm install
+$ npm run build:prod
+```
 
-URL : http://localhost:3000/
+# START HERE
 
-Navigate to http://localhost:3000/swagger for the API documentation.
+### Useful Links
+* Web framework for Node.js - [Express]
+* JavaScript ORM for Node.js - [Bookshelf]
+* SQL Query Builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle - [Knex]
+* JSON Web Tokens(jwt) - [jsonwebtoken]
+* Logging Library - [Winston]
+* Object schema validation - [Joi]
+* API documentation using [swagger-jsdoc] and [swagger-ui]
+* JavaScript library for building user interfaces - [React]
+* Predictable state container - [Redux]
+* A React component library implementing Google's Material Design - [Material-UI]
+* Redux Form - [Redux Form]
+* Declarative routing for React - [React-Router]
+* Promise based HTTP client - [Axios]
+* Code linting tool - [ESLint]
 
-### 4. Useful Link
-- Web framework for Node.js - [Express](http://expressjs.com/)
-- JavaScript ORM  for Node.js - [Bookshelf](http://bookshelfjs.org/)
-- SQL Query Builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle - [Knex](http://knexjs.org/)
-- JSON Web Tokens(jwt) - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-- Logging Library - [Winston](https://www.npmjs.com/package/winston)
-- Object schema validation  - [Joi](https://www.npmjs.com/package/joi)
-- API documentation using [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc) and [swagger-ui](https://www.npmjs.com/package/swagger-ui)
-- JavaScript library for building user interfaces - [React](https://facebook.github.io/react/)
-- Predictable state container - [Redux](http://redux.js.org/)
-- A React component library implementing Google's Material Design - [Material-UI](https://material-ui-1dab0.firebaseapp.com/)
-- Redux Form - [Redux Form](http://redux-form.com/8.2.6/)
-- Declarative routing for React - [React-Router](https://reacttraining.com/react-router/)
-- Promise based HTTP client - [Axios](https://github.com/mzabriskie/axios)
-- Code linting tool - [ESLint](http://eslint.org/)
+### Server file structure
+server
+ ┣ config 
+ ┃ ┣ bookshelf.js
+ ┃ ┣ database.js
+ ┃ ┣ directory.js
+ ┃ ┣ express.js
+ ┃ ┣ joi.validate.js
+ ┃ ┣ knex.js
+ ┃ ┣ mail.js
+ ┃ ┣ swagger.js
+ ┃ ┗ winston.js
+ ┣ controllers
+ ┃ ┣ auth.controller.js
+ ┃ ┣ panic.controller.js
+ ┃ ┗ user.controller.js
+ ┣ middlewares
+ ┃ ┣ authenticate.js
+ ┃ ┣ errorHandler.js
+ ┃ ┗ joiErrorHandler.js
+ ┣ migrations
+ ┃ ┗ 20170715222060_create_users_table.js
+ ┣ models
+ ┃ ┗ user.model.js
+ ┣ routes
+ ┃ ┣ auth.route.js
+ ┃ ┣ index.route.js
+ ┃ ┣ panic.route.js
+ ┃ ┗ user.route.js
+ ┣ utils
+ ┃ ┗ validator.js
+ ┗ app.js
+
+### Client file structure
+client
+ ┣ actions
+ ┃ ┣ authAction.js
+ ┃ ┣ commonAction.js
+ ┃ ┣ crudAction.js
+ ┃ ┣ uiActions.js
+ ┃ ┗ userActions.js
+ ┣ components
+ ┃ ┣ auth
+ ┃ ┃ ┣ LoginForm.js
+ ┃ ┃ ┣ RegisterForm.js
+ ┃ ┃ ┗ styles.js
+ ┃ ┣ chat
+ ┃ ┃ ┣ Chat.js
+ ┃ ┃ ┗ styles.js
+ ┃ ┣ common
+ ┃ ┃ ┣ drawer
+ ┃ ┃ ┃ ┣ components
+ ┃ ┃ ┃ ┃ ┣ Dot.js
+ ┃ ┃ ┃ ┃ ┣ PanicButton.js
+ ┃ ┃ ┃ ┃ ┣ SidebarLink.js
+ ┃ ┃ ┃ ┃ ┗ styles.js
+ ┃ ┃ ┃ ┣ Sidebar.js
+ ┃ ┃ ┃ ┗ styles.js
+ ┃ ┃ ┣ form
+ ┃ ┃ ┃ ┣ renderText.js
+ ┃ ┃ ┃ ┗ selectText.js
+ ┃ ┃ ┣ header
+ ┃ ┃ ┃ ┣ Header.js
+ ┃ ┃ ┃ ┗ styles.js
+ ┃ ┃ ┣ layout
+ ┃ ┃ ┃ ┗ MainLayout.js
+ ┃ ┃ ┣ snackbar
+ ┃ ┃ ┃ ┣ CustomizedSnackbar.js
+ ┃ ┃ ┃ ┗ DefaultSnackbar.js
+ ┃ ┃ ┗ user
+ ┃ ┃ ┃ ┗ userName.js
+ ┃ ┣ dashboard
+ ┃ ┃ ┣ Chat.js
+ ┃ ┃ ┣ Dashboard.js
+ ┃ ┃ ┣ styles.js
+ ┃ ┃ ┗ SummaryBox.js
+ ┃ ┣ error
+ ┃ ┃ ┗ NotFound.js
+ ┃ ┣ people
+ ┃ ┃ ┣ People.js
+ ┃ ┃ ┗ styles.js
+ ┃ ┣ settings
+ ┃ ┃ ┣ Settings.js
+ ┃ ┃ ┗ styles.js
+ ┃ ┗ teams
+ ┃ ┃ ┣ styles.js
+ ┃ ┃ ┗ Teams.js
+ ┣ config
+ ┃ ┗ config.js
+ ┣ constants
+ ┃ ┣ actionType.js
+ ┃ ┗ entity.js
+ ┣ containers
+ ┃ ┣ app
+ ┃ ┃ ┗ AppContainer.js
+ ┃ ┣ auth
+ ┃ ┃ ┣ LoginContainer.js
+ ┃ ┃ ┗ SignUpContainer.js
+ ┃ ┣ chat
+ ┃ ┃ ┗ ChatContainer.js
+ ┃ ┣ dashboard
+ ┃ ┃ ┗ DashboardContainer.js
+ ┃ ┣ people
+ ┃ ┃ ┗ PeopleContainer.js
+ ┃ ┣ settings
+ ┃ ┃ ┗ SettingsContainer.js
+ ┃ ┗ teams
+ ┃ ┃ ┗ TeamsContainer.js
+ ┣ reducers
+ ┃ ┣ authReducer.js
+ ┃ ┣ crudReducer.js
+ ┃ ┣ index.js
+ ┃ ┣ uiReducer.js
+ ┃ ┗ userReducer.js
+ ┣ routers
+ ┃ ┣ PrivateRoute.js
+ ┃ ┣ PublicRoute.js
+ ┃ ┣ RestrictRoute.js
+ ┃ ┗ routes.js
+ ┣ services
+ ┃ ┣ authService.js
+ ┃ ┣ httpService.js
+ ┃ ┣ tokenService.js
+ ┃ ┣ uiService.js
+ ┃ ┗ userService.js
+ ┣ store
+ ┃ ┗ configureStore.js
+ ┣ utils
+ ┃ ┣ commonUtil.js
+ ┃ ┣ history.js
+ ┃ ┣ httpBaseUtil.js
+ ┃ ┣ httpUtil.js
+ ┃ ┣ jwtUtil.js
+ ┃ ┣ serializeUtil.js
+ ┃ ┗ storageUtil.js
+ ┗ main.js
+
+### 
+
+### Todos
+
+ - Write MORE Tests
+ - Add Night Mode
+
+[//]: #
+   [Express]: <http://expressjs.com/>
+   [Bookshelf]: <http://bookshelfjs.org/>
+   [Knex]: <http://knexjs.org/>
+   [jsonwebtoken]: <https://www.npmjs.com/package/jsonwebtoken>
+   [Winston]: <https://www.npmjs.com/package/winston>
+   [Joi]: <https://www.npmjs.com/package/joi>
+   [swagger-jsdoc]: <https://www.npmjs.com/package/swagger-jsdoc>
+   [swagger-ui]: <https://www.npmjs.com/package/swagger-ui>
+   [React]: <https://facebook.github.io/react/>
+   [Redux]: <http://redux.js.org/>
+   [Material-UI]: <https://material-ui-1dab0.firebaseapp.com/>
+   [Redux Form]: <http://redux-form.com/8.2.6/>
+   [React-Router]: <https://reacttraining.com/react-router/>
+   [Axios]: <https://github.com/mzabriskie/axios>
+   [ESLint]: <http://eslint.org/>
