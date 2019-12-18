@@ -22,8 +22,8 @@ class SignUpContainer extends Component {
      * @param {object} formProps
      */
     submitForm(formProps) {
-
-        this.props.actions.submitForm(USERS, formProps);
+        console.log(formProps)
+        //this.props.actions.submitForm(USERS, formProps);
     }
 
     render() {
@@ -34,7 +34,6 @@ class SignUpContainer extends Component {
             />
         );
     }
-
 }
 
 /**

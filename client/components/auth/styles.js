@@ -59,7 +59,7 @@ export default makeStyles(theme => ({
     greeting: {
         fontWeight: 500,
         textAlign: "center",
-        marginTop: theme.spacing(4),
+        margin: theme.spacing(4),
     },
     subGreeting: {
         fontWeight: 500,
@@ -98,12 +98,9 @@ export default makeStyles(theme => ({
     textField: {
         borderBottomColor: theme.palette.background.light,
     },
-    formButtons: {
-        width: "100%",
-        marginTop: theme.spacing(4),
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
+    buttons: {
+        marginTop: theme.spacing(2),
+        width: "100%"
     },
     forgetButton: {
         textTransform: "none",
@@ -114,5 +111,8 @@ export default makeStyles(theme => ({
     },
     signUpText: {
         marginTop: theme.spacing(4)
+    },
+    accountType: {
+        width: "100%"
     }
 }));

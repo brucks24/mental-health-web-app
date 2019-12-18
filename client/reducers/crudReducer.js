@@ -9,9 +9,9 @@ import {
 
 
 let initialState = {
-    products: [],
+    users: [],
     selectedItem: {
-        product: {},
+        user: {},
     }
 };
 

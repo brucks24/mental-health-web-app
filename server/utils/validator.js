@@ -3,8 +3,6 @@ import Joi from 'joi';
 export default {
     storeUser: {
         body: {
-            //first_name: Joi.string().required(),
-            //last_name: Joi.string().required(),
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),
             email: Joi.string().email().required(),

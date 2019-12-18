@@ -6,9 +6,9 @@ import swaggerJSDoc from 'swagger-jsdoc';
  */
 const swaggerDefinition = {
     info: {
-        title: 'Express React Boilerplate',
+        title: 'UWW Student Athlete System',
         version: '1.0.0',
-        description: 'RESTful API description with Swagger',
+        description: 'Student athlete wellness system using react',
     },
     host: 'localhost:3000',
     basePath: '/api'

@@ -4,6 +4,7 @@ import routes from './routes/index.route';
 import swagger from './config/swagger';
 import * as errorHandler from './middlewares/errorHandler';
 import joiErrorHandler from './middlewares/joiErrorHandler';
+import cors from 'cors'
 
 // enable webpack hot module replacement in development mode
 import webpack from 'webpack';
@@ -12,7 +13,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack/webpack.config.dev';
 
 if (process.env.NODE_ENV === 'development') {
-
     const compiler = webpack(webpackConfig);
     app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
     app.use(webpackHotMiddleware(compiler));

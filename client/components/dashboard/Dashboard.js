@@ -61,7 +61,6 @@ const Dashboard = () => {
                     <Chat data={data.recentChats}/>
                 </Grid>
             </Grid>
-
         </div>
     );
 };

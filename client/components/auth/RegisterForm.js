@@ -8,16 +8,27 @@ import {
   Typography,
   Button,
   Fade,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormLabel,
+  FormControlLabel
 } from "@material-ui/core";
 
 // Import custom components
 import renderText from '../common/form/renderText';
+import selectText from '../common/form/selectText';
 
 import useStyles from './styles'
 
 function RegisterForm(props) {
   const classes = useStyles()
-  const { handleSubmit, onSubmit, errorMessages } = props
+  const [accountType, setAccountType] = React.useState("student");
+  const { handleSubmit, onSubmit, errorMessages } = props;
+
+  const handleChange = event => {
+    setAccountType(event.target.value);
+  }
 
   return (
     <Grid container className={classes.container}>
@@ -34,13 +45,25 @@ function RegisterForm(props) {
               {errorMessages}
             </Typography>
           </Fade>
-          <Field 
+          <FormControl>
+            <FormLabel component="legend">Select an account type</FormLabel>
+            <RadioGroup 
+              aria-label="acount-type" 
+              name="acount-type" 
+              value={accountType}
+              onChange={handleChange}
+            >
+              <FormControlLabel value="student" control={<Radio />} label="Student" />
+              <FormControlLabel value="coach" control={<Radio />} label="Coach" />    
+            </RadioGroup>
+          </FormControl>
+          <Field
             type="text"
             name="firstName"
             component={renderText}
             label="First name"
           />
-          <Field 
+          <Field
             type="text"
             name="lastName"
             component={renderText}
@@ -52,14 +75,26 @@ function RegisterForm(props) {
             component={renderText}
             label="Email"
           />
-          <Field 
+          <Field
+            type="text"
+            name="phone"
+            component={renderText}
+            label="Phone number"
+          />
+          <Field
             type="password"
             name="password"
             component={renderText}
             label="Password"
           />
-          <div className={classes.formButtons}>
-            <Button
+          {accountType === "coach" && <Field
+            type="password"
+            name="coachKey"
+            component={renderText}
+            label="Coach key"
+          />}
+          <Button
+              className={classes.buttons}
               variant="contained"
               color="primary"
               size="large"
@@ -67,41 +102,43 @@ function RegisterForm(props) {
             >
               Create New Account
             </Button>
-          </div>
         </form>
         <Typography className={classes.signUpText}>
-            Already have an account? <Link to={'/'}>Login</Link>
+          Already have an account? <Link to={'/'}>Login</Link>
         </Typography>
       </div>
     </Grid>
   )
 }
 
-const validateLogin = values => {
-    const errors = {};
+const validateRegister = values => {
+  const errors = {};
 
-    const requiredFields = [
-        'email',
-        'password'
-    ];
-    requiredFields.forEach(field => {
-        if (!values[field]) {
-            errors[field] = '(The ' + field + ' field is required.)';
-        }
-    });
-
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = '(Invalid email address.)';
+  const requiredFields = [
+    'firstName',
+    'lastName',
+    'email',
+    'password',
+    'coachKey'
+  ];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = '(The ' + field + ' field is required.)';
     }
-    return errors
+  });
+
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = '(Invalid email address.)';
+  }
+  return errors
 };
 
 RegisterForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    classes: PropTypes.object.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  //classes: PropTypes.object.isRequired
 }
 
 export default reduxForm({
-    form: 'RegisterForm',
-    validate: validateLogin
+  form: 'RegisterForm',
+  validate: validateRegister
 })(RegisterForm)

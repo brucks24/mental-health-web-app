@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'connected-react-router';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-import {purple} from '@material-ui/core/colors';
+import {purple, red} from '@material-ui/core/colors';
 
 import store, {history} from './store/configureStore';
 import {verifyToken} from './services/tokenService';
@@ -15,7 +15,8 @@ const theme = createMuiTheme({
         useNextVariants: true,
     },
     palette: {
-        primary: purple
+        primary: purple,
+        panic: red
     }
 });
 

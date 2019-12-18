@@ -1,10 +1,20 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as crudAction from '../../../actions/crudAction';
+import * as uiService from '../../../services/uiService';
+import store from '../../../store/configureStore';
+import axios from 'axios';
+
+import {API_URL} from '../../../config/config';
 
 // Import custom components
 import Header from '../header/Header';
 import Sidebar from '../drawer/Sidebar';
+import CustomizedSnackbar from '../snackbar/CustomizedSnackbar';
+import { showInfoSnackbar } from '../../../services/uiService';
 
 const styles = theme => ({
     root: {
@@ -36,25 +46,63 @@ class MainLayout extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {open: true};
+        this.state = {
+            open: true,
+            name: null,
+            email: null,
+            user: null,
+            snackbarOpen: false,
+            snackbarMessage: "This is from Mainlayout",
+            snackbarVariant: 'success',
+        };
+    }
+
+    componentDidMount() {
+        this.fetchUser()
     }
 
     handleToggle = () => this.setState({open: !this.state.open});
 
+    handleSnackbarToggle = () => this.setState({snackbarOpen: !this.state.snackbarOpen})
+
+    fetchUser() {
+        // TODO: eventually change this to get the curent user
+        axios.get(API_URL + 'users/' + 3).then((res) => {
+            this.setState({
+                name: res.data.data.firstName + ' ' + res.data.data.lastName,
+                email: res.data.data.email
+            })
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
     render() {
-        let {open} = this.state;
+        let { open } = this.state;
         const classes = this.props.classes;
+        const { name, email, snackbarOpen, snackbarMessage, snackbarVariant } = this.state;
+
+        //console.log(this.props)
 
         return (
             <div className={classes.root}>
                 <div className={classes.appFrame}>
-                    {/* <Header navDrawerOpen={open} handleToggleDrawer={this.handleToggle}/> */}
                     <Header navDrawerOpen={open} handleToggleDrawer={this.handleToggle} />
-                    {/* <MiniDrawer navDrawerOpen={open}/> */}
-                    <Sidebar navDrawerOpen={open} handleToggleDrawer={this.handleToggle} />
+                    <Sidebar 
+                        navDrawerOpen={open} 
+                        handleToggleDrawer={this.handleToggle}
+                        handleSnackbarToggle={this.handleSnackbarToggle} 
+                        name={name}
+                        email={email}/>
                     <main className={classes.content}>
                         {this.props.children}
                     </main>
+                    <CustomizedSnackbar
+                        snackbarOpen={snackbarOpen}
+                        variant={snackbarVariant}
+                        className={classes.snackbar}
+                        message={snackbarMessage}
+                    />}
                 </div>
             </div>
         )
@@ -64,7 +112,14 @@ class MainLayout extends Component {
 
 MainLayout.propTypes = {
     classes: PropTypes.object.isRequired,
-    children: PropTypes.element
+    children: PropTypes.element,
 };
 
-export default withStyles(styles)(MainLayout)
+const mapDispatchToProps = dispatch => {
+    return {
+        actions: bindActionCreators(Object.assign({}, crudAction), dispatch),
+        ui: bindActionCreators(Object.assign({}, uiService), dispatch),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(MainLayout))

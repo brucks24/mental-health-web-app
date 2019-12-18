@@ -6,8 +6,9 @@ export const fetch = (endpoint) => {
 };
 
 export const store = (endpoint, data) => {
-    return httpBase()
-        .post(endpoint, data);
+    //console.log(`---Endpoint: ${endpoint}`)
+    //console.log(`---Data ${data}`)
+    return httpBase().post(endpoint, data);
 };
 
 export const update = (endpoint, data) => {

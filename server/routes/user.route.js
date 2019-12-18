@@ -1,8 +1,12 @@
 import express from 'express';
 import * as userCtrl from '../controllers/user.controller';
+import * as panicCtrl from '../controllers/panic.controller';
 import isAuthenticated from '../middlewares/authenticate';
 import validate from '../config/joi.validate';
 import schema from '../utils/validator';
+import { sendPanicEmail } from '../config/mail';
+
+var nodemailer = require('nodemailer');
 
 const router = express.Router();
 
@@ -251,5 +255,46 @@ router.route('/:id')
         userCtrl.destroy(req, res);
     });
 
+    /**
+     * @swagger
+     * /user/panic:
+     *  panic:
+     *      tags:
+     *          - user
+     *      summary: User presses the panic button
+     *      security:
+     *          - 
+     */
+router.route('/panic').post((req, res) => {
+    var transport = nodemailer.createTransport({
+        host: "smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: "763a1145ed6ff9",
+          pass: "590d7a828893fa"
+        }
+      });
+    
+    const mailOptions = {
+        from: req.body.email,
+        to: 'butlerja23@uww.edu',
+        subject: '(TEST) PANIC BUTTON HAS BEEN PRESSED',
+        text: `${req.body.name} has clicked the panic button`
+    }
+    
+    transport.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            console.log(err)
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                error: err
+            });
+        } else {
+            console.log(`Email sent: ${info.response}`);
+            res.status(HttpStatus.OK).json({
+                info: info.response
+            });
+        }
+    });
+})
 
 export default router;

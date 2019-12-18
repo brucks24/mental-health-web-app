@@ -1,5 +1,6 @@
 'use strict';
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const env = process.env.NODE_ENV;
 /*
@@ -16,6 +17,9 @@ var config = {
         ]
     },
     mode: 'production',
+    optimization: {
+        minimizer: [new TerserPlugin({ /* additional options here */ })],
+    },
     output: {
         path: path.resolve(CURRENT_WORKING_DIR, 'dist'), //  destination
         filename: 'client.bundle.js',
