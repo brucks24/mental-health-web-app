@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // Import actionType constants
 import {
     LOG_IN_SUCCESS,

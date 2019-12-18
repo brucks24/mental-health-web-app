@@ -31,6 +31,8 @@ $ npm install
 $ npm run build:prod
 ```
 
+Rename the file ```env``` to ```.env``` and add the correct information to the fields.
+
 # START HERE
 
 ### Documentation

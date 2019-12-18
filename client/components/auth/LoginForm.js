@@ -1,27 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
 
 import {
   Grid,
-  CircularProgress,
   Typography,
   Button,
-  Tabs,
-  Tab,
-  TextField,
-  Fade,
-} from "@material-ui/core";
+  Fade
+} from '@material-ui/core';
 
 // Import custom components
 import renderText from '../common/form/renderText';
 
-import useStyles from './styles'
+import useStyles from './styles';
 
 function LoginForm(props) {
-  const classes = useStyles()
-  const { handleSubmit, onSubmit, errorMessages } = props
+  const classes = useStyles();
+  // handle props from passed from LoginContainer
+  const { handleSubmit, onSubmit, errorMessages } = props;
 
   return (
     <Grid container className={classes.container}>
@@ -71,16 +68,17 @@ function LoginForm(props) {
         </form>
       </div>
     </Grid>
-  )
+  );
 }
 
+// Validate the fields from the login form
 function validateLogin(values) {
-  const errors = {}
+  const errors = {};
 
   const requiredFields = [
     'email',
     'password'
-  ]
+  ];
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = '(The ' + field + ' field is required.)';
@@ -90,15 +88,19 @@ function validateLogin(values) {
   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = '(Invalid email address.)';
   }
-  return errors
+  
+  return errors;
 }
 
+// handle prop requirements from LoginContainer
 LoginForm.propTypes = {
+  handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
+  errorMessages: PropTypes.object,
   classes: PropTypes.object.isRequired
-}
+};
 
 export default reduxForm({
   form: 'LoginForm',
   validate: validateLogin
-})(LoginForm)
+})(LoginForm);
