@@ -33,6 +33,11 @@ $ npm run build:prod
 
 # START HERE
 
+### Documentation
+* [Backend Documentation]
+* [Redux Documentation]
+* [Client Documentation]
+
 ### Useful Links
 * Web framework for Node.js - [Express]
 * JavaScript ORM for Node.js - [Bookshelf]
@@ -50,7 +55,7 @@ $ npm run build:prod
 * Code linting tool - [ESLint]
 
 ### Server file structure
-server
+```server
  ┣ config 
  ┃ ┣ bookshelf.js
  ┃ ┣ database.js
@@ -81,8 +86,9 @@ server
  ┣ utils
  ┃ ┗ validator.js
  ┗ app.js
-
+ ```
 ### Client file structure
+```
 client
  ┣ actions
  ┃ ┣ authAction.js
@@ -185,15 +191,12 @@ client
  ┃ ┣ serializeUtil.js
  ┃ ┗ storageUtil.js
  ┗ main.js
-
-### 
-
-### Todos
-
- - Write MORE Tests
- - Add Night Mode
+```
 
 [//]: #
+   [Backend Documentation]: <https://github.com/uww-student-athlete-success/stuath-success-web/tree/master/docs/BACKEND.md>
+   [Redux Documentation]: <https://github.com/uww-student-athlete-success/stuath-success-web/tree/master/docs/REDUX.md>
+   [Client Documentation]: <https://github.com/uww-student-athlete-success/stuath-success-web/tree/master/docs/CLIENT.md>
    [Express]: <http://expressjs.com/>
    [Bookshelf]: <http://bookshelfjs.org/>
    [Knex]: <http://knexjs.org/>
