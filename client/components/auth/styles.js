@@ -38,6 +38,9 @@ export default makeStyles(theme => ({
             fontSize: 48,
         },
     },
+    logoSubtitle: {
+        color: "white",
+    },
     formContainer: {
         width: "40%",
         height: "100%",

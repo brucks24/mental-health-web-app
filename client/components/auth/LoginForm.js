@@ -23,7 +23,8 @@ function LoginForm(props) {
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
-        <Typography className={classes.logotypeText}>Stuath System</Typography>
+        <Typography className={classes.logotypeText}>UWW SASS</Typography>
+        <Typography variant="h4" className={classes.logoSubtitle}>UWW Student Athlete Success System</Typography>
       </div>
       <div className={classes.formContainer}>
         <form method="post" onSubmit={handleSubmit(onSubmit)} className={classes.form}>

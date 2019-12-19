@@ -23,7 +23,7 @@ class SignUpContainer extends Component {
      */
     submitForm(formProps) {
         console.log(formProps)
-        //this.props.actions.submitForm(USERS, formProps);
+        this.props.actions.submitForm(USERS, formProps);
     }
 
     render() {
@@ -40,7 +40,7 @@ class SignUpContainer extends Component {
  * Map the actions to props.
  */
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(Object.assign({}, crudAction), dispatch)
+    actions: bindActionCreators(Object.assign({}, crudAction), dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(SignUpContainer)
+export default connect(null, mapDispatchToProps)(SignUpContainer);

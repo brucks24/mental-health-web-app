@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form'
-
+import { Field, reduxForm } from 'redux-form';
 import {
   Grid,
   Typography,
@@ -13,27 +12,27 @@ import {
   FormControl,
   FormLabel,
   FormControlLabel
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 // Import custom components
 import renderText from '../common/form/renderText';
-import selectText from '../common/form/selectText';
 
-import useStyles from './styles'
+import useStyles from './styles';
 
 function RegisterForm(props) {
-  const classes = useStyles()
-  const [accountType, setAccountType] = React.useState("student");
+  const classes = useStyles();
+  const [accountType, setAccountType] = React.useState('student');
   const { handleSubmit, onSubmit, errorMessages } = props;
 
   const handleChange = event => {
     setAccountType(event.target.value);
-  }
+  };
 
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
-        <Typography className={classes.logotypeText}>Stuath System</Typography>
+        <Typography className={classes.logotypeText}>UWW SASS</Typography>
+        <Typography variant="h4" className={classes.logoSubtitle}>UWW Student Athlete Success System</Typography>
       </div>
       <div className={classes.formContainer}>
         <form method="post" onSubmit={handleSubmit(onSubmit)} className={classes.form}>
@@ -47,14 +46,14 @@ function RegisterForm(props) {
           </Fade>
           <FormControl>
             <FormLabel component="legend">Select an account type</FormLabel>
-            <RadioGroup 
-              aria-label="acount-type" 
-              name="acount-type" 
+            <RadioGroup
+              aria-label="acount-type"
+              name="acount-type"
               value={accountType}
               onChange={handleChange}
             >
               <FormControlLabel value="student" control={<Radio />} label="Student" />
-              <FormControlLabel value="coach" control={<Radio />} label="Coach" />    
+              <FormControlLabel value="coach" control={<Radio />} label="Coach" />
             </RadioGroup>
           </FormControl>
           <Field
@@ -75,32 +74,32 @@ function RegisterForm(props) {
             component={renderText}
             label="Email"
           />
-          <Field
+          {/* <Field
             type="text"
             name="phone"
             component={renderText}
             label="Phone number"
-          />
+          /> */}
           <Field
             type="password"
             name="password"
             component={renderText}
             label="Password"
           />
-          {accountType === "coach" && <Field
+          {accountType === 'coach' && <Field
             type="password"
             name="coachKey"
             component={renderText}
             label="Coach key"
           />}
           <Button
-              className={classes.buttons}
-              variant="contained"
-              color="primary"
-              size="large"
-              type="submit"
-            >
-              Create New Account
+            className={classes.buttons}
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+          >
+            Create New Account
             </Button>
         </form>
         <Typography className={classes.signUpText}>
@@ -108,7 +107,7 @@ function RegisterForm(props) {
         </Typography>
       </div>
     </Grid>
-  )
+  );
 }
 
 const validateRegister = values => {
@@ -130,15 +129,15 @@ const validateRegister = values => {
   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = '(Invalid email address.)';
   }
-  return errors
+
+  return errors;
 };
 
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  //classes: PropTypes.object.isRequired
-}
+};
 
 export default reduxForm({
   form: 'RegisterForm',
   validate: validateRegister
-})(RegisterForm)
+})(RegisterForm);
