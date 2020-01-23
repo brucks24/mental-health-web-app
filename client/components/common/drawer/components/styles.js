@@ -54,9 +54,9 @@ export default makeStyles(theme => ({
     backgroundColor: "#D8D8D880",
   },
   panicButton: {
-    position: "absolute",
-    left: 0,
-    bottom: 0,
+    // position: "absolute",
+    // left: 0,
+    // bottom: 0,
     color: theme.palette.panic,
     width: "100%",
     maxWidth: 250,

@@ -16,7 +16,8 @@ import * as userService from '../../../../services/userService'
 import * as uiService from '../../../../services/uiService'
 import { bindActionCreators } from 'redux'
 import store from '../../../../store/configureStore';
-import { showSnackbar } from '../../../../actions/uiActions'
+import { showSnackbar } from '../../../../actions/uiActions';
+import WarningIcon from '@material-ui/icons/WarningRounded';
 
 const theme = createMuiTheme({
   palette: {
@@ -57,6 +58,7 @@ function PanicButton(props) {
           variant="contained"
           onClick={handleClickOpen}
         >
+          <WarningIcon style={{marginRight: 16}}/>
           Panic Button
                 </Button>
       </ThemeProvider>
@@ -69,17 +71,19 @@ function PanicButton(props) {
         <DialogTitle id="alert-dialog-title">{"Are you sure you want to do this?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Click "I understand" ONLY if any of the following apply to you:
+            Click "I understand" ONLY if one or more of the following apply to you:
                         <ul>
-              <li>Thoughts of suicide</li>
-              <li>Thoughts of homicide</li>
-              <li>Concern regarding sexual abuse</li>
-              <li>Concern regarding hazing</li>
+              <Button variant="contained" color="primary" styles={{ height: 20, width: 40 }}>Thoughts or plans of suicide?</Button>
+
+              <li>Thoughts or plans of homicide?</li>
+              <li>Sexual harassment and or assault?</li>
+              <li>Threat of gun violence/school shooting?</li>
+              <li>Concern regarding bullying and or hazing?</li>
             </ul>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">Nevermind</Button>
+          <Button onClick={handleClose} color="primary">Exit</Button>
           <Button onClick={handleConfirm} color="primary" autoFocus>I understand</Button>
         </DialogActions>
       </Dialog>

@@ -6,12 +6,14 @@ import { Drawer, IconButton, List } from "@material-ui/core"
 import {
   Home as HomeIcon,
   AccountCircle as ProfileIcon,
-  People as PeopleIcon,
   Sports as TeamIcon,
-  Chat as ChatIcon,
   Settings as SettingsIcon,
   ArrowBack as ArrowBackIcon,
-} from "@material-ui/icons"
+  SentimentSatisfiedAltOutlined as SupportTeamIcon,
+  Drafts as InboxIcon,
+  RecordVoiceOver as ChatIcon,
+  Group as YourTeammates
+} from '@material-ui/icons';
 import { useTheme } from '@material-ui/styles'
 import useStyles from './styles'
 import SidebarLink from './components/SidebarLink'
@@ -33,39 +35,68 @@ function Sidebar(props) {
       label: `${name}`,
       subtitle: `${email}`,
       link: '',
-      icon: <ProfileIcon />
+      icon: <ProfileIcon />,
+      children: [
+        {
+          id: 0,
+          label: 'Profile',
+          link: '/profile',
+        },
+        {
+          id: 1,
+          label: 'Notifications',
+
+        },
+        {
+          id: 2,
+          label: 'Profile settings',
+          link: '/',
+        },
+      ]
     },
     {
       id: 1,
-      label: "Home",
+      label: 'Your Inbox',
+      link: '/inbox',
+      icon: <InboxIcon />
+    },
+    {
+      id: 2,
+      label: 'Support Services',
       link: '/dashboard',
       icon: <HomeIcon />
     },
     {
-      id: 2,
-      label: 'People',
-      link: '/people',
-      icon: <PeopleIcon />,
+      id: 3,
+      label: 'Your Support Team',
+      link: '/',
+      icon: <SupportTeamIcon />
     },
     {
-      id: 3,
-      label: 'Teams',
+      id: 4,
+      label: 'Your Teammates',
+      link: '/your-teammates',
+      icon: <YourTeammates />
+    },
+    {
+      id: 5,
+      label: 'Other Teams',
       link: '/teams',
       icon: <TeamIcon />,
     },
     {
-      id: 4,
+      id: 6,
       label: 'Chat',
       link: '/chat',
       icon: <ChatIcon />,
     },
     {
-      id: 5,
+      id: 7,
       label: 'Settings',
       link: '/settings',
       icon: <SettingsIcon />,
     },
-  ]
+  ];
 
   useEffect(function () {
     window.addEventListener("resize", handleWindowWidthChange);
