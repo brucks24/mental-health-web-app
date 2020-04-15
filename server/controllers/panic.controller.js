@@ -1,34 +1,72 @@
-require('dotenv').config();
-import nodemailer from 'nodemailer';
+const { transport } = require('../helpers/nodemailer');
+const handlebars = require('handlebars');
+const fs = require('fs');
+const path = require('path');
+const appDir = path.dirname(require.main.filename);
+const db = require('../helpers/db');
+const User = db.User;
 
-export function sendPanic(req, res) {
-    console.log('---', req.body);
-    var transport = nodemailer.createTransport({
-        service: process.env.SERVICE,
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD
-        }
-    })
-
-    const mailOptions = {
-        from: `[CRITICAL] UWW SAS <${process.env.EMAIL}>`,
-        to: 'butlerja23@uww.edu',
-        subject: '(TEST) PANIC BUTTON HAS BEEN PRESSED',
-        text: `${req.body.name} has clicked the panic button`,
+const readHTMLFile = (path, callback) => {
+  fs.readFile(path, { encoding: 'utf-8' }, (err, html) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, html);
     }
+  })
+}
 
-    transport.sendMail(mailOptions, (err, info) => {
-        if (err) {
+function sendPanicEmail(req, res) {
+  console.log('Panic button pressed. Initializing response...');
+  const panicReasons = req.body;
+  const userId = req.user.sub;
+
+  User.findById(userId).select('-hash').then(user => {
+    if (user) {
+      readHTMLFile(`${appDir}\\helpers\\templates\\test.html`, (err, html) => {
+        const template = handlebars.compile(html);
+        const replacements = {
+          panicReasons: panicReasons,
+          photoUrl: user.photoUrl,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phone: '999-999-9999',
+          address: '901 W Starin Rd. Whitewater WI, 53593',
+          link: 'http://localhost:3000/dashboard'
+        };
+
+        const htmlToSend = template(replacements);
+        const mailOptions = {
+          from: user.email,
+          to: 'butlerja23@uww.edu',
+          subject: 'PANIC BUTTON ALERT',
+          html: htmlToSend
+        };
+
+        transport.sendMail(mailOptions, (err, info) => {
+          if (err) {
             console.log(err)
-            res.status(500).json({
-                error: err
+            return res.status(500).json({
+              error: err
             });
-        } else {
+          } else {
             console.log(`Email sent: ${info.response}`);
-            res.status(200).json({
-                info: info.response
+            return res.status(200).json({
+              message: 'Support team has been notified'
             });
-        }
-    });
+          }
+        });
+      });
+    } else {
+      return res.status(404).json({ message: 'ID not found' });
+    }
+  }).catch(err => {
+    console.log(err);
+    return res.status(500).json({ error: err.message });
+  });
+}
+
+module.exports = {
+  sendPanicEmail
 }

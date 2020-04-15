@@ -1,29 +1,15 @@
-import bookshelf from '../config/bookshelf';
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const TABLE_NAME = 'Profile';
+const schema = new Schema({
+    hash: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    createdDate: { type: Date, default: Date.now },
+    accountType: { type: Number, required: true }
+});
 
-/**
- * User model.
- */
-class User extends bookshelf.Model {
+schema.set('toJSON', { virtuals: true });
 
-    /**
-     * Get table name.
-     */
-    get tableName() {
-        return TABLE_NAME;
-    }
-
-    /**
-     * Table has timestamps.
-     */
-    get hasTimestamps() {
-        return true;
-    }
-
-    verifyPassword(password) {
-        return this.get('password') === password;
-    }
-}
-
-export default User;
+module.exports = mongoose.model('User', schema);
