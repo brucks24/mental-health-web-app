@@ -1,6 +1,7 @@
 import { AppBar, Button, IconButton, Toolbar, Typography } from "@material-ui/core";
 import { withStyles } from '@material-ui/core/styles';
-import { ArrowBack as ArrowBackIcon, Menu as MenuIcon } from "@material-ui/icons";
+import { ArrowBack as ArrowBackIcon, Menu as MenuIcon,  } from "@material-ui/icons";
+import ChatIcon from '@material-ui/icons/Chat';
 import classNames from 'classnames';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -129,7 +130,7 @@ const styles = theme => ({
 });
 
 function Header2(props) {
-  const { classes, navDrawerOpen, handleToggleDrawer } = props;
+  const { classes, navDrawerOpen, handleToggleDrawer, ChatOpen, handleToggleChat } = props;
   const dispatch = useDispatch();
 
   function logout(e) {
@@ -173,6 +174,16 @@ function Header2(props) {
           </Typography>
         <div className={classes.grow} />
         <Button color="inherit" onClick={logout}>Logout</Button>
+        <IconButton aria-label="Open Chat" color="inherit" onClick={handleToggleChat}>
+          <ChatIcon
+            classes={{
+              root: classNames(
+                classes.headerIcon,
+                classes.headerIconCollapse,
+                )
+              }}
+            />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
