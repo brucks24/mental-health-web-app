@@ -1,0 +1,2 @@
+Yarn start - runs the front end
+yarn run server - runs the back end

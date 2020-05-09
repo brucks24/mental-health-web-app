@@ -146,6 +146,7 @@ function Sidebar(props) {
         }),
       }}
       open={navDrawerOpen}
+      anchor="left"
     >
       <div className={classes.toolbar} />
       <div className={classes.mobileBackButton}>

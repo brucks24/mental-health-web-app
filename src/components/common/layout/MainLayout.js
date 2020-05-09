@@ -2,8 +2,10 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Sidebar from '../drawer/Sidebar';
+import Chatbar from '../drawer/Chatbar';
 // Import custom components
 import Header2 from '../header/Header2';
+import { ChatBubbleSharp } from '@material-ui/icons';
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,6 +40,9 @@ function MainLayout(props) {
   const [state, setState] = React.useState({
     open: true
   });
+  const [stateChat, setChatState] = React.useState({
+    open: false
+  });
 
   // React.useEffect(() => {
   //   const windowWidth = window.innerWidth;
@@ -52,14 +57,20 @@ function MainLayout(props) {
   // });
 
   const handleToggle = () => setState({ open: !state.open });
+  const handleChat = () => setChatState({ open: !stateChat.open });
 
   return (
     <div className={classes.root}>
       <div className={classes.appFrame}>
-        <Header2 navDrawerOpen={state.open} handleToggleDrawer={handleToggle} />
+        <Header2 navDrawerOpen={state.open} handleToggleDrawer={handleToggle} ChatOpen={stateChat.open} handleToggleChat={handleChat}/>
         <Sidebar
           navDrawerOpen={state.open}
         />
+
+        <Chatbar 
+          ChatOpen={stateChat.open}
+        />
+
         <main className={classes.content}>
           {props.children}
         </main>
