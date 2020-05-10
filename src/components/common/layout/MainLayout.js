@@ -66,15 +66,16 @@ function MainLayout(props) {
         <Sidebar
           navDrawerOpen={state.open}
         />
+        
+        <main className={classes.content}>
+          {props.children}
+        </main>
 
         <Chatbar 
           ChatOpen={stateChat.open}
         />
-
-        <main className={classes.content}>
-          {props.children}
-        </main>
       </div>
+      
     </div>
   );
 }
