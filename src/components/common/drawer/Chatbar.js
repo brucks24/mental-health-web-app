@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import { Drawer, IconButton, List, Avatar } from "@material-ui/core";
+import { Drawer, IconButton, List, Avatar, InputBase, Divider } from "@material-ui/core";
 import { useTheme } from '@material-ui/styles';
 import useStyles from './styles';
 import { useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ import {
     RecordVoiceOver as ChatIcon,
     Group as YourTeammates
   } from '@material-ui/icons';
+  import SearchIcon from '@material-ui/icons/Search';
 
 
 function Chatbar(props) {
@@ -28,6 +29,7 @@ function Chatbar(props) {
                 [classes.drawerOpen]: ChatOpen,
                 [classes.drawerClose]: !ChatOpen,
             })}
+            
             anchor="right"
             open={ChatOpen}
             classes={{
@@ -38,11 +40,26 @@ function Chatbar(props) {
             }}
         >
             <div className={classes.toolbar} />
-            <div className={classes.mobileBackButton}>
-
-
-                
+            <div className={classes.text}>{"Search for people to chat with: "}</div>
+            <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                    <SearchIcon />
+                </div>
+                <InputBase
+                placeholder="Search…"
+                classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                />
             </div>
+            <Divider />
+            <div className={classes.chatList}>
+                <div className={classes.text}>{"Open chats shown below: "}</div>
+
+            </div>
+
 
         </Drawer>
     )
