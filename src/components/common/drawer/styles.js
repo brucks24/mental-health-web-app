@@ -51,18 +51,18 @@ export default makeStyles(theme => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.black, 0.25),
     },
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
     marginLeft: 0,
-    //marginTop: 6,
-    marginBottom: 13,
+    marginTop: 7,
+    marginBottom: 7,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
+      marginLeft: theme.spacing(1),
       width: 'auto',
     },
   },
   searchIcon: {
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(1, 1),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -88,6 +88,14 @@ export default makeStyles(theme => ({
     padding: theme.spacing(1),
     display: 'flex',
     justifyContent: 'center',
+  },
+  root: {
+    width: '100%',
+    maxWidth: '36ch',
+    backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
   },
   /* sidebarList: {
     marginTop: theme.spacing(6),
