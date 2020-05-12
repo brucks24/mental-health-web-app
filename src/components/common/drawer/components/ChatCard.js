@@ -1,13 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Chat from '../Chat';
+import {  IconButton, List, Avatar, InputBase, Divider, ListItem} from "@material-ui/core";
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,39 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
   inline: {
     display: 'inline',
+    maxWidth: '39ch',
   },
 }));
 
 
-<<<<<<< HEAD
-export default function ChatCard(props) {
-  const classes = useStyles();
-  const { index, name, image, previewMessage, handleOpenConvo } = props;
-
-  return (
-    <ListItem button alignItems="flex-start" onClick={handleOpenConvo()}>
-      <ListItemAvatar>
-        <Avatar alt={name} src={image} />
-      </ListItemAvatar>
-      <ListItemText
-        primary={name}
-        secondary={
-          <React.Fragment>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              noWrap={true}
-            >
-              {previewMessage}
-            </Typography>
-          </React.Fragment>
-        }
-      />
-
-    </ListItem>
-
-  )
-=======
 
 export default function ChatCard(props){
     const classes = useStyles();
@@ -60,10 +30,11 @@ export default function ChatCard(props){
    });
 
    const handleChatWindow = () => setChatWindowState({ open: !stateChatWindow.open });
+   
 
     return (
-
-        <ListItem button='true' onClick={handleChatWindow} alignItems="flex-start">
+        <React.Fragment>
+        <ListItem button onClick={handleChatWindow} alignItems="flex-start">
             
             <ListItemAvatar>
             <Avatar alt={name} src={image} />
@@ -72,24 +43,27 @@ export default function ChatCard(props){
             primary={name}
             secondary={
                 <React.Fragment>
-                <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                >
-                {previewMessage}
-                </Typography>
+                    <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}
+                        color="textPrimary"
+                    >
+                    {previewMessage}
+                    </Typography>
                 </React.Fragment>
             }
             />
-            <Chat
-                ChatWindowOpen={stateChatWindow.open}
-                handleToggleWindow={handleChatWindow}
-                name={name}
-                image={image}
-            />
+
+            
         </ListItem>
+        <Divider />
+        <Chat
+        ChatWindowOpen={stateChatWindow.open}
+        handleToggleWindow={handleChatWindow}
+        name={name}
+        image={image}
+        />
+        </React.Fragment>
     );
->>>>>>> 2c195b2c3030351ad77e5fc4e0793f9ff5b51449
 }

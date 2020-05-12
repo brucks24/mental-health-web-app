@@ -100,12 +100,6 @@ function Sidebar(props) {
     },
     {
       id: 6,
-      label: 'Chat',
-      link: '/chat',
-      icon: <ChatIcon />,
-    },
-    {
-      id: 7,
       label: 'Settings',
       link: '/settings',
       icon: <SettingsIcon />,

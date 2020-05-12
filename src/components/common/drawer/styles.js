@@ -91,7 +91,7 @@ export default makeStyles(theme => ({
   },
   root: {
     width: '100%',
-    maxWidth: '36ch',
+    maxWidth: '39ch',
     backgroundColor: theme.palette.background.paper,
   },
   inline: {

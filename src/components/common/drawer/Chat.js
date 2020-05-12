@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
   chat: {
     position: 'relative',
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    background: 'grey',
     marginRight: theme.spacing(1),
     marginLeft: 0,
     marginTop: 0,
@@ -67,15 +67,15 @@ export default function Chat(props) {
 
   return (
     <Drawer 
+    variant="persistent"
     anchor="right" 
     open={ChatWindowOpen} 
     className={classes.drawerOpen} 
-    variant='persistent' 
     classes={{paper:classes.drawerOpen}}
     >
         <div className={classes.toolbar}/>
         <div className={classes.header}>
-            <IconButton onClick={handleToggleWindow} aria-label="delete">
+            <IconButton onClick={handleToggleWindow} aria-label="back">
                 <ArrowBackIosIcon />
             </IconButton>
             <Avatar alt={name} src={image} /> {name}
@@ -93,9 +93,9 @@ export default function Chat(props) {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                 }}
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{ 'aria-label': 'Send Message' }}
             />
-            <IconButton onClick={handleToggleWindow} aria-label="delete">
+            <IconButton aria-label="send">
                 <SendIcon color="primary" />
             </IconButton>
         </div>
