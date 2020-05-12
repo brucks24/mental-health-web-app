@@ -9,43 +9,42 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      maxWidth: '36ch',
-      backgroundColor: theme.palette.background.paper,
-    },
-    inline: {
-      display: 'inline',
-    },
-  }));
+  root: {
+    width: '100%',
+    maxWidth: '36ch',
+    backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
+  },
+}));
 
 
-export default function ChatCard(props){
-    const classes = useStyles();
-    const { name, image, previewMessage} = props;
+export default function ChatCard(props) {
+  const classes = useStyles();
+  const { index, name, image, previewMessage, handleOpenConvo } = props;
 
-    return (
-        <ListItem button alignItems="flex-start">
-            <ListItemAvatar>
-            <Avatar alt={name} src={image} />
-            </ListItemAvatar>
-            <ListItemText
-            primary={name}
-            secondary={
-                <React.Fragment>
-                <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                >
-                {previewMessage}
-                </Typography>
-                </React.Fragment>
-            }
-            />
-           
-        </ListItem>
-        
-    )
+  return (
+    <ListItem button alignItems="flex-start" onClick={handleOpenConvo()}>
+      <ListItemAvatar>
+        <Avatar alt={name} src={image} />
+      </ListItemAvatar>
+      <ListItemText
+        primary={name}
+        secondary={
+          <React.Fragment>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              noWrap={true}
+            >
+              {previewMessage}
+            </Typography>
+          </React.Fragment>
+        }
+      />
+
+    </ListItem>
+
+  )
 }

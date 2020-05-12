@@ -17,7 +17,8 @@ if (config.connectionString != null) {
   mongoose.Promise = global.Promise;
 
   module.exports = {
-    User: require('../models/user.model')
+    User: require('../models/user.model'),
+    Chat: require('../models/chat.model'),
   }
 } else {
   console.log(colors.yellow('You must add dbConfig.json to the server folder'));

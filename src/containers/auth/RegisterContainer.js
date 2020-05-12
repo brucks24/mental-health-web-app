@@ -9,7 +9,6 @@ function RegisterContainer(props) {
 
   function submitForm(userData) {
     dispatch(registerUser(userData));
-    
   }
 
   return (

@@ -95,7 +95,7 @@ export default makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   inline: {
-    display: 'inline',
+    //display: 'inline',
   },
   /* sidebarList: {
     marginTop: theme.spacing(6),
