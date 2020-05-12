@@ -1,6 +1,6 @@
 import { fade, makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 280;
+const drawerWidth = 310;
 
 export default makeStyles(theme => ({
   menuButton: {
@@ -97,9 +97,19 @@ export default makeStyles(theme => ({
   inline: {
     display: 'inline',
   },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+  newChat: {
+    marginLeft: theme.spacing(21),
+    position: 'absolute',
+    bottom: theme.spacing(3),
+  },
+
   /* sidebarList: {
     marginTop: theme.spacing(6),
   }, */
+
   mobileBackButton: {
     marginTop: theme.spacing(0.5),
     marginLeft: theme.spacing(3),

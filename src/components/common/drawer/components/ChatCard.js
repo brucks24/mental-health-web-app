@@ -20,12 +20,13 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
+
 export default function ChatCard(props){
     const classes = useStyles();
-    const { name, image, previewMessage} = props;
+    const { name, image, previewMessage, handleToggleWindow} = props;
 
     return (
-        <ListItem button alignItems="flex-start">
+        <ListItem button='true' onClick={handleToggleWindow} alignItems="flex-start">
             <ListItemAvatar>
             <Avatar alt={name} src={image} />
             </ListItemAvatar>
@@ -44,8 +45,6 @@ export default function ChatCard(props){
                 </React.Fragment>
             }
             />
-           
         </ListItem>
-        
-    )
+    );
 }

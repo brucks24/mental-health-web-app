@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import { Drawer, IconButton, List, Avatar, InputBase, Divider, ListItem, ListItemText, ListItemAvatar, Typography} from "@material-ui/core";
+import { Drawer, IconButton, List, Avatar, InputBase, Divider, Fab } from "@material-ui/core";
 import { useTheme } from '@material-ui/styles';
 import useStyles from './styles';
 import { useSelector } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
 import ChatCard from './components/ChatCard'
+import Chat from './Chat';
+import AddIcon from '@material-ui/icons/Add';
 
 const openChats = [
     {
@@ -30,16 +32,20 @@ const openChats = [
     },
   ]
 
-
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-  }
-
+  
 
 function Chatbar(props) {
-    let { ChatOpen, handleToggleChat} = props
+    let { ChatOpen } = props
     const theme = useTheme()
     const classes = useStyles()
+
+    const [stateChatWindow, setChatWindowState] = React.useState({
+         open: false
+    });
+
+    const handleChatWindow = () => setChatWindowState({ open: !stateChatWindow.open });
+
+
 
     return (
         <Drawer
@@ -58,6 +64,10 @@ function Chatbar(props) {
                 }),
             }}
         >
+            <Chat
+                ChatWindowOpen={stateChatWindow.open}
+                handleToggleWindow={handleChatWindow}
+            />
             <div className={classes.toolbar} />
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
@@ -80,10 +90,17 @@ function Chatbar(props) {
                     <ChatCard 
                         name={item.name}
                         image={item.image}
-                        previewMessage={item.previewMessage}
+                        previewMessage={item.previewMessage} 
+                        handleToggleWindow={handleChatWindow}
                     />
                 ))}
             </List>
+            </div>
+            <div className={classes.newChat}>
+            <Fab variant="extended" color="primary">
+                <AddIcon className={classes.extendedIcon} />
+                Create
+            </Fab>
             </div>
         </Drawer>
     )
