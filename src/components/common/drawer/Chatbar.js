@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { Drawer, IconButton, List, Avatar, InputBase, Divider, Fab } from "@material-ui/core";
 import { useTheme } from '@material-ui/styles';
-import useStyles from './styles';
+import chatbarStyles from './chatbarStyles';
 import { useSelector } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
 import ChatCard from './components/ChatCard'
@@ -36,12 +36,10 @@ const openChats = [
     },
 ]
 
-  
-
 function Chatbar(props) {
     let { ChatOpen } = props
-    const theme = useTheme()
-    const classes = useStyles()
+    const theme = useTheme();
+    const classes = chatbarStyles();
 
     return (
         <Drawer
@@ -58,39 +56,39 @@ function Chatbar(props) {
                 }),
             }}
         >
-            
+
             <div className={classes.toolbar} />
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
                     <SearchIcon />
                 </div>
                 <InputBase
-                placeholder="Search for person"
-                classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
+                    placeholder="Search for person"
+                    classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput,
+                    }}
+                    inputProps={{ 'aria-label': 'search' }}
                 />
             </div>
             <Divider />
 
             <div className={classes.chatList}>
-            <List className={classes.root}>
-                {openChats.map(item => (
-                    <ChatCard 
-                        name={item.name}
-                        image={item.image}
-                        previewMessage={item.previewMessage} 
+                <List className={classes.root}>
+                    {openChats.map(item => (
+                        <ChatCard
+                            name={item.name}
+                            image={item.image}
+                            previewMessage={item.previewMessage}
 
-                    />
-                ))}
-            </List>
+                        />
+                    ))}
+                </List>
             </div>
-            
+
             <div className={classes.newChat}>
-            <Fab variant="extended" color="primary">
-                <AddIcon className={classes.extendedIcon} />
+                <Fab variant="extended" color="primary">
+                    <AddIcon className={classes.extendedIcon} />
                 Create
             </Fab>
             </div>

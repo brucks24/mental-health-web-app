@@ -20,15 +20,15 @@ import { useSelector } from 'react-redux';
 //This is for the links in the sidebar
 function Sidebar(props) {
   let { navDrawerOpen, handleToggleDrawer, handleSnackbarToggle } = props
-  const theme = useTheme()
-  const classes = useStyles()
+  const theme = useTheme();
+  const classes = useStyles();
 
   const { name, user } = useSelector(state => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
     user: state.user,
   }));
 
-  const [isPermanent, setPermanent] = useState(true)
+  const [isPermanent, setPermanent] = useState(true);
 
   const structure = [
     {
