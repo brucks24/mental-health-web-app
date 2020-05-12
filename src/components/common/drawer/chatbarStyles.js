@@ -22,6 +22,7 @@ export default makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
+    width: theme.spacing(20)
     
   },
   toolbar: {
