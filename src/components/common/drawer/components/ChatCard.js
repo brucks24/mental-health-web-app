@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import Chat from '../Chat';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,10 +24,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ChatCard(props){
     const classes = useStyles();
-    const { name, image, previewMessage, handleToggleWindow} = props;
+    const { name, image, previewMessage} = props;
+
+    const [stateChatWindow, setChatWindowState] = React.useState({
+        open: false
+   });
+
+   const handleChatWindow = () => setChatWindowState({ open: !stateChatWindow.open });
 
     return (
-        <ListItem button='true' onClick={handleToggleWindow} alignItems="flex-start">
+
+        <ListItem button='true' onClick={handleChatWindow} alignItems="flex-start">
+            
             <ListItemAvatar>
             <Avatar alt={name} src={image} />
             </ListItemAvatar>
@@ -44,6 +53,12 @@ export default function ChatCard(props){
                 </Typography>
                 </React.Fragment>
             }
+            />
+            <Chat
+                ChatWindowOpen={stateChatWindow.open}
+                handleToggleWindow={handleChatWindow}
+                name={name}
+                image={image}
             />
         </ListItem>
     );

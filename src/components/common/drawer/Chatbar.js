@@ -39,13 +39,11 @@ function Chatbar(props) {
     const theme = useTheme()
     const classes = useStyles()
 
-    const [stateChatWindow, setChatWindowState] = React.useState({
-         open: false
-    });
+    // const [stateChatWindow, setChatWindowState] = React.useState({
+    //      open: false
+    // });
 
-    const handleChatWindow = () => setChatWindowState({ open: !stateChatWindow.open });
-
-
+    // const handleChatWindow = () => setChatWindowState({ open: !stateChatWindow.open });
 
     return (
         <Drawer
@@ -64,10 +62,7 @@ function Chatbar(props) {
                 }),
             }}
         >
-            <Chat
-                ChatWindowOpen={stateChatWindow.open}
-                handleToggleWindow={handleChatWindow}
-            />
+            
             <div className={classes.toolbar} />
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
@@ -91,7 +86,7 @@ function Chatbar(props) {
                         name={item.name}
                         image={item.image}
                         previewMessage={item.previewMessage} 
-                        handleToggleWindow={handleChatWindow}
+
                     />
                 ))}
             </List>
