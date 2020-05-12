@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import Chat from '../Chat';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+<<<<<<< HEAD
 export default function ChatCard(props) {
   const classes = useStyles();
   const { index, name, image, previewMessage, handleOpenConvo } = props;
@@ -47,4 +49,47 @@ export default function ChatCard(props) {
     </ListItem>
 
   )
+=======
+
+export default function ChatCard(props){
+    const classes = useStyles();
+    const { name, image, previewMessage} = props;
+
+    const [stateChatWindow, setChatWindowState] = React.useState({
+        open: false
+   });
+
+   const handleChatWindow = () => setChatWindowState({ open: !stateChatWindow.open });
+
+    return (
+
+        <ListItem button='true' onClick={handleChatWindow} alignItems="flex-start">
+            
+            <ListItemAvatar>
+            <Avatar alt={name} src={image} />
+            </ListItemAvatar>
+            <ListItemText
+            primary={name}
+            secondary={
+                <React.Fragment>
+                <Typography
+                    component="span"
+                    variant="body2"
+                    className={classes.inline}
+                    color="textPrimary"
+                >
+                {previewMessage}
+                </Typography>
+                </React.Fragment>
+            }
+            />
+            <Chat
+                ChatWindowOpen={stateChatWindow.open}
+                handleToggleWindow={handleChatWindow}
+                name={name}
+                image={image}
+            />
+        </ListItem>
+    );
+>>>>>>> 2c195b2c3030351ad77e5fc4e0793f9ff5b51449
 }
