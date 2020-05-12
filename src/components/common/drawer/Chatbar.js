@@ -48,7 +48,6 @@ function Chatbar(props) {
             variant="persistent"
             className={classNames(classes.drawer, {
                 [classes.drawerOpen]: ChatOpen,
-                [classes.drawerClose]: !ChatOpen,
             })}
 
             anchor="right"
@@ -56,7 +55,6 @@ function Chatbar(props) {
             classes={{
                 paper: classNames({
                     [classes.drawerOpen]: ChatOpen,
-                    [classes.drawerClose]: !ChatOpen,
                 }),
             }}
         >
