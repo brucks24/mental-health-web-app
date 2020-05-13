@@ -23,41 +23,63 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    background: '#f2f2f2',
   },
   header: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     marginLeft: 0,
     marginTop: 0,
-    marginBottom: 7,
+    marginBottom: 12,
     width: '100%',
+    background: 'white',
   },
   chat: {
     position: 'relative',
-    background: 'grey',
     marginRight: theme.spacing(1),
     marginLeft: 0,
     marginTop: 0,
     marginBottom: 7,
     width: '100%',
   },
-  input: {
+  inputArea: {
+    background: 'white',
     position: 'absolute',
-    bottom: theme.spacing(3),
+    bottom: theme.spacing(0),
     width: '100%',
+    height: '6ch',
+    
   },
   inputRoot: {
     color: 'inherited',
+    border: "primary",
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: theme.spacing(2),
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.black, 0.1),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.black, 0.2),
     },
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    width: '100%',
+    paddingLeft: theme.spacing(2),
+    
+  },
+  avatar: {
+      position: 'absolute',
+      top: theme.spacing(1),
+      left: theme.spacing(10),
+  },
+  name: {
+    ...theme.typography,
+    backgroundColor: theme.palette.background.paper,
+    position: 'absolute',
+    top: theme.spacing(2),
+    left: theme.spacing(15),
+    padding: theme.spacing(1),
+    //display: 'flex',
+    justifyContent: 'center',
   },
 }));
 
@@ -78,16 +100,23 @@ export default function Chat(props) {
             <IconButton onClick={handleToggleWindow} aria-label="back">
                 <ArrowBackIosIcon />
             </IconButton>
-            <Avatar alt={name} src={image} /> {name}
+            
+            <div className={classes.avatar}>
+                <Avatar alt={name} src={image} />
+            </div>
+            <div className={classes.name}>
+                {name}
+            </div>
+            
             <Divider />
         </div>
         <div className={classes.chat}>
             This is where the chat will go
         </div>
 
-        <div className={classes.input}>
+        <div className={classes.inputArea}>
             <Divider />
-            <InputBase
+            <InputBase 
                 placeholder="Send a Message..."
                 classes={{
                     root: classes.inputRoot,

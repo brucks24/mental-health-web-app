@@ -34,6 +34,84 @@ const openChats = [
         image: 'https://www.themandarin.com.au/content/uploads/2019/10/space-nebula.jpg',
         previewMessage: 'Test test',
     },
+    {
+        id: 4,
+        name: 'Micheal Scott',
+        image: 'https://upload.wikimedia.org/wikipedia/en/d/dc/MichaelScott.png',
+        previewMessage: 'You need paper?',
+    },
+    {
+        id: 5,
+        name: 'Barack Obama',
+        image: 'https://www.biography.com/.image/t_share/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg',
+        previewMessage: 'We got the Changes for you and your people',
+    },
+    {
+        id: 6,
+        name: 'John Garcia',
+        image: '',
+        previewMessage: 'You get those papers I sent over?',
+    },
+    {
+        id: 7,
+        name: 'Rick Sanchez',
+        image: '/static/images/avatar/2.jpg',
+        previewMessage: 'Ready for an adventure?',
+    },
+    {
+        id: 8,
+        name: 'David Miller',
+        image: '/static/images/avatar/3.jpg',
+        previewMessage: 'test test test test test test',
+    },
+    {
+        id: 9,
+        name: 'Patricia Joseph',
+        image: '/static/images/avatar/2.jpg',
+        previewMessage: 'test test test',
+    },
+    {
+        id: 10,
+        name: 'Mary Smith',
+        image: '/static/images/avatar/2.jpg',
+        previewMessage: 'test test test test test test test test test test test test',
+    },
+    {
+        id: 11,
+        name: 'Dorothy Jones',
+        image: '/static/images/avatar/3.jpg',
+        previewMessage: 'test test test',
+    },
+    {
+        id: 12,
+        name: 'Barbara Wilson',
+        image: 'test test test test test test test test test',
+        previewMessage: 'Test test',
+    },
+    {
+        id: 13,
+        name: 'Margaret Joseph',
+        image: '/static/images/avatar/2.jpg',
+        previewMessage: 'test test test',
+    },
+    {
+        id: 14,
+        name: 'William Smith',
+        image: '/static/images/avatar/2.jpg',
+        previewMessage: 'test test test test test test test test test test test test',
+    },
+    {
+        id: 15,
+        name: 'Thomas Jones',
+        image: '/static/images/avatar/3.jpg',
+        previewMessage: 'test test test',
+    },
+    {
+        id: 16,
+        name: 'Linda Wilson',
+        image: 'test test test test test test test test test',
+        previewMessage: 'Test test',
+    },
 ]
 
 function Chatbar(props) {

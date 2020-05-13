@@ -22,7 +22,6 @@ export default makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: theme.spacing(20)
     
   },
   toolbar: {
@@ -71,9 +70,9 @@ export default makeStyles(theme => ({
     },
   },
   newChat: {
-    //display: 'flex',
+    display: 'flex',
     right: theme.spacing(3),
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing(3),
   },
 }));
