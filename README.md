@@ -11,6 +11,13 @@ UWW SASS is a information/social media support platform for student athletes and
 # New Features!
   - Panic button to alert coaches or staff of a critical event
   - Blank pages in the sidebar for content related to the side (boilerplate code)
+  
+ # Planed Features - Maybe, we haven't discussed this yet.
+  - Chat between players, coaches, and other professionals.
+  - Assignment of players to new teams
+  - Allow coaches to make new teams
+  - Allow coaches to assign players to new teams
+  - Maybe an invite only feature? A coach can send an email to the player to speed up registration.
 
 ### Installation
 
@@ -36,9 +43,9 @@ The backend server will then start, if you connect to the database properly the 
 # START HERE
 
 ### Documentation -- OLD Needs updating
-* [Backend Documentation]
-* [Redux Documentation]
-* [Client Documentation]
+* [Backend Documentation] -- dead link
+* [Redux Documentation] -- dead link
+* [Client Documentation] -- dead link
 
 ### Useful Links
 * Web framework for Node.js - [Express]
