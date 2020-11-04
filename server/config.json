@@ -1,0 +1,4 @@
+{
+    "secret": "abc",
+    "connectionString": "mongodb+srv://zh3844:GaGGZCiX58w5uPz@cluster0.zrjbw.mongodb.net/sass?retryWrites=true&w=majority"
+}

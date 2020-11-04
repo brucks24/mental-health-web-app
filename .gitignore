@@ -28,5 +28,3 @@ yarn-error.log*
 # security
 dbConfig.json
 .env
-
-server/config.json

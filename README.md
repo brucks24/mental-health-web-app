@@ -15,28 +15,27 @@ UWW SASS is a information/social media support platform for student athletes and
 ### Installation
 
 UWW SASS requires [Node.js](https://nodejs.org/) v10+ to run.
+UWW SASS requires a backend server and a front end server
 
-Install the dependencies and start the DEVELOPMENT server.
-
-```sh
-$ cd stuath-system-web
-$ yarn
-$ yarn server
-$ yarn start
+To start the front end in development mode do the following
 ```
-
-For production environments...
-
-```sh
-$ yarn
-$ yarn build
+$ Navigate to the root directory of the project
+$ Ensure all depencies are downloaded (npm install && yarn)
+$ Start the server (npm start)
 ```
+Once this is completed a window should pop up in your browser. This is the frontend. If you get an error, change the version of ```"react-scripts":``` to  ```"3.4.1"```.
 
-Rename the file ```env``` to ```.env``` and add the correct information to the fields.
+Now it's time to start the backend.
+```
+$ Ensure you have the most up-to-date config.json file. This will allow you to connect to the database
+$ Open a seperate command line and navigate to the projects root directory.
+$ Run (yarn server)
+```
+The backend server will then start, if you connect to the database properly the command line will say so. Once that is done, the installation is complete.
 
 # START HERE
 
-### Documentation
+### Documentation -- OLD Needs updating
 * [Backend Documentation]
 * [Redux Documentation]
 * [Client Documentation]
