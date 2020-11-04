@@ -78,7 +78,7 @@ The backend server will then start, if you connect to the database properly the 
    [ESLint]: <http://eslint.org/>
 
    [New Features]: <https://github.com/uww-student-athlete-success/stuath-success-web#new-features>
-   [Planned Features]: <https://github.com/uww-student-athlete-success/stuath-success-web#planed-features---maybe-we-havent-discussed-this-yet>
+   [Planned Features]: <https://github.com/uww-student-athlete-success/stuath-success-web#planned-features---maybe-we-havent-discussed-this-yet>
    [Installation]: <https://github.com/uww-student-athlete-success/stuath-success-web#installation>
    [Documentation]: <https://github.com/uww-student-athlete-success/stuath-success-web#documentation----old-needs-updating>
    [Useful Links]: <https://github.com/uww-student-athlete-success/stuath-success-web#useful-links>
