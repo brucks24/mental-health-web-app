@@ -8,11 +8,18 @@ UWW SASS is a information/social media support platform for student athletes and
   - Webpack
   - And more..
 
-# New Features!
+### Table of Contents
+  * [New Features]
+  * [Planned Features]
+  * [Installation]
+  * [Documentation]
+  * [Useful Links]
+
+### New Features!
   - Panic button to alert coaches or staff of a critical event
   - Blank pages in the sidebar for content related to the side (boilerplate code)
   
- # Planed Features - Maybe, we haven't discussed this yet.
+### Planned Features - Maybe, we haven't discussed this yet.
   - Chat between players, coaches, and other professionals.
   - Assignment of players to new teams
   - Allow coaches to make new teams
@@ -39,8 +46,6 @@ $ Open a seperate command line and navigate to the projects root directory.
 $ Run (yarn server)
 ```
 The backend server will then start, if you connect to the database properly the command line will say so. Once that is done, the installation is complete.
-
-# START HERE
 
 ### Documentation -- OLD Needs updating
 * [Backend Documentation] -- dead link
@@ -71,3 +76,9 @@ The backend server will then start, if you connect to the database properly the 
    [React-Router]: <https://reacttraining.com/react-router/>
    [Axios]: <https://github.com/mzabriskie/axios>
    [ESLint]: <http://eslint.org/>
+
+   [New Features]: <https://github.com/uww-student-athlete-success/stuath-success-web#new-features>
+   [Planned Features]: <https://github.com/uww-student-athlete-success/stuath-success-web#planed-features---maybe-we-havent-discussed-this-yet>
+   [Installation]: <https://github.com/uww-student-athlete-success/stuath-success-web#installation>
+   [Documentation]: <https://github.com/uww-student-athlete-success/stuath-success-web#documentation----old-needs-updating>
+   [Useful Links]: <https://github.com/uww-student-athlete-success/stuath-success-web#useful-links>
