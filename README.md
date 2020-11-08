@@ -19,12 +19,13 @@ UWW SASS is a information/social media support platform for student athletes and
   - Panic button to alert coaches or staff of a critical event
   - Blank pages in the sidebar for content related to the side (boilerplate code)
   
-### Planned Features - Maybe, we haven't discussed this yet.
-  - Chat between players, coaches, and other professionals.
-  - Assignment of players to new teams
-  - Allow coaches to make new teams
-  - Allow coaches to assign players to new teams
-  - Maybe an invite only feature? A coach can send an email to the player to speed up registration.
+### Planned Features for Fall 2020
+  - The system will allow the user to open a chat between another user on the platform.
+  - The system will allow users with the coach trait to create new teams
+  - The system will allow users with the coach trait to assign users with the student trait to be assigned to a team
+  - The system will allow users with the coach trait to send email invitations
+  - The system will allow for users with the coach trait to delete inactive players
+  - The system will allow for all users to customize their profile page
 
 ### Installation
 
