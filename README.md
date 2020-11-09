@@ -20,12 +20,18 @@ UWW SASS is a information/social media support platform for student athletes and
   - Blank pages in the sidebar for content related to the side (boilerplate code)
   
 ### Planned Features for Fall 2020
-  - The system will allow the user to open a chat between another user on the platform.
-  - The system will allow users with the coach trait to create new teams
-  - The system will allow users with the coach trait to assign users with the student trait to be assigned to a team
-  - The system will allow users with the coach trait to send email invitations
-  - The system will allow for users with the coach trait to delete inactive players
-  - The system will allow for all users to customize their profile page
+  ## Priority Functionality:
+    - The system will allow the user to open a chat between another user on the platform.
+    - The system will allow users with the coach trait to create new teams
+    - The system will allow users with the coach trait to assign users with the student trait to be assigned to a team
+    - The system will allow users with the coach trait to send email invitations for team invites
+    - The system will allow users with the coach trait to send email invitations for quick registration on the platform
+    - The system will allow for users with the coach trait to delete inactive players
+  ## If time:
+    - The system will allow for all users to customize their profile page
+    - The system will allow for users with the student trait to be allowed to fill out health information that will be shown to users with the coaches and support trait.
+    - The system will allow for users with support staff trait will be notified when the panic button is pressed for a user
+    - The system will allow for coaches to set up meetings through cisco webex.
 
 ### Installation
 
@@ -34,6 +40,7 @@ UWW SASS requires a backend server and a front end server
 
 To start the front end in development mode do the following
 ```
+$ First clone the repository
 $ Navigate to the root directory of the project
 $ Ensure all depencies are downloaded (npm install && yarn)
 $ Start the server (npm start)
