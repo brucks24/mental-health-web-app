@@ -8,32 +8,28 @@ UWW SASS is a information/social media support platform for student athletes and
   - Webpack
   - And more..
 
-### Table of Contents
+## Table of Contents
   * [New Features]
   * [Planned Features]
   * [Installation]
   * [Documentation]
   * [Useful Links]
-
-### New Features!
-  - Panic button to alert coaches or staff of a critical event
-  - Blank pages in the sidebar for content related to the side (boilerplate code)
   
-### Planned Features for Fall 2020
-  ## Priority Functionality:
+## Planned Features for Fall 2020
+  ### Priority Functionality:
     - The system will allow the user to open a chat between another user on the platform.
     - The system will allow users with the coach trait to create new teams
     - The system will allow users with the coach trait to assign users with the student trait to be assigned to a team
     - The system will allow users with the coach trait to send email invitations for team invites
     - The system will allow users with the coach trait to send email invitations for quick registration on the platform
     - The system will allow for users with the coach trait to delete inactive players
-  ## If time:
+  ### If time:
     - The system will allow for all users to customize their profile page
     - The system will allow for users with the student trait to be allowed to fill out health information that will be shown to users with the coaches and support trait.
     - The system will allow for users with support staff trait will be notified when the panic button is pressed for a user
     - The system will allow for coaches to set up meetings through cisco webex.
 
-### Installation
+## Installation
 
 UWW SASS requires [Node.js](https://nodejs.org/) v10+ to run.
 UWW SASS requires a backend server and a front end server
@@ -55,9 +51,9 @@ $ Run (yarn server)
 ```
 The backend server will then start, if you connect to the database properly the command line will say so. Once that is done, the installation is complete.
 
-### Documentation -- OLD Needs updating
+## Documentation -- OLD Needs updating
 * [Backend Documentation] -- dead link
-* [Redux Documentation] -- dead link
+* [Redux]
 * [Client Documentation] -- dead link
 
 ### Useful Links
@@ -73,7 +69,7 @@ The backend server will then start, if you connect to the database properly the 
 
 [//]: #
    [Backend Documentation]: <https://github.com/uww-student-athlete-success/stuath-success-web/tree/master/docs/BACKEND.md>
-   [Redux Documentation]: <https://github.com/uww-student-athlete-success/stuath-success-web/tree/master/docs/REDUX.md>
+   [Redux]: <https://react-redux.js.org/>
    [Client Documentation]: <https://github.com/uww-student-athlete-success/stuath-success-web/tree/master/docs/CLIENT.md>
    [Express]: <http://expressjs.com/>
    [jsonwebtoken]: <https://www.npmjs.com/package/jsonwebtoken>
