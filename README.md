@@ -7,13 +7,6 @@ UWW SASS is a information/social media support platform for student athletes and
   - Express
   - Webpack
   - And more..
-
-## Table of Contents
-  * [New Features]
-  * [Planned Features]
-  * [Installation]
-  * [Documentation]
-  * [Useful Links]
   
 ## Planned Features for Fall 2020
   ### Priority Functionality:
