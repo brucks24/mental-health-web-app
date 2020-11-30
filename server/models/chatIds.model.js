@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    message: { type: String }, // plain text message
+    sender: { type: String }, // id
+    recipient: { type: String }, // id
     conversationId: { type: Number }, // id to store between the two users
 }, { timestamps: true });
 

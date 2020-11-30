@@ -6,6 +6,10 @@ const User = db.User;
 function getChats(req, res) {
     let chats = [];
 
+    const userId;
+
+    const sentChats = Chat.find(userId); // get the cahts from the database
+    const received
 
 
 
