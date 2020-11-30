@@ -8,9 +8,18 @@ import SearchIcon from '@material-ui/icons/Search';
 import ChatCard from './components/ChatCard'
 import Chat from './Chat';
 import AddIcon from '@material-ui/icons/Add';
+import { useDispatch } from 'react-redux';
 
-const openChats = [
-    {
+// TODO Populate this array with chats from the database. 
+function loadChats(userId) {
+    let chats = [{}];
+
+    return chats;
+}
+
+const openChats = loadChats(1);
+/*
+const openChats = [{
         id: 0,
         name: 'Remy Sharp',
         image: '/static/images/avatar/1.jpg',
@@ -113,66 +122,84 @@ const openChats = [
         previewMessage: 'Test test',
     },
 ]
+*/
 
 function Chatbar(props) {
     let { ChatOpen } = props
     const theme = useTheme();
     const classes = chatbarStyles();
 
-    return (
-        <Drawer
-            variant="persistent"
-            className={classNames(classes.drawer, {
+    return ( <
+        Drawer variant = "persistent"
+        className = {
+            classNames(classes.drawer, {
                 [classes.drawerOpen]: ChatOpen,
                 [classes.drawerClose]: !ChatOpen,
-            })}
+            })
+        }
 
-            anchor="right"
-            open={ChatOpen}
-            classes={{
+        anchor = "right"
+        open = { ChatOpen }
+        classes = {
+            {
                 paper: classNames({
                     [classes.drawerOpen]: ChatOpen,
                     [classes.drawerClose]: !ChatOpen,
                 }),
-            }}
-        >
+            }
+        } >
 
-            <div className={classes.toolbar} />
-            <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                    <SearchIcon />
-                </div>
-                <InputBase
-                    placeholder="Search for person"
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
+        <
+        div className = { classes.toolbar }
+        /> <
+        div className = { classes.search } >
+        <
+        div className = { classes.searchIcon } >
+        <
+        SearchIcon / >
+        <
+        /div> <
+        InputBase placeholder = "Search for person"
+        classes = {
+            {
+                root: classes.inputRoot,
+                input: classes.inputInput,
+            }
+        }
+        inputProps = {
+            { 'aria-label': 'search' }
+        }
+        /> < /
+        div > <
+        Divider / >
+
+        <
+        div className = { classes.chatList } >
+        <
+        List className = { classes.root } > {
+            openChats.map(item => ( <
+                ChatCard name = { item.name }
+                image = { item.image }
+                previewMessage = { item.previewMessage }
+
                 />
-            </div>
-            <Divider />
+            ))
+        } <
+        /List> < /
+        div >
 
-            <div className={classes.chatList}>
-                <List className={classes.root}>
-                    {openChats.map(item => (
-                        <ChatCard
-                            name={item.name}
-                            image={item.image}
-                            previewMessage={item.previewMessage}
-
-                        />
-                    ))}
-                </List>
-            </div>
-
-            <div className={classes.newChat}>
-                <Fab variant="extended" color="primary">
-                    <AddIcon className={classes.extendedIcon} />
-                Create
-            </Fab>
-            </div>
-        </Drawer>
+        <
+        div className = { classes.newChat } >
+        <
+        Fab variant = "extended"
+        color = "primary" >
+        <
+        AddIcon className = { classes.extendedIcon }
+        />
+        Create <
+        /Fab> < /
+        div > <
+        /Drawer>
     )
 
 }
