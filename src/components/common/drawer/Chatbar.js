@@ -9,15 +9,10 @@ import ChatCard from './components/ChatCard'
 import Chat from './Chat';
 import AddIcon from '@material-ui/icons/Add';
 import { useDispatch } from 'react-redux';
+import { getUserChats } from '../../../redux/actions/chatActions'
 
-// TODO Populate this array with chats from the database. 
-function loadChats(userId) {
-    let chats = [{}];
 
-    return chats;
-}
-
-const openChats = loadChats(1);
+var openChats = [];
 /*
 const openChats = [{
         id: 0,
@@ -128,6 +123,8 @@ function Chatbar(props) {
     let { ChatOpen } = props
     const theme = useTheme();
     const classes = chatbarStyles();
+    const dispatch = useDispatch();
+    //openChats = dispatch(getUserChats(1));
 
     return ( <
         Drawer variant = "persistent"

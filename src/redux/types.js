@@ -13,3 +13,6 @@ export const SET_USER = 'SET_USER';
 export const LOADING_USER = 'LOADING_USER';
 // Data reducer types
 export const GET_USER_DATA = 'GET_USER_DATA';
+// Chat Reducer types
+export const LOADING_CHATS = 'LOADING_CHATS';
+export const LOAD_CHATS = 'LOAD_CHATS';

@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Fetch all chats for user
 router.route('/fetch').post((req, res) => {
-
+    chatController.getChats(req, res)
 });
 
 // Fetch if any new chats are there for the user
