@@ -13,7 +13,19 @@ function getUnreadChats(userId) {
     return false;
 }
 
+// Adds the chat to the database
+function sendChat(senderId, receiverId, conversationId, message) {
+
+}
+
+// Marrks the conversation as read
+function markAsRead(conversationId) {
+
+}
+
 module.exports = {
     getChats,
-    getUnreadChats
+    getUnreadChats,
+    sendChat,
+    markAsRead
 };
