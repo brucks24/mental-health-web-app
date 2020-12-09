@@ -123,8 +123,6 @@ function Chatbar(props) {
     let { ChatOpen } = props
     const theme = useTheme();
     const classes = chatbarStyles();
-    const dispatch = useDispatch();
-    //openChats = dispatch(getUserChats(1));
 
     return ( <
         Drawer variant = "persistent"
@@ -146,34 +144,27 @@ function Chatbar(props) {
             }
         } >
 
-        <
-        div className = { classes.toolbar }
-        /> <
-        div className = { classes.search } >
-        <
-        div className = { classes.searchIcon } >
-        <
-        SearchIcon / >
-        <
-        /div> <
-        InputBase placeholder = "Search for person"
-        classes = {
-            {
-                root: classes.inputRoot,
-                input: classes.inputInput,
+        <div className = { classes.toolbar } />
+        <div className = { classes.search } >
+            <div className = { classes.searchIcon } >
+                <SearchIcon / >
+            </div> 
+            <InputBase placeholder = "Search for person"
+            classes = {
+                {
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                }
             }
-        }
-        inputProps = {
-            { 'aria-label': 'search' }
-        }
-        /> < /
-        div > <
-        Divider / >
+            inputProps = {
+                { 'aria-label': 'search' }
+            }
+            />
+        </div>
+        <Divider/>
 
-        <
-        div className = { classes.chatList } >
-        <
-        List className = { classes.root } > {
+        <div className = { classes.chatList }>
+        <List className = { classes.root }> {
             openChats.map(item => ( <
                 ChatCard name = { item.name }
                 image = { item.image }
@@ -181,22 +172,14 @@ function Chatbar(props) {
 
                 />
             ))
-        } <
-        /List> < /
-        div >
+        } 
+        </List> 
+        </div>
 
-        <
-        div className = { classes.newChat } >
-        <
-        Fab variant = "extended"
-        color = "primary" >
-        <
-        AddIcon className = { classes.extendedIcon }
-        />
-        Create <
-        /Fab> < /
-        div > <
-        /Drawer>
+        <div className = { classes.newChat } >
+        <Fab variant = "extended" color = "primary" >
+        <AddIcon className = { classes.extendedIcon }/>Create
+        </Fab></div></Drawer>
     )
 
 }

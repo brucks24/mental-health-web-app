@@ -9,23 +9,34 @@ function getChats(req, res) {
 }
 
 // Returns boolean value wheter or not user has new unread chats
-function getUnreadChats(userId) {
+function getUnreadChats(req, res) {
     return false;
 }
 
+// 
+function fetchNew(req, res) {
+    var newChats = chatController.getUnreadChats(req, res);
+    if (newChats) {
+        chatController.getChats(req, res);
+    }
+}
+
 // Adds the chat to the database
-function sendChat(senderId, receiverId, conversationId, message) {
+function sendChat(req, res) {
+    var conversation = req.body.conversation;
+    var message = req.body.message;
 
 }
 
 // Marrks the conversation as read
-function markAsRead(conversationId) {
-
+function markAsRead(req, res) {
+    var conversation = req.body.conversation;
 }
 
 module.exports = {
     getChats,
     getUnreadChats,
     sendChat,
-    markAsRead
+    markAsRead,
+    fetchNew
 };

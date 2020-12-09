@@ -10,26 +10,18 @@ router.route('/fetch').post((req, res) => {
 
 // Checks for new messages, if there are new messages it loads the messages.
 router.route('/fetchnew').post((req, res) => {
-    var newChats = chatController.getUnreadChats(req, res);
-    if (newChats) {
-        chatController.getChats(req, res);
-    }
+    chatController.fetchNew(req, res);
 });
 
 // Sends message to designated user
 router.route('/sendmsg').post((req, res) => {
-    var conversation = req.body.conversation;
-    var message = req.body.message;
-
-    chatController.sendChat(sender, receiver, conversation, message);
+    chatController.sendChat(req, res);
 });
 
 // Marks all messages in the chat to be read
 router.route('/markread').post((req, res) => {
-    var conversation = req.body.conversation;
-    chatController.markAsRead(conversation);
+    chatController.markAsRead(req, res);
 });
-
 
 module.exports = router;
 
@@ -38,7 +30,7 @@ module.exports = router;
         - You need to pass the userId for this method to work.
         - The method will return the following
             - A JSON object of each chat in chronological order and not sorted by conversation.
-    POST /fetchnew -- Fetches all chats for the user if there are new messages
+    POST /chat/fetchnew -- Fetches all chats for the user if there are new messages
         - You need to pass the userId for this method to work
         - The method will return the following
             - A JSON object of each chat in chronological order and not sorted by conversation.
