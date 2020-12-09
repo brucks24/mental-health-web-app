@@ -5,7 +5,8 @@ const User = db.User;
 
 // Returns all the of the chats for the userId.
 function getChats(req, res) {
-    return res.json({});
+    console.log("Received post!")
+    return res.status(200);
 }
 
 // Returns boolean value wheter or not user has new unread chats

@@ -1,19 +1,23 @@
 import { LOADING_CHATS, CLEAR_ERRORS, LOAD_CHATS } from '../types';
-import history from '../../utils/history';
 import axios from 'axios';
 
-export const getUserChats = (userId) => (dispatch) => {
+export const getUserChats = () => (dispatch) => {
     dispatch({ type: LOADING_CHATS });
-    axios.post('/chat/fetch', userId).then(res => {
-
-        dispatch({
-            type: LOAD_CHATS
+    try {
+        axios.post('chat/fetch').then(res => {
+            console.log('oki!');
         })
-        dispatch({ type: CLEAR_ERRORS });
-        history.push('/dashboard');
-    });
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
+};
+
+const setAuthorizationHeader = (token) => {
+    const FBIdToken = `Bearer ${token}`;
+    localStorage.setItem('FBIdToken', FBIdToken);
+    axios.defaults.headers.common['Authorization'] = FBIdToken;
 };
