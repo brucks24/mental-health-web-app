@@ -1,15 +1,78 @@
+/*
+*	Edited by: Cole Bollig
+*	Time: Fall 2020 semester
+*	Description: Working on implementing team features for coaches
+*/
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
-import useStyles from './styles'
+import { Grid, Typography, Fade } from '@material-ui/core';
+import useStyles from './styles';
+import { useSelector } from 'react-redux';
+import Team from './teamObj';
+import Menu from './Coach/CoachMenu';
+
+
+//Replace with teams that user is part of
+const teams = [
+	//Test team data
+	{
+		name: 'COD Esports',
+		coach: 'Tristan',
+		id: '12',
+		members: 8,
+		description: 'Er mer gerd'
+	},
+	{
+		name: 'Football',
+		coach: 'Jack Oph',
+		id: '254',
+		members: 2,
+		description: 'Er mer gerd'
+	},
+	{
+		name: 'Finger Painting',
+		coach: 'Cole Bollig',
+		id: '23',
+		members: 34,
+		description: 'Er mer gerd'
+	},
+]
 
 const Teams = () => {
-    const classes = useStyles()
-
-    return (
-        <div>
-            <Typography variant="h5" className={classes.titleText}>Teams</Typography>
-        </div>
-    )
+   	const classes = useStyles();
+	
+	
+	//Get user status
+    const { name, user } = useSelector(state => ({
+      name: `${state.user.firstName} ${state.user.lastName}`,
+      user: state.user,
+    }));
+	var account = user.accountType;
+	
+	if (account === 0){
+		//If user account is 0 (student) return all team objects that user is part of
+		return (
+			<div>
+	 			{teams.map(item => (
+					<Team
+		 				name = {item.name}
+		 				coach = {item.coach}
+		 				id = {item.id}
+						nummembers = {item.members}
+					/>
+				))}
+		 	</div>
+		)
+	}
+	else if (account === 1){
+		//Else if account is 1 (coach) return coach team menu
+    		return (
+       		 	<div>
+           	 		<Typography variant="h5" className={classes.titleText}></Typography>
+				<Menu teams={teams}/>
+        		</div>
+   		)
+	}
 }
+
 
 export default Teams;

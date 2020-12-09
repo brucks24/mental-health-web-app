@@ -8,6 +8,7 @@ import RegisterContainer from '../containers/auth/RegisterContainer';
 import Dashboard from '../containers/dashboard/DashboardContainer';
 import ProfileContainer from '../containers/profile/ProfileContainer';
 import SupportTeamContainer from '../containers/supportTeam/SupportTeamContainer';
+import TeamsContainer from '../containers/teams/TeamsContainer';
 
 import PrivateRoute from './PrivateRoute';
 import RestrictedRoute from './RestrictedRoute';
@@ -23,6 +24,7 @@ const MainRouter = () => {
                     <Switch>
                         <PrivateRoute path="/dashboard" component={Dashboard} />
                         <PrivateRoute path="/support-team" component={SupportTeamContainer} />
+			<PrivateRoute path="/your-teams/Teams" component={TeamsContainer} />
                         <PrivateRoute exact path="/user/:id" component={ProfileContainer} />
                     </Switch>
                 </MainLayout>
