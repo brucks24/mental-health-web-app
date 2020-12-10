@@ -3,6 +3,7 @@ const User = db.User;
 const Team = db.Team;
 
 const makeTeam = (req, res) => {
+    console.log('Test')
     let newTeam = new Team({
         teamName: req.params[teamname],
         coach: req.params[coach], 
@@ -14,4 +15,7 @@ const makeTeam = (req, res) => {
         console.log(data);
     });
 };
-module.exports = makeTeam;
+
+module.exports = {
+    makeTeam
+};

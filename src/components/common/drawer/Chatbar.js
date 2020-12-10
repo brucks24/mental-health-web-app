@@ -9,6 +9,7 @@ import ChatCard from './components/ChatCard'
 import Chat from './Chat';
 import AddIcon from '@material-ui/icons/Add';
 import { getUserChats, sendUserMessage, markMessageRead } from '../../../redux/actions/chatActions';
+import {createTeam} from '../../../redux/actions/coachActions'
 import { useDispatch } from 'react-redux';
 
 
@@ -32,9 +33,10 @@ function Chatbar(props) {
     const [userData, setUserData] = React.useState({});
 
     function handleSubmit(e) {
+        console.log('idk');
         e.preventDefault();
         console.log('Test 123')
-        dispatch(markMessageRead(userData, props.history))
+        dispatch(createTeam(userData, props.history))
     }
 
 
