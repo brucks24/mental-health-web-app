@@ -81,7 +81,7 @@ async function sendChat(req, res) {
     // TODO: Reload the data and reload the chatbox with the updated chats.
 }
 
-// Marrks the conversation as read
+// Marks the conversation as read
 function markAsRead(req, res) {
     var conversation = req.body.conversation;
     Chat.updateMany({ conversationId: conversation }, { $set: { isRead: true } }, (err) => {
