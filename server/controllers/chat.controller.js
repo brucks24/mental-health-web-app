@@ -26,7 +26,14 @@ function fetchNew(req, res) {
 function sendChat(req, res) {
     var conversation = req.body.conversation;
     var message = req.body.message;
+    const chat = new Chat({
+        message: message,
+        conversationId: conversation,
+        isRead: false
+    })
+    chat.save();
 
+    // TODO: Reload the data and reload the chatbox with the updated chats.
 }
 
 // Marrks the conversation as read

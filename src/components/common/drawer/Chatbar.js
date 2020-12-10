@@ -8,7 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ChatCard from './components/ChatCard'
 import Chat from './Chat';
 import AddIcon from '@material-ui/icons/Add';
-import { getUserChats } from '../../../redux/actions/chatActions';
+import { getUserChats, sendUserMessage } from '../../../redux/actions/chatActions';
 import { useDispatch } from 'react-redux';
 
 
@@ -34,7 +34,7 @@ function Chatbar(props) {
     function handleSubmit(e) {
         e.preventDefault();
         console.log('Test 123')
-        dispatch(getUserChats(userData, props.history))
+        dispatch(sendUserMessage(userData, props.history))
     }
 
 
