@@ -20,6 +20,7 @@ if (config.connectionString != null) {
     module.exports = {
         User: require('../models/user.model'),
         Chat: require('../models/chat.model'),
+        ChatIds: require('../models/chatIds.model')
     }
 } else {
     console.log(colors.yellow('You must add dbConfig.json to the server folder'));

@@ -3,29 +3,23 @@ import axios from 'axios';
 
 export const getUserChats = () => (dispatch) => {
     dispatch({ type: LOADING_CHATS });
-    try {
         axios.post('chat/fetch').then(res => {
-            console.log('oki!');
+            // TODO: set data on page to the res.
         })
-    } catch (err) {
-        console.log(err);
-    }
 }
 
 export const sendUserMessage = () => (dispatch) => {
-    axios.post('chat/sendmsg');
+    axios.post('chat/sendmsg').then(res => {
+
+    });
 }
 
 export const markMessageRead = () => (dispatch) => {
-    axios.post('chat/markread');
+    axios.post('chat/markread').then(res => {
+
+    });
 }
 
 export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
-};
-
-const setAuthorizationHeader = (token) => {
-    const FBIdToken = `Bearer ${token}`;
-    localStorage.setItem('FBIdToken', FBIdToken);
-    axios.defaults.headers.common['Authorization'] = FBIdToken;
 };

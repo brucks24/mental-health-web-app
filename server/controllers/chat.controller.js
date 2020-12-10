@@ -1,6 +1,7 @@
 const config = require('../config.json');
 const db = require('../helpers/db');
 const Chat = db.Chat;
+const ChatIds = db.ChatIds;
 const User = db.User;
 
 // Returns all the of the chats for the userId.
@@ -24,7 +25,19 @@ function fetchNew(req, res) {
 
 // Returns the conversation id that is between the two users.
 function getConversationId(sender, receiver) {
-
+    ChatIds.findOne({user_one: sender, user_two: receiver}, (convo) => {
+        if (convo == null) {
+            ChatIds.findOne({user_one: receiver, user_two: sender}, (convo) => {
+                if (convo == null) {
+                    // new convo.
+                } else {
+                    return convo.conversationId;
+                }
+            });
+        } else {
+            return convo.conversationId;
+        }
+    });
 }
 
 // Adds the chat to the database
