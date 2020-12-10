@@ -5,51 +5,78 @@ const ChatIds = db.ChatIds;
 const User = db.User;
 
 // Returns all the of the chats for the userId.
-function getChats(req, res) {
-    console.log("Received post!")
+async function getChats(req, res) {
+    var id = await getConversationId("test1", "test2");
+
+    Chat.find({conversationId: id}).then(chats => {
+        console.log(chats);
+    });
+
     return res.status(200);
 }
 
 // Returns boolean value wheter or not user has new unread chats
-function getUnreadChats(req, res) {
-    return false;
-}
-
-// This might not be a useful thingy. Gonna have to take a peak at it.
-function fetchNew(req, res) {
-    var newChats = chatController.getUnreadChats(req, res);
-    if (newChats) {
-        chatController.getChats(req, res);
-    }
+async function hasUnreadChats(req, res) {
+    var id = await getConversationId("test1", "test2");
+    Chat.find({conversationId: id, isRead: false}).then(chats => {
+        return chats.length > 0 ? true : false;
+    });
 }
 
 // Returns the conversation id that is between the two users.
 function getConversationId(sender, receiver) {
-    ChatIds.findOne({user_one: sender, user_two: receiver}, (convo) => {
-        if (convo == null) {
-            ChatIds.findOne({user_one: receiver, user_two: sender}, (convo) => {
-                if (convo == null) {
-                    // new convo.
-                } else {
-                    return convo.conversationId;
-                }
-            });
-        } else {
-            return convo.conversationId;
-        }
+    return new Promise(function(resolve, reject) {
+        ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
+            if (convo == null) {
+                ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo => {
+                    if (convo == null) {
+                        const id = new ChatIds({
+                            user_one: sender,
+                            user_two: receiver,
+                            conversationId: `${makeid(10)}`
+                        });
+                        id.save();
+                        resolve(id.conversationId);
+                    } else {
+                        resolve(convo2.conversationId);
+                    }
+                });
+            } else {
+                resolve(convo.conversationId);
+            }
+
+        });
+    })
+}
+
+function didUserOneSend(sender, receiver) {
+    return new Promise((resolve, reject) => {
+        ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
+            if (convo == null) {
+                ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo => {
+                    return false;
+                });
+            } else {
+                return true;
+            }
+        });
+        return null;
     });
 }
 
 // Adds the chat to the database
-function sendChat(req, res) {
-    var conversation = req.body.conversation;
-    var message = req.body.message;
+async function sendChat(req, res) {
+    var id = await getConversationId("test1", "test2");
+    var userOneSent = await didUserOneSend("test1", "test2");
+    var message = "This is a test message.";
     const chat = new Chat({
         message: message,
-        conversationId: conversation,
+        conversationId: id,
+        user_one_sent: userOneSent,
         isRead: false
     })
     chat.save();
+
 
     // TODO: Reload the data and reload the chatbox with the updated chats.
 }
@@ -64,10 +91,19 @@ function markAsRead(req, res) {
     });
 }
 
+function makeid(length) {
+    var result = '';
+    var characters = '0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
 module.exports = {
     getChats,
-    getUnreadChats,
+    hasUnreadChats,
     sendChat,
-    markAsRead,
-    fetchNew
+    markAsRead
 };

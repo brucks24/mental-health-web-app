@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const schema = new Schema({
     message: { type: String }, // plain text message
     conversationId: { type: Number }, // id to store between the two users
+    userOneSent: { type: Boolean },
     isRead: { type: Boolean }, // boolean wheter or not the message has been read by the reciver
 }, { timestamps: true, collection: 'chats'});
 

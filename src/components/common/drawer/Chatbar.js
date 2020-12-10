@@ -32,11 +32,10 @@ function Chatbar(props) {
     const dispatch = useDispatch();
     const [userData, setUserData] = React.useState({});
 
+    
     function handleSubmit(e) {
-        console.log('idk');
         e.preventDefault();
-        console.log('Test 123')
-        dispatch(createTeam(userData, props.history))
+        //dispatch(getUserChats(userData, props.history)) -- Used for my testing...
     }
 
 
