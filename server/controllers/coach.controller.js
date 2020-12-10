@@ -5,9 +5,9 @@ const Team = db.Team;
 const makeTeam = (req, res) => {
     console.log('Test')
     let newTeam = new Team({
-        teamName: req.params[teamname],
-        coach: req.params[coach], 
-        description: req.params[description],
+        teamName: 'Test',
+        coach: 'Test', 
+        description: "123",
     });
 
     newTeam.save((err, data) => {
