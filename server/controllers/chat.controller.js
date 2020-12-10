@@ -14,12 +14,17 @@ function getUnreadChats(req, res) {
     return false;
 }
 
-// 
+// This might not be a useful thingy. Gonna have to take a peak at it.
 function fetchNew(req, res) {
     var newChats = chatController.getUnreadChats(req, res);
     if (newChats) {
         chatController.getChats(req, res);
     }
+}
+
+// Returns the conversation id that is between the two users.
+function getConversationId(sender, receiver) {
+
 }
 
 // Adds the chat to the database
