@@ -8,7 +8,7 @@ const schema = new Schema({
     lastName: { type: String, required: true },
     createdDate: { type: Date, default: Date.now },
     accountType: { type: Number, required: true }
-});
+}, { collection: 'users'});
 
 schema.set('toJSON', { virtuals: true });
 
