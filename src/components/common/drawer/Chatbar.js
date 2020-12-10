@@ -9,7 +9,7 @@ import ChatCard from './components/ChatCard'
 import Chat from './Chat';
 import AddIcon from '@material-ui/icons/Add';
 import { getUserChats, sendUserMessage, markMessageRead } from '../../../redux/actions/chatActions';
-import {createTeam} from '../../../redux/actions/coachActions'
+import {createTeam} from '../../../redux/actions/coachActions';
 import { useDispatch } from 'react-redux';
 
 
