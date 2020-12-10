@@ -16,6 +16,10 @@ export const sendUserMessage = () => (dispatch) => {
     axios.post('chat/sendmsg');
 }
 
+export const markMessageRead = () => (dispatch) => {
+    axios.post('chat/markread');
+}
+
 export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
 };

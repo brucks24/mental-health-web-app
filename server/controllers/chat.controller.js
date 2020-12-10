@@ -39,6 +39,11 @@ function sendChat(req, res) {
 // Marrks the conversation as read
 function markAsRead(req, res) {
     var conversation = req.body.conversation;
+    Chat.updateMany({ conversationId: conversation }, { $set: { isRead: true } }, (err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
 }
 
 module.exports = {
