@@ -11,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { getUserChats, sendUserMessage, markMessageRead } from '../../../redux/actions/chatActions';
 import { createTeam } from '../../../redux/actions/coachActions';
 import { useDispatch } from 'react-redux';
+import Popup from './components/Popup';
 
 
 var openChats = [];
@@ -41,8 +42,8 @@ function Chatbar(props) {
     }
 
 
-    return ( <
-        Drawer variant = "persistent"
+    return ( 
+        <Drawer variant = "persistent"
         className = {
             classNames(classes.drawer, {
                 [classes.drawerOpen]: ChatOpen,
@@ -61,17 +62,13 @@ function Chatbar(props) {
             }
         } >
 
-        <
-        div className = { classes.toolbar }
-        /> <
-        div className = { classes.search } >
-        <
-        div className = { classes.searchIcon } >
-        <
-        SearchIcon / >
-        <
-        /div>  <
-        InputBase placeholder = "Search for person"
+        <div className = { classes.toolbar }/> 
+        <div className = { classes.search } >
+
+        <div className = { classes.searchIcon } >
+        <SearchIcon / >
+        </div> 
+        <InputBase placeholder = "Search for person"
         classes = {
             {
                 root: classes.inputRoot,
@@ -81,14 +78,12 @@ function Chatbar(props) {
         inputProps = {
             { 'aria-label': 'search' }
         }
-        /> < /
-        div > <
-        Divider / >
+        /> 
+        </div > 
+        <Divider/>
 
-        <
-        div className = { classes.chatList } >
-        <
-        List className = { classes.root } > {
+        <div className = { classes.chatList } >
+        <List className = { classes.root } > {
             openChats.map(item => ( <
                 ChatCard name = { item.name }
                 image = { item.image }
@@ -96,26 +91,36 @@ function Chatbar(props) {
 
                 />
             ))
-        } <
-        /List>  < /
-        div >
+        }
+        </List> 
+        </div>
 
-        <
-        div className = { classes.newChat } >
-        <
-        Fab variant = "extended"
-        color = "primary" >
-        <
-        Button onClick = { handleSubmit }
-        type = "submit" >
-        <
-        AddIcon className = { classes.extendedIcon }
-        />Create < /
-        Button > <
-        /Fab> < /
-        div > <
-        /Drawer>
+        <div className = { classes.newChat } >
+            
+        <Fab 
+            variant = "extended" 
+            color = "primary" 
+            
+            onClick ={() => setOpenPopup(true)}
+         
+        
+        >
+            <AddIcon  className = { classes.extendedIcon}/>
+            Create
+        </Fab> 
+        
+        </div >
+        <newMessageForm/>    
+        <Popup  
+        openPopup = {openPopup}
+        setOpenPopup = {setOpenPopup}
+        >
+        </Popup>
+        
+        </Drawer>
+         
     )
+        
 
 }
 
