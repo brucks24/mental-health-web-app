@@ -3,11 +3,11 @@ const User = db.User;
 const Team = db.Team;
 
 const makeTeam = (req, res) => {
-    console.log('Test')
-    let newTeam = new Team({
-        teamName: 'Test',
-        coach: 'Test', 
-        description: "123",
+    //console.log(req.body);
+   let newTeam = new Team({
+        teamName: req.body.teamname,
+        coach: req.body.coach, 
+        description: req.body.description,
     });
 
     newTeam.save((err, data) => {

@@ -8,7 +8,8 @@
 import React from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 import {Grid} from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { createTeam } from '../../../redux/actions/coachActions';
 
 const infoStyle = makeStyles({
 	Box: {
@@ -52,24 +53,27 @@ const infoStyle = makeStyles({
 });
 
 
-function CreateTeam(){
+function CreateTeam(props){
 	const classes = infoStyle();
-	
+	const dispatch = useDispatch();
    	const { name, user } = useSelector(state => ({
       		name: `${state.user.firstName} ${state.user.lastName}`,
-      		user: state.user,
+			user: state.user,
    	 }));
-	 
+
 	 function handleSubmit(event){
 		 //Upon clicking create send form request
 		 //Sent data teamname, coach, and description
-		 alert('New Team Created');
-		 event.preventdefault();
+		 event.preventDefault();
+		 const teamData = {
+
+		 };
+		 dispatch(createTeam(teamData, props.history));
 	 }
 	
 	return (
 		<div  className={classes.Box}>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} method="post">
 			<Grid container xs={12}>
 				<Grid container xs={4}>
 					<label className={classes.Text}>Team Name:</label>
@@ -101,7 +105,7 @@ function CreateTeam(){
 			<Grid container xs={12}>
 				<Grid container xs={5}></Grid>
 				<Grid container xs={2}>
-					<input type="Submit" value="Create" className={classes.Submit}/>
+					<button type="Submit">Create</button>
 				</Grid>
 				<Grid container xs={4}></Grid>
 			</Grid>

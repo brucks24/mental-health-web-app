@@ -63,7 +63,7 @@ const Teams = () => {
 		 	</div>
 		)
 	}
-	else if (account === 1){
+	else{
 		//Else if account is 1 (coach) return coach team menu
     		return (
        		 	<div>
