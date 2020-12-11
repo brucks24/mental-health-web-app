@@ -29,9 +29,9 @@ function Chatbar(props) {
     let { ChatOpen } = props
     const theme = useTheme();
     const classes = chatbarStyles();
-
     const dispatch = useDispatch();
     const [userData, setUserData] = React.useState({});
+    const [openPopup, setOpenPopup] = useState(false);
 
     // Load the chats on initilize
     dispatch(getUserChats(userData, props.history));
