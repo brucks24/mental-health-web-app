@@ -97,7 +97,7 @@ To start the Client
    ```sh
    npm install
    ```
-3. Start yan
+3. Start yarn
    ```sh
    yarn
    ```
