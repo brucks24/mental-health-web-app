@@ -157,17 +157,17 @@ See the [open issues](https://github.com/uww-student-athlete-success/stuath-succ
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* All stuath-success-web - Software Engineering students working on this project
+* All UW-Whitewater's CS476-Software Engineering students working on this project
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/uww-student-athlete-success/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/uww-student-athlete-success/repo/graphs/contributors
+[contributors-url]: https://github.com/uww-student-athlete-success/stuath-success-web/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/uww-student-athlete-success/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/uww-student-athlete-success/repo/network/members
+[forks-url]: https://github.com/uww-student-athlete-success/stuath-success-web/network/members
 [stars-shield]: https://img.shields.io/github/stars/uww-student-athlete-success/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/uww-student-athlete-success/repo/stargazers
+[stars-url]: https://github.com/uww-student-athlete-success/stuath-success-web/stargazers
 [issues-shield]: https://img.shields.io/github/issues/uww-student-athlete-success/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/uww-student-athlete-success/repo/issues
+[issues-url]: https://github.com/uww-student-athlete-success/stuath-success-web/issues
 <!-- [license-shield]: https://img.shields.io/github/license/uww-student-athlete-success/repo.svg?style=for-the-badge
 [license-url]: https://github.com/uww-student-athlete-success/repo/blob/master/LICENSE.txt -->
