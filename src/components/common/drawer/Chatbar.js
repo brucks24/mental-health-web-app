@@ -9,7 +9,7 @@ import ChatCard from './components/ChatCard'
 import Chat from './Chat';
 import AddIcon from '@material-ui/icons/Add';
 import { getUserChats, sendUserMessage, markMessageRead } from '../../../redux/actions/chatActions';
-import {createTeam} from '../../../redux/actions/coachActions';
+import { createTeam } from '../../../redux/actions/coachActions';
 import { useDispatch } from 'react-redux';
 
 
@@ -32,10 +32,12 @@ function Chatbar(props) {
     const dispatch = useDispatch();
     const [userData, setUserData] = React.useState({});
 
-    
+    // Load the chats on initilize
+    dispatch(getUserChats(userData, props.history));
+
     function handleSubmit(e) {
         e.preventDefault();
-        //dispatch(getUserChats(userData, props.history)) -- Used for my testing...
+        dispatch(getUserChats(userData, props.history))
     }
 
 
@@ -59,27 +61,34 @@ function Chatbar(props) {
             }
         } >
 
-        <div className = { classes.toolbar } />
-        <div className = { classes.search } >
-            <div className = { classes.searchIcon } >
-                <SearchIcon / >
-            </div> 
-            <InputBase placeholder = "Search for person"
-            classes = {
-                {
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                }
+        <
+        div className = { classes.toolbar }
+        /> <
+        div className = { classes.search } >
+        <
+        div className = { classes.searchIcon } >
+        <
+        SearchIcon / >
+        <
+        /div>  <
+        InputBase placeholder = "Search for person"
+        classes = {
+            {
+                root: classes.inputRoot,
+                input: classes.inputInput,
             }
-            inputProps = {
-                { 'aria-label': 'search' }
-            }
-            />
-        </div>
-        <Divider/>
+        }
+        inputProps = {
+            { 'aria-label': 'search' }
+        }
+        /> < /
+        div > <
+        Divider / >
 
-        <div className = { classes.chatList }>
-        <List className = { classes.root }> {
+        <
+        div className = { classes.chatList } >
+        <
+        List className = { classes.root } > {
             openChats.map(item => ( <
                 ChatCard name = { item.name }
                 image = { item.image }
@@ -87,20 +96,31 @@ function Chatbar(props) {
 
                 />
             ))
-        } 
-        </List> 
-        </div>
+        } <
+        /List>  < /
+        div >
 
-        <div className = { classes.newChat } >
-            <Fab variant = "extended" color = "primary" >
-                <Button onClick={handleSubmit} type="submit">
-                    <AddIcon className = { classes.extendedIcon }/>Create
-                </Button>
-            </Fab>
-        </div>
-        </Drawer>
+        <
+        div className = { classes.newChat } >
+        <
+        Fab variant = "extended"
+        color = "primary" >
+        <
+        Button onClick = { handleSubmit }
+        type = "submit" >
+        <
+        AddIcon className = { classes.extendedIcon }
+        />Create < /
+        Button > <
+        /Fab> < /
+        div > <
+        /Drawer>
     )
 
 }
 
 export default Chatbar
+
+export function setChat(chats) {
+    openChats = chats;
+}

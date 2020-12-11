@@ -7,20 +7,20 @@ const User = db.User;
 // Returns all the of the chats for the userId.
 async function getChats(req, res) {
     var id = await getConversationId("test1", "test2");
-
-    Chat.find({conversationId: id}).then(chats => {
-        console.log(chats);
+    Chat.find({ conversationId: id }).then(chats => {
+        return res.status(200).json({ chats })
     });
-
-    return res.status(200);
+    return null;
 }
 
 // Returns boolean value wheter or not user has new unread chats
 async function hasUnreadChats(req, res) {
     var id = await getConversationId("test1", "test2");
-    Chat.find({conversationId: id, isRead: false}).then(chats => {
-        return chats.length > 0 ? true : false;
+    Chat.find({ conversationId: id, isRead: false }).then(chats => {
+        var hasUnread = chats.length > 0 ? true : false;
+        return res.status(200).json({ hasUnread: hasUnread });
     });
+    return null;
 }
 
 // Returns the conversation id that is between the two users.
@@ -76,7 +76,7 @@ async function sendChat(req, res) {
         isRead: false
     })
     chat.save();
-
+    getChats(req, res);
 
     // TODO: Reload the data and reload the chatbox with the updated chats.
 }
@@ -89,6 +89,7 @@ function markAsRead(req, res) {
             console.log(err);
         }
     });
+    getChats(req, res);
 }
 
 function makeid(length) {
