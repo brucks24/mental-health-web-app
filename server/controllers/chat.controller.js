@@ -129,7 +129,6 @@ async function sendChat(req, res) {
     var id = await getConversationId(req.body.sender, req.body.receiver);
     var userOneSent = await didUserOneSend(req.body.sender, req.body.receiver);
     var message = req.body.msg;
-    console.log(message);
     const chat = new Chat({
         message: message,
         conversationId: id,

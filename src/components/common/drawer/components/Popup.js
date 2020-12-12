@@ -6,7 +6,12 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
-import { sendUserMessage } from "../../../../redux/actions/chatActions";
+import {
+  getUserChats,
+  sendUserMessage,
+  markMessageRead,
+  getUserConvos,
+} from "../../../../redux/actions/chatActions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
@@ -23,6 +28,9 @@ export default function Popup(props) {
 
   const handleClose = () => {
     dispatch(sendUserMessage(name, receiver, message));
+    setTimeout(() => {
+      dispatch(getUserConvos(name));
+    }, 2000);
     setOpenPopup(false);
   };
 

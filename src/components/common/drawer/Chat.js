@@ -1,4 +1,4 @@
-import React from "react";
+import React, {forceUpdate} from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -8,12 +8,6 @@ import "react-chat-elements/dist/main.css";
 import { MessageBox } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserChats, getConvoId, sendUserMessage } from "../../../redux/actions/chatActions";
-
-export function setMessages(msgs) {
-  console.log('Setting the messages');
-  console.log(msgs);
-  messages = msgs;
-}
 
 var messages = [];
 
@@ -112,6 +106,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export function setMessages(msgs) {
+  console.log('Updating messages.')
+  messages = msgs;
+}
+
 export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, receiverName, image } = props;
   const classes = useStyles();
@@ -131,6 +130,9 @@ export default function Chat(props) {
     if (messageTarget != null) {
       messageTarget.value = "";
     }
+    setTimeout(() => {
+      dispatch(getUserChats(senderName, receiverName));
+    }, 2000);
   }
 
   var message = "";
@@ -163,11 +165,13 @@ export default function Chat(props) {
       </div>{" "}
       <div className={classes.chat}>
         {messages.map((value, index) => {
+          
           return (
             <MessageBox
               position={value.side} //outgoing message is right
               type={"text"}
               text={value.message} //message
+              date={new Date(value.time)}
               data={{
                 uri: "https://facebook.github.io/react/img/logo.svg",
               }}
