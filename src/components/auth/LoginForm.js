@@ -1,16 +1,16 @@
-import { Button, Fade, Grid, TextField, Typography } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { loginUser } from '../../redux/actions/userActions';
-import useStyles from './styles';
+import { Button, Fade, Grid, TextField, Typography } from "@material-ui/core";
+import PropTypes from "prop-types";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { loginUser } from "../../redux/actions/userActions";
+import useStyles from "./styles";
 
 function LoginForm(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   // handle props from passed from LoginContainer
-  const { onSubmit, errorMessages } = props;
+  const { errorMessages } = props;
   const [userData, setUserData] = React.useState({});
 
   function handleChange(e) {
@@ -28,19 +28,23 @@ function LoginForm(props) {
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
-        <Typography className={classes.logotypeText}>UWW SASS</Typography>
-        <Typography variant="h4" className={classes.logoSubtitle}>UWW Student Athlete Success System</Typography>
-      </div>
+        <Typography className={classes.logotypeText}> UWW SASS </Typography>{" "}
+        <Typography variant="h4" className={classes.logoSubtitle}>
+          {" "}
+          UWW Student Athlete Success System{" "}
+        </Typography>{" "}
+      </div>{" "}
       <div className={classes.formContainer}>
         <form method="post" onSubmit={handleSubmit} className={classes.form}>
           <Typography variant="h4" className={classes.greeting}>
-            Sign In
-          </Typography>
+            Sign In{" "}
+          </Typography>{" "}
           <Fade in={errorMessages}>
             <Typography color="secondary" className={classes.errorMessage}>
-              {errorMessages}
-            </Typography>
-          </Fade>
+              {" "}
+              {errorMessages}{" "}
+            </Typography>{" "}
+          </Fade>{" "}
           <TextField
             type="email"
             name="email"
@@ -49,7 +53,7 @@ function LoginForm(props) {
             fullWidth={true}
             label="Email"
             onChange={handleChange}
-          />
+          />{" "}
           <TextField
             type="password"
             name="password"
@@ -58,7 +62,7 @@ function LoginForm(props) {
             fullWidth={true}
             label="Password"
             onChange={handleChange}
-          />
+          />{" "}
           <div className={classes.formButtons}>
             <Button
               variant="contained"
@@ -66,24 +70,27 @@ function LoginForm(props) {
               size="large"
               type="submit"
             >
-              Sign In
-            </Button>
+              Sign In{" "}
+            </Button>{" "}
             <Button
               color="primary"
               size="large"
               className={classes.forgetButton}
-            >Forgot password</Button>
-          </div>
-          <Typography
-            className={classes.signUpText}
-          >Don't have an account? <Link to={'/register'}>Sign up</Link></Typography>
-        </form>
-      </div>
+            >
+              Forgot password{" "}
+            </Button>{" "}
+          </div>{" "}
+          <Typography className={classes.signUpText}>
+            Don 't have an account? <Link to={" / register "}>Sign up</Link>
+          </Typography>{" "}
+        </form>{" "}
+      </div>{" "}
     </Grid>
   );
 }
 
 // Validate the fields from the login form
+/*
 function validateLogin(values) {
   const errors = {};
 
@@ -103,13 +110,14 @@ function validateLogin(values) {
 
   return errors;
 }
+*/
 
 // handle prop requirements from LoginContainer
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
   errorMessages: PropTypes.object,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 // export default reduxForm({
