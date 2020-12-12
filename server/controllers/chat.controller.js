@@ -6,9 +6,27 @@ const User = db.User;
 
 // Returns all the of the chats for the userId.
 async function getChats(req, res) {
-    var id = await getConversationId("test1", "test2");
-    Chat.find({ conversationId: id }).then(chats => {
-        return res.status(200).json({ chats })
+    var id = await getConversationId(req.body.sender, req.body.receiver);
+    Chat.findOne({ conversationId: id }).then(chats => {
+
+        // let's format the chats...
+        var newChats = [];
+        chats.array.forEach(element => {
+
+            var sideBool = await didUserOneSend(req.body.sender, req.body.receiver);
+            var side = 'right';
+            if (sideBool) {
+                side = 'left';
+            }
+            
+            var tmp = {
+                message: element.message,
+                side: side,
+                time: element.createdAt
+            };
+            newChats.push(tmp);
+        });
+        return res.status(200).json({ newChats })
     });
     return null;
 }
@@ -26,7 +44,6 @@ function getConvos(req, res) {
         ChatIds.find({ user_two: `${user}` }).then(convo => {
             if (convo.length > 0) { convos.push(convo); }
             return res.status(200).json(convos);
-
         });
     });
 }
@@ -91,11 +108,12 @@ function didUserOneSend(sender, receiver) {
 async function sendChat(req, res) {
     var id = await getConversationId(req.body.sender, req.body.receiver);
     var userOneSent = await didUserOneSend(req.body.sender, req.body.receiver);
-    var message = req.body.message;
+    var message = req.body.msg;
+    console.log(message);
     const chat = new Chat({
         message: message,
         conversationId: id,
-        user_one_sent: userOneSent,
+        userOneSent: userOneSent,
         isRead: false
     })
     chat.save();

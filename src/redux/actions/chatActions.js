@@ -8,9 +8,7 @@ export const getUserChats = (sender, receiver) => (dispatch) => {
         sender: sender,
         receiver: receiver
     }).then(res => {
-        dispatch({
-            type: CLEAR_ERRORS
-        });
+        dispatch({ type: CLEAR_ERRORS });
         axios.post('chat/fetch/chats', {
             convo_id: res.data.id
         }).then(res => {

@@ -3,28 +3,36 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import SendIcon from "@material-ui/icons/Send";
-import {
-  IconButton,
-  Avatar,
-  InputBase,
-  Divider,
-} from "@material-ui/core";
+import { IconButton, Avatar, InputBase, Divider } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
 import { MessageBox } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
-import {getUserChats, getConvoId} from '../../../redux/actions/chatActions'
+import { getUserChats, getConvoId, sendUserMessage } from "../../../redux/actions/chatActions";
 
-export function setMessages(mesages) {
-  mesages = messages;
+export function setMessages(msgs) {
+  messages = msgs;
 }
 
 var messages = [
   {
     message: "123",
-    side: "right"
+    side: "right",
   },
-  {message: "456", side: "left"}
+  { message: "456", side: "left" },
 ];
+
+var lastDispatch = Date.now();
+
+function shouldDispatch() {
+  const rightNow = Date.now();
+  if (rightNow - lastDispatch > 500) {
+    lastDispatch = Date.now();
+    return true;
+  } else {
+    return false;
+  }
+}
+
 /*
 message template:
 {
@@ -111,12 +119,25 @@ const useStyles = makeStyles((theme) => ({
 export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, receiverName, image } = props;
   const classes = useStyles();
-  const { senderName } = useSelector(state => ({
-      name: `${state.user.firstName} ${state.user.lastName}`,
-      user: state.user,
+
+  const { senderName } = useSelector((state) => ({
+    name: `${state.user.firstName} ${state.user.lastName}`,
+    user: state.user,
   }));
   const dispatch = useDispatch();
-  dispatch(getUserChats(senderName, receiverName));
+
+  if (shouldDispatch()) {
+    dispatch(getUserChats(senderName, receiverName));
+  }
+
+  function handleSubmit(e) {
+    dispatch(sendUserMessage(senderName, receiverName, message));
+  }
+
+  var message = "";
+  function messageChange(e) {
+    message = e.target.value;
+  }
 
   return (
     <Drawer
@@ -140,33 +161,38 @@ export default function Chat(props) {
         <Divider />
       </div>{" "}
       <div className={classes.chat}>
-          {messages.map((value, index) => {
-            return <MessageBox
-            position={value.side} //outgoing message is right
-            type={"text"}
-            text={value.message} //message
-            data={{
-              uri: "https://facebook.github.io/react/img/logo.svg",
-            }}
+        {messages.map((value, index) => {
+          return (
+            <MessageBox
+              position={value.side} //outgoing message is right
+              type={"text"}
+              text={value.message} //message
+              data={{
+                uri: "https://facebook.github.io/react/img/logo.svg",
+              }}
             />
-          })};
+          );
+        })}
       </div>
-      <div className={classes.inputArea}>
-        <Divider />
-        <InputBase
-          placeholder="Send a Message..."
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          inputProps={{
-            "aria-label": "Send Message",
-          }}
-        />{" "}
-        <IconButton aria-label="send">
-          <SendIcon color="primary" />
-        </IconButton>{" "}
-      </div>{" "}
+      <form>
+        <div className={classes.inputArea}>
+          <Divider />
+          <InputBase
+            placeholder="Send a Message..."
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{
+              "aria-label": "Send Message",
+            }}
+            onChange={messageChange}
+          />{" "}
+          <IconButton aria-label="send" onClick={handleSubmit}>
+            <SendIcon color="primary" />
+          </IconButton>{" "}
+        </div>{" "}
+      </form>
     </Drawer>
   );
 }
