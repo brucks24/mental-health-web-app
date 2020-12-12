@@ -36,7 +36,7 @@ const teamStyle = makeStyles({
 
 
 function teamObj(props){
-	const { name, coach, id, nummembers} = props;
+	const { name, coach, nummembers} = props;
 	const classes = teamStyle();
 	
 	function handleEvent(){
