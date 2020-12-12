@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import {Grid} from '@material-ui/core';
 import Update from './UpdateTeam';
 import MemberBox from './MembersContainer';
@@ -20,7 +20,6 @@ const infoStyle = makeStyles({
 
 function EditTeam(props){
 	const {name, id, coach, description} = props;
-	const classes = infoStyle();
 	
 	return (
 		<div>

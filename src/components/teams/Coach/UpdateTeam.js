@@ -5,7 +5,7 @@
 */
 
 import React, { useState } from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import {Grid} from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { updateTeam } from '../../../redux/actions/coachActions';
@@ -56,7 +56,7 @@ const infoStyle = makeStyles({
 
 function UpdateTeam(props){
 	const dispatch = useDispatch();
-	const {name,id,coach,description} = props;
+	const {name,coach,description} = props;
 	const classes = infoStyle();
 	const [newname, setNewName] = useState("");
 	const [newdesc, setNewDesc] = useState("");
