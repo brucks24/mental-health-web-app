@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Link, Fade } from '@material-ui/core';
+import { Grid, Fade } from '@material-ui/core';
 import { red, purple, pink, blue, lightBlue, teal, green, lightGreen } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './styles';
