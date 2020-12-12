@@ -1,10 +1,13 @@
 import React from "react";
+
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   TextField,
   Button,
+  Grid,
+  DialogActions
 } from "@material-ui/core";
 import {
   getUserChats,
@@ -26,7 +29,7 @@ export default function Popup(props) {
   var receiver = "";
   var message = "";
 
-  const handleClose = () => {
+  const sendClose = () => {
     dispatch(sendUserMessage(name, receiver, message));
     setTimeout(() => {
       dispatch(getUserConvos(name));
@@ -37,16 +40,23 @@ export default function Popup(props) {
   const messageChange = (e) => {
     message = e.target.value;
   };
+  const handleClose = () => {
+    setOpenPopup(false);
+  };
 
   const receiverChange = (e) => {
     receiver = e.target.value;
   };
 
   return (
-    <Dialog open={openPopup}>
-      <DialogTitle>Create Message </DialogTitle>{" "}
+
+    <div>     
+    <Dialog open={openPopup} contentStyle={{width: "100%"}}>    
+      <DialogTitle>Create Message</DialogTitle>{" "}
+      
       <DialogContent>
-        <form>
+      
+        <form>       
           <TextField
             autoFocus
             onChange={receiverChange}
@@ -56,7 +66,8 @@ export default function Popup(props) {
             type="userName"
             fullWidth
           />
-
+           
+           
           <TextField
             autoFocus
             onChange={messageChange}
@@ -66,12 +77,21 @@ export default function Popup(props) {
             type="typedMessage"
             fullWidth
           />
-
-          <Button variant="contained" color="primary" onClick={handleClose}>
+      
+          <DialogActions>          
+          <Button variant="contained" color="primary" onClick={sendClose}>
             Send{" "}
-          </Button>
+          </Button> 
+          <Button variant="contained" color="Secondary" onClick={handleClose}>
+            Close{" "}
+          </Button>   
+          </DialogActions>
+   
         </form>
-      </DialogContent>
+        </DialogContent>
+      
     </Dialog>
+    
+    </div>
   );
 }
