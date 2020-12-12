@@ -6,17 +6,14 @@ const User = db.User;
 
 // Returns all the of the chats for the userId.
 async function getChats(req, res) {
-    var id = await getConversationId(req.body.sender, req.body.receiver);
-    Chat.findOne({ conversationId: id }).then(chats => {
-
+    var convoObj = await getConvoObject(req.body.sender, req.body.receiver);
+    Chat.find({ conversationId: convoObj.conversationId }).then(chats => {
         // let's format the chats...
         var newChats = [];
-        chats.array.forEach(element => {
-
-            var sideBool = await didUserOneSend(req.body.sender, req.body.receiver);
-            var side = 'right';
-            if (sideBool) {
-                side = 'left';
+        chats.forEach(element => {
+            var side = "left";
+            if (convoObj.user_one == req.body.sender) {
+                side = "right";
             }
             
             var tmp = {
@@ -26,9 +23,8 @@ async function getChats(req, res) {
             };
             newChats.push(tmp);
         });
-        return res.status(200).json({ newChats })
+        return res.status(200).json({ chats: newChats })
     });
-    return null;
 }
 
 function getConvos(req, res) {
@@ -89,6 +85,31 @@ function getConversationId(sender, receiver) {
     })
 }
 
+function getConvoObject(sender, receiver) {
+    return new Promise(function(resolve, reject) {
+        ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
+            if (convo == null) {
+                ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo => {
+                    if (convo == null) {
+                        const id = new ChatIds({
+                            user_one: sender,
+                            user_two: receiver,
+                            conversationId: `${makeid(10)}`
+                        });
+                        id.save();
+                        resolve(id);
+                    } else {
+                        resolve(convo2);
+                    }
+                });
+            } else {
+                resolve(convo);
+            }
+
+        });
+    })
+}
+
 function didUserOneSend(sender, receiver) {
     return new Promise((resolve, reject) => {
         ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
@@ -100,7 +121,6 @@ function didUserOneSend(sender, receiver) {
                 resolve(true)
             }
         });
-        resolve(null)
     });
 }
 

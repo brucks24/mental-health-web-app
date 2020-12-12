@@ -10,16 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserChats, getConvoId, sendUserMessage } from "../../../redux/actions/chatActions";
 
 export function setMessages(msgs) {
+  console.log('Setting the messages');
+  console.log(msgs);
   messages = msgs;
 }
 
-var messages = [
-  {
-    message: "123",
-    side: "right",
-  },
-  { message: "456", side: "left" },
-];
+var messages = [];
 
 var lastDispatch = Date.now();
 
@@ -132,10 +128,15 @@ export default function Chat(props) {
 
   function handleSubmit(e) {
     dispatch(sendUserMessage(senderName, receiverName, message));
+    if (messageTarget != null) {
+      messageTarget.value = "";
+    }
   }
 
   var message = "";
+  var messageTarget = null;
   function messageChange(e) {
+    messageTarget = e.target;
     message = e.target.value;
   }
 

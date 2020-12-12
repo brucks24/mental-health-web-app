@@ -13,7 +13,6 @@ export const getUserChats = (sender, receiver) => (dispatch) => {
             convo_id: res.data.id
         }).then(res => {
             setMessages(res.data.chats);
-            return res.data.chats;
         })
     });
 }
