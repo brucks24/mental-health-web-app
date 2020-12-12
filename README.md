@@ -163,7 +163,7 @@ See the [open issues](https://github.com/uww-student-athlete-success/stuath-succ
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* All UW-Whitewater's CS476-Software Engineering students working on this project
+* [CS476 Contributors](https://github.com/uww-student-athlete-success/stuath-success-web/graphs/contributors)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [contributors-shield]: https://img.shields.io/github/contributors/uww-student-athlete-success/repo.svg?style=plastic
