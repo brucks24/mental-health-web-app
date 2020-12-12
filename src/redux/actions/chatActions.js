@@ -12,7 +12,7 @@ export const getUserConvos = (user) => (dispatch) => {
     axios.post('chat/fetch/convos', {
         user: user
     }).then(res => {
-        loadChatsToPage(res);
+        loadChatsToPage(res, user);
     });
 }
 
@@ -22,7 +22,7 @@ export const sendUserMessage = (sender, receiver, msg) => (dispatch) => {
         receiver: receiver,
         msg: msg
     }).then(res => {
-        loadChatsToPage(res);
+        getUserConvos(sender);
     });
 }
 
@@ -37,6 +37,6 @@ export const clearErrors = () => (dispatch) => {
 };
 
 // Takes in an array of convos and loads them to the inbox page.
-function loadChatsToPage(convos) {
-    setChat(convos)
+function loadChatsToPage(convos, user) {
+    setChat(convos, user)
 }
