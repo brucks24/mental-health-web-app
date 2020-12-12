@@ -14,15 +14,15 @@ import { useDispatch } from 'react-redux';
 import Popup from './components/Popup';
 
 
-var openChats = [];
-/*
+//var openChats = [];
+
 const openChats = [{
         id: 0,
         name: 'Remy Sharp',
         image: '/static/images/avatar/1.jpg',
         previewMessage: 'Hey just wanted to check in with you about',
     }]
-*/
+
 
 
 function Chatbar(props) {
@@ -34,7 +34,7 @@ function Chatbar(props) {
     const [openPopup, setOpenPopup] = useState(false);
 
     // Load the chats on initilize
-    dispatch(getUserChats(userData, props.history));
+   // dispatch(getUserChats(userData, props.history));
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -88,7 +88,6 @@ function Chatbar(props) {
                 ChatCard name = { item.name }
                 image = { item.image }
                 previewMessage = { item.previewMessage }
-
                 />
             ))
         }
@@ -96,7 +95,7 @@ function Chatbar(props) {
         </div>
 
         <div className = { classes.newChat } >
-            
+        
         <Fab 
             variant = "extended" 
             color = "primary" 
@@ -120,8 +119,6 @@ function Chatbar(props) {
         </Drawer>
          
     )
-        
-
 }
 
 export default Chatbar

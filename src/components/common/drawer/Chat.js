@@ -5,6 +5,8 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SendIcon from '@material-ui/icons/Send';
 import SearchIcon from '@material-ui/icons/Search';
 import {  IconButton, List, Avatar, InputBase, Divider, ListItem} from "@material-ui/core";
+import 'react-chat-elements/dist/main.css';
+import { MessageBox } from 'react-chat-elements';
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -111,7 +113,27 @@ export default function Chat(props) {
             <Divider />
         </div>
         <div className={classes.chat}>
-            This is where the chat will go
+       
+        <MessageBox      
+         /*
+         *  https://www.npmjs.com/package/react-chat-elements#chatitem-component 
+         */       
+            position={'left'} //incoming message is left
+            type={'text'}  // 
+            text={'hello world'}
+            data={{
+                uri: 'https://facebook.github.io/react/img/logo.svg'
+                  
+        }}/>
+        <MessageBox
+                position={'right'} //outgoing message is right
+                type={'text'}
+                text={'how are you'} //message           
+                data={{
+                    uri: 'https://facebook.github.io/react/img/logo.svg'
+                     
+            }
+        }/>
         </div>
 
         <div className={classes.inputArea}>
