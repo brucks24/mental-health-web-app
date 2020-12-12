@@ -3,12 +3,13 @@
 *	Time: Fall 2020 semester
 *	Description: Working on implementing team features for coaches
 */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, Typography, Fade } from '@material-ui/core';
 import useStyles from './styles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Team from './teamObj';
 import Menu from './Coach/CoachMenu';
+import { getTeam } from '../../redux/actions/coachActions';
 
 
 //Replace with teams that user is part of
@@ -37,9 +38,9 @@ const teams = [
 	},
 ]
 
-const Teams = () => {
+const Teams = (props) => {
    	const classes = useStyles();
-	
+	const dispatch = useDispatch();
 	
 	//Get user status
     const { name, user } = useSelector(state => ({
@@ -48,6 +49,10 @@ const Teams = () => {
     }));
 	var account = user.accountType;
 	
+	useEffect(() => {
+		dispatch(getTeam(name, props.history));
+	}, []);
+
 	if (account === 0){
 		//If user account is 0 (student) return all team objects that user is part of
 		return (
