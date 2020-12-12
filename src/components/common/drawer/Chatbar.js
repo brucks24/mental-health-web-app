@@ -1,49 +1,94 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+    useState,
+    useEffect
+} from 'react';
 import classNames from 'classnames';
-import { Drawer, IconButton, List, Avatar, InputBase, Divider, Fab, Button } from "@material-ui/core";
-import { useTheme } from '@material-ui/styles';
+import {
+    Drawer,
+    IconButton,
+    List,
+    Avatar,
+    InputBase,
+    Divider,
+    Fab,
+    Button
+} from "@material-ui/core";
+import {
+    useTheme
+} from '@material-ui/styles';
 import chatbarStyles from './chatbarStyles';
-import { useSelector } from 'react-redux';
+import {
+    useSelector
+} from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
 import ChatCard from './components/ChatCard'
 import Chat from './Chat';
 import AddIcon from '@material-ui/icons/Add';
-import { getUserChats, sendUserMessage, markMessageRead } from '../../../redux/actions/chatActions';
-import { createTeam } from '../../../redux/actions/coachActions';
-import { useDispatch } from 'react-redux';
+import {
+    getUserChats,
+    sendUserMessage,
+    markMessageRead,
+    getUserConvos
+} from '../../../redux/actions/chatActions';
+import {
+    createTeam
+} from '../../../redux/actions/coachActions';
+import {
+    useDispatch
+} from 'react-redux';
 import Popup from './components/Popup';
 
 
+
 var openChats = [];
+
 /*
 const openChats = [{
-        id: 0,
-        name: 'Remy Sharp',
-        image: '/static/images/avatar/1.jpg',
-        previewMessage: 'Hey just wanted to check in with you about',
-    }]
+    id: 0,
+    name: 'Remy Sharp',
+    image: '/static/images/avatar/1.jpg',
+    previewMessage: 'Hey just wanted to check in with you about',
+}]
 */
 
+export function setChat(data) {
+    const convos = data.data[0];
+    openChats = [];
+
+    convos.forEach(e => {
+        openChats.push({
+            id: e._id,
+            name: e.user_one,
+            previewMessage: 'Clck to view conversation'
+        });
+    });
+}
 
 function Chatbar(props) {
-    let { ChatOpen } = props
+    let {
+        ChatOpen
+    } = props
     const theme = useTheme();
     const classes = chatbarStyles();
     const dispatch = useDispatch();
     const [userData, setUserData] = React.useState({});
     const [openPopup, setOpenPopup] = useState(false);
+    const { name, user } = useSelector(state => ({
+        name: `${state.user.firstName} ${state.user.lastName}`,
+        user: state.user,
+    }));
 
     // Load the chats on initilize
-    dispatch(getUserChats(userData, props.history));
+    dispatch(getUserConvos(name));
 
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(getUserChats(userData, props.history))
+        dispatch(getUserConvos(name))
     }
 
 
-    return ( 
-        <Drawer variant = "persistent"
+    return ( <
+        Drawer variant = "persistent"
         className = {
             classNames(classes.drawer, {
                 [classes.drawerOpen]: ChatOpen,
@@ -52,7 +97,9 @@ function Chatbar(props) {
         }
 
         anchor = "right"
-        open = { ChatOpen }
+        open = {
+            ChatOpen
+        }
         classes = {
             {
                 paper: classNames({
@@ -62,13 +109,24 @@ function Chatbar(props) {
             }
         } >
 
-        <div className = { classes.toolbar }/> 
-        <div className = { classes.search } >
+        <
+        div className = {
+            classes.toolbar
+        }
+        />  <
+        div className = {
+            classes.search
+        } >
 
-        <div className = { classes.searchIcon } >
-        <SearchIcon / >
-        </div> 
-        <InputBase placeholder = "Search for person"
+        <
+        div className = {
+            classes.searchIcon
+        } >
+        <
+        SearchIcon / >
+        <
+        /div>  <
+        InputBase placeholder = "Search for person"
         classes = {
             {
                 root: classes.inputRoot,
@@ -76,56 +134,79 @@ function Chatbar(props) {
             }
         }
         inputProps = {
-            { 'aria-label': 'search' }
+            {
+                'aria-label': 'search'
+            }
         }
-        /> 
-        </div > 
-        <Divider/>
+        />  < /
+        div > <
+        Divider / >
 
-        <div className = { classes.chatList } >
-        <List className = { classes.root } > {
+        <
+        div className = {
+            classes.chatList
+        } >
+        <
+        List className = {
+            classes.root
+        } > {
             openChats.map(item => ( <
-                ChatCard name = { item.name }
-                image = { item.image }
-                previewMessage = { item.previewMessage }
+                ChatCard name = {
+                    item.name
+                }
+                image = {
+                    item.image
+                }
+                previewMessage = {
+                    item.previewMessage
+                }
 
                 />
             ))
+        } <
+        /List>  < /
+        div >
+
+        <
+        div className = {
+            classes.newChat
+        } >
+
+        <
+        Fab variant = "extended"
+        color = "primary"
+
+        onClick = {
+            () => setOpenPopup(true)
         }
-        </List> 
-        </div>
 
-        <div className = { classes.newChat } >
-            
-        <Fab 
-            variant = "extended" 
-            color = "primary" 
-            
-            onClick ={() => setOpenPopup(true)}
-         
-        
+
         >
-            <AddIcon  className = { classes.extendedIcon}/>
-            Create
-        </Fab> 
-        
-        </div >
-        <newMessageForm/>    
-        <Popup  
-        openPopup = {openPopup}
-        setOpenPopup = {setOpenPopup}
-        >
-        </Popup>
-        
-        </Drawer>
-         
+        <
+        AddIcon className = {
+            classes.extendedIcon
+        }
+        />
+        Create <
+        /Fab> 
+
+        <
+        /div > <
+        newMessageForm / >
+        <
+        Popup openPopup = {
+            openPopup
+        }
+        setOpenPopup = {
+            setOpenPopup
+        } >
+        <
+        /Popup>
+
+        <
+        /Drawer>
+
     )
-        
-
 }
 
-export default Chatbar
-
-export function setChat(chats) {
-    openChats = chats;
-}
+export default Chatbar;
