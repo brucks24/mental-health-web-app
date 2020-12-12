@@ -10,7 +10,9 @@ export const getUserChats = (sender, receiver) => (dispatch) => {
     }).then(res => {
         dispatch({ type: CLEAR_ERRORS });
         axios.post('chat/fetch/chats', {
-            convo_id: res.data.id
+            convo_id: res.data.id,
+            sender: sender,
+            receiver: receiver
         }).then(res => {
             setMessages(res.data.chats);
         })
@@ -35,6 +37,7 @@ export const getUserConvos = (user) => (dispatch) => {
 }
 
 export const sendUserMessage = (sender, receiver, msg) => (dispatch) => {
+    console.log(sender + " -- " + receiver)
     axios.post('chat/sendmsg', {
         sender: sender,
         receiver: receiver,
