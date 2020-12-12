@@ -112,26 +112,28 @@ export function setMessages(msgs) {
 }
 
 export default function Chat(props) {
-  let { ChatWindowOpen, handleToggleWindow, receiverName, image } = props;
+  let { ChatWindowOpen, handleToggleWindow, image } = props;
+  var receiverName = props.name;
   const classes = useStyles();
 
-  const { senderName } = useSelector((state) => ({
+  const { name } = useSelector(state => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
     user: state.user,
-  }));
+}));
+
   const dispatch = useDispatch();
 
   if (shouldDispatch()) {
-    dispatch(getUserChats(senderName, receiverName));
+    dispatch(getUserChats(name, receiverName));
   }
 
   function handleSubmit(e) {
-    dispatch(sendUserMessage(senderName, receiverName, message));
+    dispatch(sendUserMessage(name, receiverName, message));
     if (messageTarget != null) {
       messageTarget.value = "";
     }
     setTimeout(() => {
-      dispatch(getUserChats(senderName, receiverName));
+      dispatch(getUserChats(name, receiverName));
     }, 2000);
   }
 

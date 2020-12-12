@@ -35,6 +35,7 @@ export const getUserConvos = (user) => (dispatch) => {
 }
 
 export const sendUserMessage = (sender, receiver, msg) => (dispatch) => {
+    console.log(sender + " -- " + receiver)
     axios.post('chat/sendmsg', {
         sender: sender,
         receiver: receiver,

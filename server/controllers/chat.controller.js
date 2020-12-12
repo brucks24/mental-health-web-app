@@ -12,8 +12,11 @@ async function getChats(req, res) {
         var newChats = [];
         chats.forEach(element => {
             var side = "left";
-            if (convoObj.user_one == req.body.sender) {
-                side = "right";
+
+            if (convoObj.user_one == req.body.sender) { // requester is this message
+                side = "right"
+            } else {
+                side = "left";
             }
             
             var tmp = {
@@ -112,12 +115,15 @@ function getConvoObject(sender, receiver) {
 
 function didUserOneSend(sender, receiver) {
     return new Promise((resolve, reject) => {
+        console.log(sender + "  -  " + receiver);
         ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
-            if (convo == null) {
+            if (convo == null || convo == undefined) {
                 ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo => {
+                    console.log('not bang')
                     resolve(false)
                 });
             } else {
+                console.log('bang');
                 resolve(true)
             }
         });
@@ -126,9 +132,11 @@ function didUserOneSend(sender, receiver) {
 
 // Adds the chat to the database
 async function sendChat(req, res) {
+    console.log(req.body);
     var id = await getConversationId(req.body.sender, req.body.receiver);
     var userOneSent = await didUserOneSend(req.body.sender, req.body.receiver);
     var message = req.body.msg;
+    console.log(userOneSent);
     const chat = new Chat({
         message: message,
         conversationId: id,
