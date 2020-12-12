@@ -132,15 +132,14 @@ A successful connection to the Server looks like this on the terminal:
 ## Usage
 
 ### Additional Screenshots
-<img src="imgs/mainPage.png" alt="Main Page" width="480" height="360">
-<!-- ![Main Page](/imgs/mainPage.png)
+![Main Page](/imgs/mainPage.png)
 ![Register Page](/imgs/register.png)
 ![Home Page](/imgs/home.png)
 ![User profile](/imgs/userProfile.png)
 ![Your teams](/imgs/yourTeams.png)
 ![Support Teams](/imgs/supportTeams.png)
 ![Panic Button](/imgs/panicButton.png)
-![Chat Message](/imgs/createMessage.png) -->
+![Chat Message](/imgs/createMessage.png)
 
 _For more examples, please refer to the [Documentation](https://github.com/uww-student-athlete-success/stuath-success-web/wiki)_
 
