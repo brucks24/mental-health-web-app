@@ -5,17 +5,9 @@
 */
 
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
 import {Grid} from '@material-ui/core';
 import Update from './UpdateTeam';
 import MemberBox from './MembersContainer';
-
-const infoStyle = makeStyles({
-	Text: {
-		color: 'purple',
-		align: 'center'
-	},
-});
 
 
 function EditTeam(props){

@@ -6,7 +6,7 @@
 */
 
 import React, { useState } from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import {Grid} from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTeam } from '../../../redux/actions/coachActions';
@@ -55,7 +55,7 @@ const infoStyle = makeStyles({
 function CreateTeam(props){
 	const classes = infoStyle();
 	const dispatch = useDispatch();
-   	const { name, user } = useSelector(state => ({
+   	const { name } = useSelector(state => ({
       		name: `${state.user.firstName} ${state.user.lastName}`,
 			user: state.user,
    	 }));

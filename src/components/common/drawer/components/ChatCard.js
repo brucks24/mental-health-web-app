@@ -6,18 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Chat from '../Chat';
 import { Avatar, Divider, ListItem } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    //maxWidth: '36ch',
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
-
-
 export default function ChatCard(props) {
-  const classes = useStyles();
   const { name, image, previewMessage } = props;
 
   const [stateChatWindow, setChatWindowState] = React.useState({
