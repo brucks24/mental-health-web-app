@@ -1,4 +1,4 @@
-import { Button, Fade, Grid, TextField, Typography } from "@material-ui/core";
+import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -39,12 +39,15 @@ function LoginForm(props) {
           <Typography variant="h4" className={classes.greeting}>
             Sign In{" "}
           </Typography>{" "}
+          {/* -- 
           <Fade in={errorMessages}>
             <Typography color="secondary" className={classes.errorMessage}>
               {" "}
               {errorMessages}{" "}
             </Typography>{" "}
           </Fade>{" "}
+          */}
+
           <TextField
             type="email"
             name="email"
