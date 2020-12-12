@@ -1,18 +1,39 @@
-import { LOADING_CHATS, CLEAR_ERRORS, LOAD_CHATS } from '../types';
+import { CLEAR_ERRORS } from '../types';
 import { setChat } from '../../components/common/drawer/Chatbar'
+import { setMessages } from '../../components/common/drawer/Chat';
 import axios from 'axios';
 
-export const getUserChats = () => (dispatch) => {
-    axios.post('chat/fetch/chats').then(res => {
-        // todo load chats into box.
-    })
+export const getUserChats = (sender, receiver) => (dispatch) => {
+    axios.post('chat/fetch/convoid', {
+        sender: sender,
+        receiver: receiver
+    }).then(res => {
+        dispatch({
+            type: CLEAR_ERRORS
+        });
+        axios.post('chat/fetch/chats', {
+            convo_id: res.data.id
+        }).then(res => {
+            setMessages(res.data.chats);
+            return res.data.chats;
+        })
+    });
+}
+
+export const getConvoId = (sender, receiver) => {
+    axios.post('chat/fetch/convoid', {
+        sender: sender,
+        receiver: receiver
+    }).then(res => {
+        return res.data.id;
+    });
 }
 
 export const getUserConvos = (user) => (dispatch) => {
     axios.post('chat/fetch/convos', {
         user: user
     }).then(res => {
-        loadChatsToPage(res, user);
+        loadConvosToPage(res, user);
     });
 }
 
@@ -23,6 +44,7 @@ export const sendUserMessage = (sender, receiver, msg) => (dispatch) => {
         msg: msg
     }).then(res => {
         getUserConvos(sender);
+        getUserChats();
     });
 }
 
@@ -37,6 +59,11 @@ export const clearErrors = () => (dispatch) => {
 };
 
 // Takes in an array of convos and loads them to the inbox page.
-function loadChatsToPage(convos, user) {
+function loadConvosToPage(convos, user) {
     setChat(convos, user)
+}
+
+// Takes in array of chats for one covno.
+function loadChatsToPage(chats) {
+    setMessages(chats)
 }

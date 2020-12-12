@@ -57,7 +57,6 @@ export function setChat(data, name) {
 
     if (convos != undefined) {
         convos.forEach(e => {
-            console.log(name + "  " + e.user_one);
             var user = e.user_one;
             if (user == name) {
                 user = e.user_two;

@@ -1,13 +1,22 @@
-import { AppBar, Button, IconButton, Toolbar, Typography } from "@material-ui/core";
-import { withStyles } from '@material-ui/core/styles';
-import { ArrowBack as ArrowBackIcon, Menu as MenuIcon,  } from "@material-ui/icons";
-import ChatIcon from '@material-ui/icons/Chat';
-import classNames from 'classnames';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../../redux/actions/userActions';
+import {
+  AppBar,
+  Button,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import {
+  ArrowBack as ArrowBackIcon,
+  Menu as MenuIcon,
+} from "@material-ui/icons";
+import ChatIcon from "@material-ui/icons/Chat";
+import classNames from "classnames";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../../redux/actions/userActions";
 
-const styles = theme => ({
+const styles = (theme) => ({
   logotype: {
     color: "white",
     marginLeft: theme.spacing(2.5),
@@ -130,7 +139,12 @@ const styles = theme => ({
 });
 
 function Header2(props) {
-  const { classes, navDrawerOpen, handleToggleDrawer, ChatOpen, handleToggleChat } = props;
+  const {
+    classes,
+    navDrawerOpen,
+    handleToggleDrawer,
+    handleToggleChat,
+  } = props;
   const dispatch = useDispatch();
 
   function logout(e) {
@@ -145,7 +159,7 @@ function Header2(props) {
           color="inherit"
           className={classNames(
             classes.headerMenuButton,
-            classes.headerMenuButtonCollapse,
+            classes.headerMenuButtonCollapse
           )}
           onClick={handleToggleDrawer}
         >
@@ -154,35 +168,38 @@ function Header2(props) {
               classes={{
                 root: classNames(
                   classes.headerIcon,
-                  classes.headerIconCollapse,
-                )
+                  classes.headerIconCollapse
+                ),
               }}
             />
           ) : (
-              <MenuIcon
-                classes={{
-                  root: classNames(
-                    classes.headerIcon,
-                    classes.headerIconCollapse,
-                  )
-                }}
-              />
-            )}
+            <MenuIcon
+              classes={{
+                root: classNames(
+                  classes.headerIcon,
+                  classes.headerIconCollapse
+                ),
+              }}
+            />
+          )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
           UWW Student Athlete Support
-          </Typography>
+        </Typography>
         <div className={classes.grow} />
-        <Button color="inherit" onClick={logout}>Logout</Button>
-        <IconButton aria-label="Open Chat" color="inherit" onClick={handleToggleChat}>
+        <Button color="inherit" onClick={logout}>
+          Logout
+        </Button>
+        <IconButton
+          aria-label="Open Chat"
+          color="inherit"
+          onClick={handleToggleChat}
+        >
           <ChatIcon
             classes={{
-              root: classNames(
-                classes.headerIcon,
-                classes.headerIconCollapse,
-                )
-              }}
-            />
+              root: classNames(classes.headerIcon, classes.headerIconCollapse),
+            }}
+          />
         </IconButton>
       </Toolbar>
     </AppBar>

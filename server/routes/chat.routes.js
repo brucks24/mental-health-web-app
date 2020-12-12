@@ -28,6 +28,10 @@ router.route('/markread').post((req, res) => {
     chatController.markAsRead(req, res);
 });
 
+router.route('/fetch/convoid').post((req, res) => {
+    chatController.getConvoId(req, res);
+});
+
 module.exports = router;
 
 /*

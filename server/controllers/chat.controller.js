@@ -41,6 +41,11 @@ async function hasUnreadChats(req, res) {
     return null;
 }
 
+async function getConvoId(req, res) {
+    var id = await getConversationId(req.body.sender, req.body.receiver);
+    return res.status(200).json({ id: id });
+}
+
 // Returns the conversation id that is between the two users.
 function getConversationId(sender, receiver) {
     return new Promise(function(resolve, reject) {
@@ -123,5 +128,6 @@ module.exports = {
     hasUnreadChats,
     sendChat,
     markAsRead,
-    getConvos
+    getConvos,
+    getConvoId
 };
