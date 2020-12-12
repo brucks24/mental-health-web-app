@@ -5,7 +5,7 @@
 *                           will send a form request to create new team.
 */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 import {Grid} from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,10 +48,9 @@ const infoStyle = makeStyles({
 		fontSize: 25,
 		color: 'white',
 		padding: '0 20px',
-		textShadow: '2px 2px 5px DarkViolet'
+		textShadow: '2px 2px 5px DarkViolet',
 	}
 });
-
 
 function CreateTeam(props){
 	const classes = infoStyle();
@@ -60,13 +59,17 @@ function CreateTeam(props){
       		name: `${state.user.firstName} ${state.user.lastName}`,
 			user: state.user,
    	 }));
+	const [teamName, setName] = useState("");
+	const [description, setDesc] = useState("");
 
-	 function handleSubmit(event){
+	function handleSubmit(event){
 		 //Upon clicking create send form request
 		 //Sent data teamname, coach, and description
 		 event.preventDefault();
 		 const teamData = {
-
+			teamName: teamName,
+			coach: name,
+			description: description
 		 };
 		 dispatch(createTeam(teamData, props.history));
 	 }
@@ -79,7 +82,7 @@ function CreateTeam(props){
 					<label className={classes.Text}>Team Name:</label>
 				</Grid>
 				<Grid container xs={4}>
-					<input type="text" name='teamname' className={classes.createInput} placeholder='Team Name' required/>
+					<input type="text" name='teamname' className={classes.createInput} placeholder='Team Name' onChange={e => setName(e.target.value)} required/>
 				</Grid>
 				<Grid container xs={4}></Grid>
 			</Grid>
@@ -98,14 +101,14 @@ function CreateTeam(props){
 					<label className={classes.Text} placeholder='Description'>Description:</label>
 				</Grid>
 				<Grid container xs={4}>
-					<textarea name='description' className={classes.createDecription} placeholder='Enter Team Description Here'/>
+					<textarea name='description' className={classes.createDecription} placeholder='Enter Team Description Here' onChange={e => setDesc(e.target.value)}/>
 				</Grid>
 				<Grid container xs={4}></Grid>
 			</Grid>
 			<Grid container xs={12}>
 				<Grid container xs={5}></Grid>
 				<Grid container xs={2}>
-					<button type="Submit">Create</button>
+					<button type="Submit" className={classes.Submit}>Create</button>
 				</Grid>
 				<Grid container xs={4}></Grid>
 			</Grid>
