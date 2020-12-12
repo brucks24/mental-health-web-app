@@ -3,14 +3,11 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import SendIcon from "@material-ui/icons/Send";
-import SearchIcon from "@material-ui/icons/Search";
 import {
   IconButton,
-  List,
   Avatar,
   InputBase,
   Divider,
-  ListItem,
 } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
 import { MessageBox } from "react-chat-elements";
@@ -114,8 +111,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, receiverName, image } = props;
   const classes = useStyles();
-  const [userData, setUserData] = React.useState({});
-  const { senderName, user } = useSelector(state => ({
+  const { senderName } = useSelector(state => ({
       name: `${state.user.firstName} ${state.user.lastName}`,
       user: state.user,
   }));

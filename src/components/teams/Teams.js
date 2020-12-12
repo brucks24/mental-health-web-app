@@ -4,7 +4,7 @@
 *	Description: Working on implementing team features for coaches
 */
 import React, { useEffect } from 'react';
-import { Grid, Typography, Fade } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import useStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import Team from './teamObj';

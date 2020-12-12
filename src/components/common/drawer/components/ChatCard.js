@@ -4,8 +4,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Typography from '@material-ui/core/Typography';
 import Chat from '../Chat';
-import { IconButton, List, Avatar, InputBase, Divider, ListItem } from "@material-ui/core";
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { Avatar, Divider, ListItem } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {

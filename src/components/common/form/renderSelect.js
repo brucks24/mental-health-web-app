@@ -2,11 +2,8 @@ import React from 'react';
 import {
   InputLabel,
   FormControl,
-  Select,
-  MenuItem,
-  Button
+  Select
 } from "@material-ui/core";
-import { Field, reduxForm, Form } from "redux-form";
 
 function renderSelect(props) {
   const {

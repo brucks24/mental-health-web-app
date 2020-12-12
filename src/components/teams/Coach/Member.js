@@ -38,7 +38,7 @@ const memberStyle = makeStyles({
 
 
 function Member(props){
-	const { name,type,id,teamId } = props;
+	const { name,type } = props;
 	const classes = memberStyle();
 	
 	function handleRemove(){

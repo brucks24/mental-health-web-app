@@ -1,15 +1,26 @@
-import { Button, Card, CardContent, CardMedia, Chip, Grid, Grow, TextField, Typography, CardActions } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Chip,
+  Grid,
+  Grow,
+  TextField,
+  Typography,
+  CardActions,
+} from "@material-ui/core";
 import React, { Fragment, useEffect } from "react";
-import { getUserData } from '../../redux/actions/dataActions';
+import { getUserData } from "../../redux/actions/dataActions";
 
-import useStyles from './styles';
-import { useDispatch, useSelector } from 'react-redux';
+import useStyles from "./styles";
+import { useDispatch, useSelector } from "react-redux";
 
 function Profile(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const paramId = props.id;
-  const user = useSelector(state => state.data.user);
+  const user = useSelector((state) => state.data.user);
 
   const initialState = {
     firstName: user.firstName,
@@ -17,14 +28,14 @@ function Profile(props) {
     email: user.email,
     phone: user.phone ? user.phone : "",
     bio: user.bio ? user.bio : "",
-  }
+  };
 
   const [showEditProfile, setShowEditProfile] = React.useState(false);
   const [form, setForm] = React.useState(initialState);
 
   const handleEditProfile = () => {
     setShowEditProfile(!showEditProfile);
-  }
+  };
 
   const handleFormChange = (event) => {
     event.preventDefault();
@@ -32,7 +43,7 @@ function Profile(props) {
       ...form,
       [event.target.name]: event.target.value,
     });
-  }
+  };
 
   useEffect(() => {
     dispatch(getUserData(paramId));
@@ -40,8 +51,8 @@ function Profile(props) {
   }, []);
 
   function isCurrentUser() {
-    if (paramId != user.id) {
-      setShowEditProfile(false)
+    if (paramId !== user.id) {
+      setShowEditProfile(false);
     }
   }
 
@@ -66,18 +77,20 @@ function Profile(props) {
                 {user.lastName}
               </Typography>
               <div style={{ marginTop: 16 }}>
-                {user.accountType == 0 
-                  ? <Chip label="Student Athlete" color="secondary" />
-                  : <Chip label="Coach" color="secondary" />
-                }
-                {showEditProfile ?
+                {user.accountType === 0 ? (
+                  <Chip label="Student Athlete" color="secondary" />
+                ) : (
+                  <Chip label="Coach" color="secondary" />
+                )}
+                {showEditProfile ? (
                   <Button
                     style={{ marginLeft: 8 }}
                     color="primary"
                     onClick={() => handleEditProfile()}
-                  >Edit profile</Button>
-                  : null
-                }
+                  >
+                    Edit profile
+                  </Button>
+                ) : null}
               </div>
             </div>
           </div>
@@ -94,7 +107,13 @@ function Profile(props) {
       <Grow in={showEditProfile}>
         <Card className={classes.infoCard}>
           <CardContent>
-            <Typography style={{ marginBottom: 16 }} variant="h5" component="h2">Edit profile</Typography>
+            <Typography
+              style={{ marginBottom: 16 }}
+              variant="h5"
+              component="h2"
+            >
+              Edit profile
+            </Typography>
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <TextField
@@ -158,7 +177,7 @@ function Profile(props) {
         </Card>
       </Grow>
     </Fragment>
-  )
+  );
 }
 
 export default Profile;
