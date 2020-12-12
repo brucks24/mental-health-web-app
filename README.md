@@ -117,15 +117,30 @@ To start the Server
    yarn server
    ```
 
-The backend server will then start, if you connect to the database properly the command line will say so. Once that is done, the installation is complete.
+A successful connection to the Server looks like this on the terminal:
+  ```sh
+  yarn run v1.x.x
+  $ node ./server/index.js
+  mongodb+srv://zh3844:GaGGZCiX58w5uPz@cluster0.zrjbw.mongodb.net/sass?retryWrites=true&w=majority
+  undefined
+  Nodemailer is running
+  Server listening on port 4000
+  Database connected
+  ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
 ### Additional Screenshots
-![Homepage](imgs/sample1.jpg)
-![Sample dahboard](imgs/sample2.jpg)
-![Sample profile](imgs/sample3.jpg)
+<img src="imgs/mainPage.png" alt="Main Page" width="480" height="360">
+<!-- ![Main Page](/imgs/mainPage.png)
+![Register Page](/imgs/register.png)
+![Home Page](/imgs/home.png)
+![User profile](/imgs/userProfile.png)
+![Your teams](/imgs/yourTeams.png)
+![Support Teams](/imgs/supportTeams.png)
+![Panic Button](/imgs/panicButton.png)
+![Chat Message](/imgs/createMessage.png) -->
 
 _For more examples, please refer to the [Documentation](https://github.com/uww-student-athlete-success/stuath-success-web/wiki)_
 
