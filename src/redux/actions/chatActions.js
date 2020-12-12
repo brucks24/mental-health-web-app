@@ -3,15 +3,26 @@ import { setChat } from '../../components/common/drawer/Chatbar'
 import axios from 'axios';
 
 export const getUserChats = () => (dispatch) => {
-    dispatch({ type: LOADING_CHATS });
-    axios.post('chat/fetch').then(res => {
-        loadChatsToPage(res.data.chats);
+    axios.post('chat/fetch/chats').then(res => {
+        // todo load chats into box.
     })
 }
 
-export const sendUserMessage = () => (dispatch) => {
-    axios.post('chat/sendmsg').then(res => {
-        loadChatsToPage(res.data.chats);
+export const getUserConvos = (user) => (dispatch) => {
+    axios.post('chat/fetch/convos', {
+        user: user
+    }).then(res => {
+        loadChatsToPage(res);
+    });
+}
+
+export const sendUserMessage = (sender, receiver, msg) => (dispatch) => {
+    axios.post('chat/sendmsg', {
+        sender: sender,
+        receiver: receiver,
+        msg: msg
+    }).then(res => {
+        loadChatsToPage(res);
     });
 }
 
@@ -25,7 +36,7 @@ export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
 };
 
-// Takes in an array of chat message and loads them to the page.
-function loadChatsToPage(chats) {
-    setChat(chats)
+// Takes in an array of convos and loads them to the inbox page.
+function loadChatsToPage(convos) {
+    setChat(convos)
 }

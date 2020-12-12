@@ -15,7 +15,7 @@ router.use('/panic', panicRoutes);
 // mount chat routes at /chat
 router.use('/chat', chatRoutes)
 
-// mount team routes at /
+// mount team routes at /team
 router.use('/team', coachRoutes)
 
 module.exports = router;

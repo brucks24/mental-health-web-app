@@ -4,9 +4,11 @@
 *	Description: This object will display current team info and allow user to update that info.
 */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 import {Grid} from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { updateTeam } from '../../../redux/actions/coachActions';
 
 
 const infoStyle = makeStyles({
@@ -53,15 +55,25 @@ const infoStyle = makeStyles({
 
 
 function UpdateTeam(props){
+	const dispatch = useDispatch();
 	const {name,id,coach,description} = props;
 	const classes = infoStyle();
-	
+	const [newname, setNewName] = useState("");
+	const [newdesc, setNewDesc] = useState("");
+
 	 function handleSubmit(event){
 		 //Upon clicking Update form request is sent
 		 //Sent data: oldteamname, newteamname, coach, olddescription, and newdescription
 		 //If any new data is empty then use old data for update else use new data
-		 alert('Team Updated\nReturning to Teams Page');
-		 event.preventdefault();
+		event.preventDefault();
+		const updatedInfo = {
+			oldname: name,
+			coach: coach,
+			newname: newname,
+			description: newdesc,
+			olddescription: description
+		 };
+		dispatch(updateTeam(updatedInfo, props.history));
 	 }
 	
 	return (
@@ -80,7 +92,7 @@ function UpdateTeam(props){
 			<Grid container xs={12}>
 				<Grid container xs={4}></Grid>
 				<Grid container xs={4}>
-					<input type="text" name='newteamname' className={classes.createInput} placeholder='New Team Name' />
+					<input type="text" name='newteamname' className={classes.createInput} placeholder='New Team Name' onChange={e => setNewName(e.target.value)}/>
 				</Grid>
 				<Grid container xs={2}></Grid>
 			</Grid>
@@ -107,7 +119,7 @@ function UpdateTeam(props){
 			<Grid container xs={12}>
 				<Grid container xs={4}></Grid>
 				<Grid container xs={4}>
-					<textarea name='newdescription' className={classes.createDecription} cols='40' placeholder='Enter New Description of Team Here'/>
+					<textarea name='newdescription' className={classes.createDecription} cols='40' placeholder='Enter New Description of Team Here'  onChange={e => setNewDesc(e.target.value)}/>
 				</Grid>
 				<Grid container xs={2}></Grid>
 			</Grid>

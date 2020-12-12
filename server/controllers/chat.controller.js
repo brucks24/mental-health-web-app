@@ -13,6 +13,18 @@ async function getChats(req, res) {
     return null;
 }
 
+function getConvos(req, res) {
+    var convos = [];
+    const user = req.body.user;
+    ChatIds.find({ user_one: user }).then(convo => {
+        if (convo.length > 0) { convos.push(convo); }
+        ChatIds.find({ user_two: user }).then(convo => {
+            if (convo.length > 0) { convos.push(convo); }
+            return res.status(200).json(convos);
+        });
+    });
+}
+
 // Returns boolean value wheter or not user has new unread chats
 async function hasUnreadChats(req, res) {
     var id = await getConversationId("test1", "test2");
@@ -54,21 +66,21 @@ function didUserOneSend(sender, receiver) {
         ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
             if (convo == null) {
                 ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo => {
-                    return false;
+                    resolve(false)
                 });
             } else {
-                return true;
+                resolve(true)
             }
         });
-        return null;
+        resolve(null)
     });
 }
 
 // Adds the chat to the database
 async function sendChat(req, res) {
-    var id = await getConversationId("test1", "test2");
-    var userOneSent = await didUserOneSend("test1", "test2");
-    var message = "This is a test message.";
+    var id = await getConversationId(req.body.sender, req.body.receiver);
+    var userOneSent = await didUserOneSend(req.body.sender, req.body.receiver);
+    var message = req.body.message;
     const chat = new Chat({
         message: message,
         conversationId: id,
@@ -76,9 +88,7 @@ async function sendChat(req, res) {
         isRead: false
     })
     chat.save();
-    getChats(req, res);
-
-    // TODO: Reload the data and reload the chatbox with the updated chats.
+    getConvos(req, res);
 }
 
 // Marks the conversation as read
@@ -106,5 +116,6 @@ module.exports = {
     getChats,
     hasUnreadChats,
     sendChat,
-    markAsRead
+    markAsRead,
+    getConvos
 };

@@ -10,6 +10,7 @@ if (config.connectionString != null) {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useFindAndModify: false
     }).then(() => {
         console.log(colors.green('Database connected'));
     }).catch(err => {

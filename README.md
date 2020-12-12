@@ -127,7 +127,7 @@ The backend server will then start, if you connect to the database properly the 
 ![Sample dahboard](imgs/sample2.jpg)
 ![Sample profile](imgs/sample3.jpg)
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://github.com/uww-student-athlete-success/stuath-success-web/wiki)_
 
 <!-- ROADMAP -->
 ## Roadmap

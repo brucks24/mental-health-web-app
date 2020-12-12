@@ -3,9 +3,8 @@ const User = db.User;
 const Team = db.Team;
 
 const makeTeam = (req, res) => {
-    //console.log(req.body);
    let newTeam = new Team({
-        teamName: req.body.teamname,
+        teamName: req.body.teamName,
         coach: req.body.coach, 
         description: req.body.description,
     });
@@ -16,6 +15,32 @@ const makeTeam = (req, res) => {
     });
 };
 
+const updateTeam = (req, res) => {
+    let newName = req.body.newname;
+    let newDesc = req.body.description;
+    Team.findOneAndUpdate({teamName: req.body.oldname, coach: req.body.coach}, {teamName: newName, description: newDesc}, (err, data) => {
+        if(err) return console.error(err);
+        console.log(data);
+    });
+};
+
+const getTeams = (req, res) => {
+    Team.find({coach: req.params.coach}, (err, data) => {
+        if(err) return console.error(err);
+        return res.json(data);
+    });
+};
+
+const getStudents = (req, res) => {
+    User.find({accountType: 0}, (err, data) => {
+        if(err) return console.error(err);
+        return res.json(data);
+    });
+};
+
 module.exports = {
-    makeTeam
+    makeTeam,
+    updateTeam,
+    getTeams,
+    getStudents
 };
