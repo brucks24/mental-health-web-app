@@ -6,28 +6,27 @@ const User = db.User;
 
 // Returns all the of the chats for the userId.
 async function getChats(req, res) {
-    var convoObj = await getConvoObject(req.body.sender, req.body.receiver);
-    Chat.find({ conversationId: convoObj.conversationId }).then(chats => {
-        // let's format the chats...
-        var newChats = [];
-        chats.forEach(element => {
-            var side = "left";
-
-            if (convoObj.user_one == req.body.sender) { // requester is this message
-                side = "right"
-            } else {
-                side = "left";
-            }
-            
-            var tmp = {
-                message: element.message,
-                side: side,
-                time: element.createdAt
-            };
-            newChats.push(tmp);
+    ChatIds.findOne({conversationId: req.body.convo_id}).then(convoObj => {
+        Chat.find({ conversationId: req.body.convo_id }).then(chats => {
+            // let's format the chats...
+            var newChats = [];
+            chats.forEach(element => {
+                var side = "right";
+                if (req.body.sender == convoObj.user_one && element.userOneSent) {
+                    side = "left";
+                }
+                
+                var tmp = {
+                    message: element.message,
+                    side: side,
+                    time: element.createdAt
+                };
+                newChats.push(tmp);
+            });
+            return res.status(200).json({ chats: newChats })
         });
-        return res.status(200).json({ chats: newChats })
     });
+
 }
 
 function getConvos(req, res) {
@@ -115,15 +114,12 @@ function getConvoObject(sender, receiver) {
 
 function didUserOneSend(sender, receiver) {
     return new Promise((resolve, reject) => {
-        console.log(sender + "  -  " + receiver);
         ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
             if (convo == null || convo == undefined) {
                 ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo => {
-                    console.log('not bang')
                     resolve(false)
                 });
             } else {
-                console.log('bang');
                 resolve(true)
             }
         });
@@ -135,7 +131,6 @@ async function sendChat(req, res) {
     var id = await getConversationId(req.body.sender, req.body.receiver);
     var userOneSent = await didUserOneSend(req.body.sender, req.body.receiver);
     var message = req.body.msg;
-    console.log(userOneSent);
     const chat = new Chat({
         message: message,
         conversationId: id,
@@ -143,7 +138,6 @@ async function sendChat(req, res) {
         isRead: false
     })
     chat.save();
-    console.log('Saved chat to db.')
     getConvos(req, res);
 }
 

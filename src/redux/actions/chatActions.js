@@ -10,7 +10,9 @@ export const getUserChats = (sender, receiver) => (dispatch) => {
     }).then(res => {
         dispatch({ type: CLEAR_ERRORS });
         axios.post('chat/fetch/chats', {
-            convo_id: res.data.id
+            convo_id: res.data.id,
+            sender: sender,
+            receiver: receiver
         }).then(res => {
             setMessages(res.data.chats);
         })
