@@ -107,7 +107,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function setMessages(msgs) {
-  console.log('Updating messages.')
   messages = msgs;
 }
 

@@ -67,8 +67,8 @@ function getConversationId(sender, receiver) {
     return new Promise(function(resolve, reject) {
         ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
             if (convo == null) {
-                ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo => {
-                    if (convo == null) {
+                ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo2 => {
+                    if (convo2 == null) {
                         const id = new ChatIds({
                             user_one: sender,
                             user_two: receiver,
@@ -132,7 +132,6 @@ function didUserOneSend(sender, receiver) {
 
 // Adds the chat to the database
 async function sendChat(req, res) {
-    console.log(req.body);
     var id = await getConversationId(req.body.sender, req.body.receiver);
     var userOneSent = await didUserOneSend(req.body.sender, req.body.receiver);
     var message = req.body.msg;
@@ -144,6 +143,7 @@ async function sendChat(req, res) {
         isRead: false
     })
     chat.save();
+    console.log('Saved chat to db.')
     getConvos(req, res);
 }
 
