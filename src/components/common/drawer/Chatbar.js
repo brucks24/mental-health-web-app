@@ -51,17 +51,25 @@ const openChats = [{
 }]
 */
 
-export function setChat(data) {
+export function setChat(data, name) {
     const convos = data.data[0];
     openChats = [];
 
-    convos.forEach(e => {
-        openChats.push({
-            id: e._id,
-            name: e.user_one,
-            previewMessage: 'Clck to view conversation'
+    if (convos != undefined) {
+        convos.forEach(e => {
+            console.log(name + "  " + e.user_one);
+            var user = e.user_one;
+            if (user == name) {
+                user = e.user_two;
+            }
+
+            openChats.push({
+                id: e._id,
+                name: user,
+                previewMessage: 'Clck to view conversation'
+            });
         });
-    });
+    }
 }
 
 function Chatbar(props) {

@@ -16,11 +16,17 @@ async function getChats(req, res) {
 function getConvos(req, res) {
     var convos = [];
     const user = req.body.user;
-    ChatIds.find({ user_one: user }).then(convo => {
+
+    if (user == undefined) {
+        return convos;
+    }
+
+    ChatIds.find({ user_one: `${user}` }).then(convo => {
         if (convo.length > 0) { convos.push(convo); }
-        ChatIds.find({ user_two: user }).then(convo => {
+        ChatIds.find({ user_two: `${user}` }).then(convo => {
             if (convo.length > 0) { convos.push(convo); }
             return res.status(200).json(convos);
+
         });
     });
 }
