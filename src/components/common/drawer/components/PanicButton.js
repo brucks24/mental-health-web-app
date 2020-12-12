@@ -32,7 +32,6 @@ function PanicButton(props) {
     button4: 'primary'
   });
   const dispatch = useDispatch();
-  const handleSnackbarToggle = props;
 
   let buttonsClicked = [];
 
