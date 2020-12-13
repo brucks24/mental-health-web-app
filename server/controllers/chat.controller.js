@@ -31,7 +31,7 @@ async function sendChat(req, res) {
 
 async function getChat(req, res) {
     var chat = await getChatHelper(req.body.sender, req.body.receiver);
-    res.status(200).json({chat});
+    res.status(200).json({result: chat});
 }
 
 // Returns the object that holds convo between these two.

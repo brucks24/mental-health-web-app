@@ -3,7 +3,6 @@ import {setChat} from '../../components/common/drawer/Chatbar'
 import {setMessages} from '../../components/common/drawer/Chat'
 
 export const getAllChats = (sender) => (dispatch) => {
-    console.log("1 posted.");
     axios.post('chat/fetch/chats', {
         sender: sender,
     }).then(res => {
@@ -11,9 +10,7 @@ export const getAllChats = (sender) => (dispatch) => {
     });
 }
 
-export const fuck = (sender, receiver) => (dispatch) => {
-    console.log(sender + " - " + receiver);
-    console.log("2 posted.");
+export const getChats = (sender, receiver) => (dispatch) => {
     axios.post('chat/fetch/chat', {
         sender: sender,
         receiver, receiver
@@ -23,7 +20,6 @@ export const fuck = (sender, receiver) => (dispatch) => {
 }
 
 export const sendChat = (sender, receiver, message) => (dispatch) => {
-    console.log("3 posted.")
     axios.post('chat/send/message', {
         sender: sender,
         receiver: receiver,

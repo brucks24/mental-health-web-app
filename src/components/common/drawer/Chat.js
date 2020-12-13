@@ -7,7 +7,7 @@ import { IconButton, Avatar, InputBase, Divider } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
 import { MessageBox } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllChats, sendChat, fuck } from "../../../redux/actions/chatActions";
+import { getAllChats, sendChat, getChats } from "../../../redux/actions/chatActions";
 import { Eco } from "@material-ui/icons";
 
 var messages = [];
@@ -22,10 +22,8 @@ message template:
 
 export const setMessages = (data, senderName) => {
   
-  console.log(data)
-  console.log('Setting messages.')
   messages = [];
-  var c = data.data.chat;
+  var c = data.data.result;
   c.forEach(e => {
     e.chats.forEach(e2 => {
       var names = e.participants;
@@ -144,7 +142,7 @@ export default function Chat(props) {
   const dispatch = useDispatch();
   if (shouldDispatch()) {
     console.log(name + " - " + receiverName)
-    dispatch(fuck(name, receiverName));
+    dispatch(getChats(name, receiverName));
   }
 
 
