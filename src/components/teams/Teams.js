@@ -12,31 +12,6 @@ import Menu from './Coach/CoachMenu';
 import { getTeam } from '../../redux/actions/coachActions';
 import { getUserData } from '../../redux/actions/userActions';
 
-//Replace with teams that user is part of
-/*const teams = [
-	//Test team data
-	{
-		name: 'COD Esports',
-		coach: 'Tristan',
-		id: '12',
-		members: 8,
-		description: 'Er mer gerd'
-	},
-	{
-		name: 'Football',
-		coach: 'Jack Oph',
-		id: '254',
-		members: 2,
-		description: 'Er mer gerd'
-	},
-	{
-		name: 'Finger Painting',
-		coach: 'Cole Bollig',
-		id: '23',
-		members: 34,
-		description: 'Er mer gerd'
-	},
-]*/
 var teams = [];
 
 export function setTeams(teamData){
@@ -66,11 +41,17 @@ function Teams(){
 	useEffect(() => {
 		dispatch(getUserData());
 		dispatch(getTeam(name));
-	}, [name]);
+	}, [user.loading]);
 
-	if (account === 0){
-		//If user account is 0 (student) return all team objects that user is part of
+	if (account === 1){
 		return (
+			<div>
+				<Typography variant="h5" className={classes.titleText}></Typography>
+				<Menu teams={teams}/>
+			</div>
+		)	
+	}else{
+    	return (	
 			<div>
 	 			{teams.map(item => (
 					<Team
@@ -82,15 +63,6 @@ function Teams(){
 				))}
 		 	</div>
 		)
-	}
-	else{
-		//Else if account is 1 (coach) return coach team menu
-    		return (
-       		 	<div>
-           	 		<Typography variant="h5" className={classes.titleText}></Typography>
-				<Menu teams={teams}/>
-        		</div>
-   		)
 	}
 }
 
