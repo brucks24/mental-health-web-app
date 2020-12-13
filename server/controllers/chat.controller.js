@@ -18,7 +18,6 @@ async function sendChat(req, res) {
   var msg = req.body.message;
 
   var chat = await getChatHelper(sender, receiver);
-  console.log(chat);
   var chatArray = [];
   if (chat.length > 0) {
     chatArray = chat[0].chats;
@@ -31,7 +30,6 @@ async function sendChat(req, res) {
 }
 
 async function getChat(req, res) {
-  console.log(req.body);
     var chat = await getChatHelper(req.body.sender, req.body.receiver);
     res.status(200).json({chat});
 }

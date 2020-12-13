@@ -73,7 +73,6 @@ function Chatbar(props) {
   }));
 
   if (shouldDispatch()) {
-    console.log(name);
     dispatch(getAllChats(name));
   }
 
