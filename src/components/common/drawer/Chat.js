@@ -26,7 +26,7 @@ import { Eco } from "@material-ui/icons";
 
 var lastDispatch = new Date().getTime();
 function shouldDispatch() {
-  if (new Date().getTime() > lastDispatch + 1500) {
+  if (new Date().getTime() > lastDispatch + 2500) {
     lastDispatch = new Date().getTime();
     return true;
   } else {
@@ -126,7 +126,7 @@ export default function Chat(props) {
 
   setInterval(() => {
     setTmp(!tmp)
-  }, 5000)
+  }, 10000)
 
   const [curMessage, setCurMessage] = useState("");
   const [tmp, setTmp] = useState(false);
