@@ -13,6 +13,7 @@ import {
 import "react-chat-elements/dist/main.css";
 import useSound from 'use-sound';
 import send from '../../sounds/send.mp3'
+import receive from '../../sounds/receive.mp3'
 import { MessageBox, MessageList } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -114,7 +115,9 @@ export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, image } = props;
   var receiverName = props.name;
   const classes = useStyles();
-  const [play, { sound }] = useSound(send);
+  const [playSend, { sendSound }] = useSound(send);
+  const [playReceive, {receiveSound}] = useSound(receive);
+  var oldNumMessages = null;
 
   const { name } = useSelector((state) => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
@@ -149,6 +152,19 @@ export default function Chat(props) {
               time: e2.time,
             });
           });
+          var newMessages = e.chats.length;
+
+          if (oldNumMessages == null) { 
+            oldNumMessages = new Map();
+          }
+          if (oldNumMessages.has(e._id)) {
+            if (tmpObj.title != name && newMessages > oldNumMessages.get(e._id)) {
+              playReceive();
+            }
+          }
+          oldNumMessages.set(e._id, {'length': e.chats.length})
+
+
           allChats.push({
             participants: e.participants,
             msgs: tmpObj,
@@ -164,7 +180,7 @@ export default function Chat(props) {
       messageTarget.value = "";
     }
     await sendChat(name, receiverName, curMessage);
-    play()
+    playSend()
     setTmp(!tmp)
   }
 
