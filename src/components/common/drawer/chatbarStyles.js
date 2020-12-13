@@ -6,7 +6,7 @@ export default makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: "nowrap",
+    whiteSpace: "pre-wrap",
   },
   drawerOpen: {
     width: drawerWidth,

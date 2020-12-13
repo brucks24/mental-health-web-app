@@ -5,7 +5,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import SendIcon from "@material-ui/icons/Send";
 import { IconButton, Avatar, InputBase, Divider, Grid } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
-import { MessageBox } from "react-chat-elements";
+import { MessageBox, MessageList } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllChats, sendChat, getChats } from "../../../redux/actions/chatActions";
 import { Eco } from "@material-ui/icons";
@@ -190,9 +190,7 @@ export default function Chat(props) {
       <div className={classes.chat}>
         {messages.map((value, index) => {
           return (
-            
             <MessageBox
-            
               position={value.side} //outgoing message is right
               type={"text"}
               title={value.title}
@@ -204,14 +202,21 @@ export default function Chat(props) {
             />            
           );
           
-        })}        
+        })}  
+      </div>
+      <div>
+        <MessageList
+          className={classes.chat}
+          lockable={true}
+          toBottomHeight={"100%"}
+        />
       </div>
       <form>
         <div className={classes.inputArea}>
           <Divider />
           <InputBase
             placeholder="Send a Message..."
-
+            multiline={true}
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
