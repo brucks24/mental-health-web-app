@@ -31,7 +31,7 @@ export const setMessages = (data, senderName) => {
       console.log(e2)
       var names = e.participants;
       var side = "left";
-      if (names[0] == senderName) {
+      if (names[1] == senderName) {
         var side = "right";
       }
 
@@ -149,8 +149,8 @@ export default function Chat(props) {
   }
 
   function handleSubmit(e) {
+    messageTarget.value = "";
     dispatch(sendChat(name, receiverName, message));
-    e.target.value = "";
   }
 
   var message = "";

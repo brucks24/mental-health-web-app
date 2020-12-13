@@ -17,15 +17,21 @@ async function sendChat(req, res) {
   var receiver = req.body.receiver;
   var msg = req.body.message;
 
+  console.log('hello fucker!');
   var chat = await getChatHelper(sender, receiver);
   var chatArray = [];
   if (chat.length > 0) {
     chatArray = chat[0].chats;
   }
+  console.log(chatArray);
   var timeNow = new Date().getTime();
   chatArray.push({ message: msg, sender: sender, time: timeNow })
+  console.log("fucker");
 
-  await Chat.findOneAndUpdate({'participants': [sender, receiver]}, {chats: chatArray})
+  var order = await getOrder(sender, receiver);
+  if (order != null) {
+    await Chat.findOneAndUpdate({'participants': order}, {chats: chatArray})
+  }
   return res.status(200);
 }
 
@@ -56,6 +62,25 @@ function getChatHelper(sender, receiver) {
       }
     });
   });
+}
+
+function getOrder(sender, receiver) {
+  return new Promise((resolve, reject) => {
+    Chat.find({ participants: [sender, receiver]}).then((chat) => {
+      if (chat == null || chat == undefined || chat.length == 0) {
+        Chat.find({participants: [receiver, sender]}).then((chat) => {
+          if (chat == null || chat == undefined || chat.length == 0) {
+            resolve(null);
+          } else {
+            resolve([receiver, sender]);
+          }
+        });
+      } else {
+        resolve([sender, receiver]);
+      }
+    });
+  });
+
 }
 
 module.exports = {
