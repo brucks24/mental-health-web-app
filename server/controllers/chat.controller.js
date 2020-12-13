@@ -17,16 +17,13 @@ async function sendChat(req, res) {
   var receiver = req.body.receiver;
   var msg = req.body.message;
 
-  console.log('hello fucker!');
   var chat = await getChatHelper(sender, receiver);
   var chatArray = [];
   if (chat.length > 0) {
     chatArray = chat[0].chats;
   }
-  console.log(chatArray);
   var timeNow = new Date().getTime();
-  chatArray.push({ message: msg, sender: sender, time: timeNow })
-  console.log("fucker");
+  chatArray.push({ message: msg, sender: sender, time: timeNow };
 
   var order = await getOrder(sender, receiver);
   if (order != null) {

@@ -20,7 +20,6 @@ export const getChats = (sender, receiver) => (dispatch) => {
 }
 
 export const sendChat = (sender, receiver, message) => (dispatch) => {
-    console.log('sent bby girl');
     axios.post('chat/send/message', {
         sender: sender,
         receiver: receiver,

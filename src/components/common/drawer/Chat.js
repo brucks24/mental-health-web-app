@@ -20,27 +20,41 @@ message template:
 }
 */
 
+// this takes in the name of the 
 export const setMessages = (data, senderName) => {
-  console.log("oki i'm here...")
-  console.log("")
   messages = [];
   var c = data.data.result;
-  console.log(data)
   c.forEach(e => {
     e.chats.forEach(e2 => {
-      console.log(e2)
       var names = e.participants;
-      var side = "left";
-      if (names[1] == senderName) {
-        var side = "right";
+      var homeside = "left"
+      var opposite = "right";
+      if (names[0] == senderName) {
+         homeside = "right"
+         opposite = "left";
       }
 
-      messages.push({
-        message: e2.message,
-        title: e2.sender,
-        side: side,
-        time: e2.time
-      });
+      var home = e.participants[0];
+      if (names[0] != home) {
+        home = e.participants[1];
+      }
+
+      if (e2.sender == home) {
+        messages.push({
+          message: e2.message,
+          title: e2.sender,
+          side: homeside,
+          time: e2.time
+        });
+      } else {
+        messages.push({
+          message: e2.message,
+          title: e2.sender,
+          side: opposite,
+          time: e2.time
+        });
+      }
+
     });
     })
 }
@@ -144,12 +158,13 @@ export default function Chat(props) {
 
   const dispatch = useDispatch();
   if (shouldDispatch()) {
-    console.log(name + " - " + receiverName)
     dispatch(getChats(name, receiverName));
   }
 
   function handleSubmit(e) {
-    messageTarget.value = "";
+    if (messageTarget != null) {
+      messageTarget.value = "";
+    }
     dispatch(sendChat(name, receiverName, message));
   }
 
@@ -188,6 +203,7 @@ export default function Chat(props) {
               position={value.side} //outgoing message is right
               type={"text"}
               title={value.title}
+              multiline={true}
               text={value.message} //message
               date={new Date(value.time)}
               data={{
