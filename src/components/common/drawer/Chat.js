@@ -24,6 +24,7 @@ export const setMessages = (data, senderName) => {
         side = "left";
       }
 
+      console.log(e._id);
       messages.push({
         message: e2.message,
         title: e2.sender,
@@ -174,14 +175,14 @@ export default function Chat(props) {
         <Divider />
       </div>{" "}
       <div className={classes.chat}>
-        {messages.map((value, index) => {
+        {messages.map(item => {
           return (
             <MessageBox
-              position={value.side} //outgoing message is right
+              position={item.side} //outgoing message is right
               type={"text"}
-              title={value.title}
-              text={value.message} //message
-              date={new Date(value.time)}
+              title={item.title}
+              text={item.message} //message
+              date={new Date(item.time)}
               data={{
                 uri: "https://facebook.github.io/react/img/logo.svg",
               }}

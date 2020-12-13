@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Drawer, List, InputBase, Divider, Fab } from "@material-ui/core";
 import chatbarStyles from "./chatbarStyles";
@@ -72,9 +72,26 @@ function Chatbar(props) {
     user: state.user,
   }));
 
-  if (shouldDispatch()) {
-    dispatch(getAllChats(name));
-  }
+  const [chats, setChats] = useState(openChats);
+
+  useEffect(() => {
+    console.log("Effect called....")
+    if (name == undefined) {
+      return;
+    } else {
+      setInterval(() => {
+        var tmp = name;
+        if (tmp == "undefined undefined") {
+          return;
+        }
+        if (shouldDispatch()) {
+          dispatch(getAllChats(name));
+        }
+      }, 1000);
+    }
+  }, [name]);
+
+
 
   return (
     <Drawer
@@ -112,7 +129,7 @@ function Chatbar(props) {
       <div className={classes.chatList}>
         <List className={classes.root}>
           {" "}
-          {openChats.map((item) => (
+          {openChats.map(item => (
             <ChatCard
               name={item.name}
               image={item.image}
