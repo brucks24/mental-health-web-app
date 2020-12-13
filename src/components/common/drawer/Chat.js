@@ -1,13 +1,23 @@
-import React, {forceUpdate, useRef,useState,useEffect} from "react";
+import React, { forceUpdate, useRef, useState, useEffect } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import SendIcon from "@material-ui/icons/Send";
-import { IconButton, Avatar, InputBase, Divider, Grid } from "@material-ui/core";
+import {
+  IconButton,
+  Avatar,
+  InputBase,
+  Divider,
+  Grid,
+} from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
 import { MessageBox, MessageList } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllChats, sendChat, getChats } from "../../../redux/actions/chatActions";
+import {
+  getAllChats,
+  sendChat,
+  getChats,
+} from "../../../redux/actions/chatActions";
 import { Eco } from "@material-ui/icons";
 
 var messages = [];
@@ -15,24 +25,27 @@ var messages = [];
 export const setMessages = (data, senderName) => {
   messages = [];
   var c = data.data.result;
-  c.forEach(e => {
-    e.chats.forEach(e2 => {
-
+  c.forEach((e) => {
+    var tmpObj = [];
+    e.chats.forEach((e2) => {
       var side = "right";
       if (e2.sender != senderName) {
         side = "left";
       }
 
-      messages.push({
+      tmpObj.push({
         message: e2.message,
         title: e2.sender,
         side: side,
-        time: e2.time
+        time: e2.time,
       });
     });
-    })
-}
-
+    messages.push({
+      participants: e.participants,
+      msgs: tmpObj,
+    });
+  });
+};
 
 var lastDispatch = new Date().getTime();
 function shouldDispatch() {
@@ -70,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     marginBottom: 7,
     width: "100%",
-    height:"95%",
+    height: "95%",
     background: "white",
   },
   chat: {
@@ -119,21 +132,18 @@ const useStyles = makeStyles((theme) => ({
     //display: 'flex',
     justifyContent: "center",
   },
-  
 }));
-
 
 export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, image } = props;
   var receiverName = props.name;
   const classes = useStyles();
 
-  const { name } = useSelector(state => ({
+  const { name } = useSelector((state) => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
     user: state.user,
-}));
+  }));
 
-  
   const dispatch = useDispatch();
 
   const [msgs, setMessages] = useState(messages);
@@ -143,19 +153,22 @@ export default function Chat(props) {
     } else {
       setInterval(() => {
         var tmp = name;
-        if (tmp == "undefined undefined" || receiverName == "undefined undefined") {
+        if (
+          tmp == "undefined undefined" ||
+          receiverName == "undefined undefined"
+        ) {
           return;
         }
-        if (shouldDispatch()) {
-          dispatch(getChats(name, receiverName));
-        }
-      }, 1000);
+        dispatch(getAllChats(name, receiverName));
+      }, 2000);
     }
   }, [name, receiverName]);
 
   function handleSubmit(e) {
     dispatch(sendChat(name, receiverName, message));
-    e.target.value = "";
+    if (messageTarget != null) {
+      messageTarget.value = "";
+    }
   }
 
   var message = "";
@@ -175,7 +188,6 @@ export default function Chat(props) {
       }}
     >
       <div className={classes.toolbar} />{" "}
-      
       <div className={classes.header}>
         <IconButton onClick={handleToggleWindow} aria-label="back">
           <ArrowBackIosIcon />
@@ -187,21 +199,21 @@ export default function Chat(props) {
         <Divider />
       </div>{" "}
       <div className={classes.chat}>
-        {messages.map(item => {
-          return (
-            <MessageBox
-              position={item.side} //outgoing message is right
-              type={"text"}
-              title={item.title}
-              text={item.message} //message
-              date={new Date(item.time)}
-              data={{
-                uri: "https://facebook.github.io/react/img/logo.svg",
-              }}
-            />            
-          );
-          
-        })}  
+        {messages.map((item) => {
+          if (item.participants.includes(receiverName)) {
+            const listItems = item.msgs.map((m) => (
+              <MessageBox
+                position={m.side}
+                type={"text"}
+                title={m.title}
+                text={m.message}
+                date={new Date(m.time)}
+                data={{ uri: "https://facebook.github.io/react/img/logo.svg" }}
+              />
+            ));
+            return (listItems)
+          }
+        })}
       </div>
       <div>
         <MessageList
@@ -230,13 +242,7 @@ export default function Chat(props) {
             <SendIcon color="primary" />
           </IconButton>{" "}
         </div>{" "}
-        
       </form>
-      
-      
-      
     </Drawer>
-    
-    
   );
 }

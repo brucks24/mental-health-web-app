@@ -6,6 +6,7 @@ export const getAllChats = (sender) => (dispatch) => {
     axios.post('chat/fetch/chats', {
         sender: sender,
     }).then(res => {
+        setMessages(res, sender);
         setChat(res, sender)
     });
 }
