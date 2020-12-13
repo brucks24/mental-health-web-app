@@ -83,15 +83,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     marginBottom: 7,
     width: "100%",
-    height: "95%",
+    height: 50,
     background: "white",
   },
   chat: {
     position: "relative",
     marginRight: theme.spacing(1),
     marginLeft: 0,
-    marginTop: 0,
     marginBottom: 55,
+    paddingTop: 0,
     width: "100%",
   },
   inputArea: {
