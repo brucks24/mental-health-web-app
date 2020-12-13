@@ -17,7 +17,7 @@ async function sendChat(req, res) {
   var receiver = req.body.receiver;
   var msg = req.body.message;
 
-  var chat = await getChat(sender, receiver);
+  var chat = await getChatHelper(sender, receiver);
   var chatArray = chat[0].chats;
   var timeNow = new Date().getTime();
   chatArray.push({ message: msg, sender: sender, time: timeNow })
@@ -26,8 +26,14 @@ async function sendChat(req, res) {
   return res.status(200);
 }
 
+async function getChat(req, res) {
+  console.log(req.body);
+    var chat = await getChatHelper(req.body.sender, req.body.receiver);
+    res.status(200).json({chat});
+}
+
 // Returns the object that holds convo between these two.
-function getChat(sender, receiver) {
+function getChatHelper(sender, receiver) {
   return new Promise((resolve, reject) => {
     Chat.find({ participants: [sender, receiver]}).then((chat) => {
       if (chat == null || chat == undefined || chat.length == 0) {
@@ -48,4 +54,5 @@ module.exports = {
   getChat,
   getChats,
   sendChat,
+  getChatHelper
 };

@@ -36,7 +36,11 @@ export function setChat(data, senderName) {
     }
 
     var numChats = e.chats.length;
-    var preview = e.chats[numChats - 1].message.substring(0, 30) + "..."
+    var preview = "Click to start the conversation.";
+    if (e.chats.length > 0) {
+      preview = e.chats[numChats - 1].message.substring(0, 30) + "..."
+    }
+
 
     openChats.push({
       name: name,

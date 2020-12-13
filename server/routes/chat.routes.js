@@ -14,5 +14,9 @@ router.route('/send/message').post((req, res) => {
     chatController.sendChat(req, res);
 });
 
+router.route('/fetch/chat').post((req, res) => {
+    chatController.getChat(req, res);
+});
+
 
 module.exports = router;
