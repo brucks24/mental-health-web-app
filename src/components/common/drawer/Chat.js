@@ -21,11 +21,14 @@ message template:
 */
 
 export const setMessages = (data, senderName) => {
-  
+  console.log("oki i'm here...")
+  console.log("")
   messages = [];
   var c = data.data.result;
+  console.log(data)
   c.forEach(e => {
     e.chats.forEach(e2 => {
+      console.log(e2)
       var names = e.participants;
       var side = "left";
       if (names[0] == senderName) {
@@ -144,7 +147,6 @@ export default function Chat(props) {
     console.log(name + " - " + receiverName)
     dispatch(getChats(name, receiverName));
   }
-
 
   function handleSubmit(e) {
     dispatch(sendChat(name, receiverName, message));

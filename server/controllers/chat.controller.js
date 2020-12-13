@@ -39,15 +39,21 @@ function getChatHelper(sender, receiver) {
   return new Promise((resolve, reject) => {
     Chat.find({ participants: [sender, receiver]}).then((chat) => {
       if (chat == null || chat == undefined || chat.length == 0) {
-        const newChat = new Chat({
-          participants: [sender, receiver],
-          chats: []
-        });
-        newChat.save();
-        resolve({
-          participants: [sender, receiver],
-          chats: []
-        });
+        Chat.find({participants: [receiver, sender]}).then((chat) => {
+          if (chat == null || chat == undefined || chat.length == 0) {
+            const newChat = new Chat({
+              participants: [sender, receiver],
+              chats: []
+            });
+            newChat.save();
+            resolve({
+              participants: [sender, receiver],
+              chats: []
+            });
+          } else {
+            resolve(chat);
+          }
+        })
       } else {
         resolve(chat);
       }
