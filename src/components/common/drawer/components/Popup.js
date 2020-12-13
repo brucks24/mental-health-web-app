@@ -5,6 +5,7 @@ import {
   DialogTitle,
   TextField,
   Button,
+  DialogActions
 } from "@material-ui/core";
 import {
   sendChat,
@@ -24,8 +25,12 @@ export default function Popup(props) {
   var receiver = "";
   var message = "";
 
-  const handleClose = () => {
+  const handleSendClose = () => {
     dispatch(sendChat(name, receiver, message))
+    setOpenPopup(false);
+  };
+  const handleClose = () => {
+    
     setOpenPopup(false);
   };
 
@@ -61,10 +66,14 @@ export default function Popup(props) {
             type="typedMessage"
             fullWidth
           />
-
-          <Button variant="contained" color="primary" onClick={handleClose}>
+          <DialogActions>
+          <Button variant="contained" color="primary" onClick={handleSendClose}>
             Send{" "}
           </Button>
+          <Button variant="contained" color="secondary" onClick={handleClose}>
+            Close{" "}
+          </Button>
+          </DialogActions>
         </form>
       </DialogContent>
     </Dialog>
