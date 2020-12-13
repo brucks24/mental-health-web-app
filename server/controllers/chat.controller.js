@@ -46,10 +46,7 @@ function getChatHelper(sender, receiver) {
               chats: []
             });
             newChat.save();
-            resolve({
-              participants: [sender, receiver],
-              chats: []
-            });
+            resolve(newChat.toJSON());
           } else {
             resolve(chat);
           }
