@@ -1,4 +1,4 @@
-import React, { forceUpdate, useRef, useState, useEffect } from "react";
+import React, { forceUpdate, useRef, useState, useEffect, setState } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -11,6 +11,8 @@ import {
   Grid,
 } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
+import useSound from 'use-sound';
+import send from '../../sounds/send.mp3'
 import { MessageBox, MessageList } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,32 +22,6 @@ import {
 } from "../../../redux/actions/chatActions";
 import { Eco } from "@material-ui/icons";
 
-var messages = [];
-
-export const setMessages = (data, senderName) => {
-  messages = [];
-  var c = data.data.result;
-  c.forEach((e) => {
-    var tmpObj = [];
-    e.chats.forEach((e2) => {
-      var side = "right";
-      if (e2.sender != senderName) {
-        side = "left";
-      }
-
-      tmpObj.push({
-        message: e2.message,
-        title: e2.sender,
-        side: side,
-        time: e2.time,
-      });
-    });
-    messages.push({
-      participants: e.participants,
-      msgs: tmpObj,
-    });
-  });
-};
 
 var lastDispatch = new Date().getTime();
 function shouldDispatch() {
@@ -137,44 +113,64 @@ export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, image } = props;
   var receiverName = props.name;
   const classes = useStyles();
+  const [play, { sound }] = useSound(send);
 
   const { name } = useSelector((state) => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
     user: state.user,
   }));
 
-  const dispatch = useDispatch();
+  setInterval(() => {
+    setTmp(!tmp)
+  }, 5000)
 
-  const [msgs, setMessages] = useState(messages);
+  const [curMessage, setCurMessage] = useState("");
+  const [tmp, setTmp] = useState(false);
+  const [messages, setMessages] = useState({messages: []});
   useEffect(() => {
-    if (name == undefined || receiverName == undefined) {
-      return;
-    } else {
-      setInterval(() => {
-        var tmp = name;
-        if (
-          tmp == "undefined undefined" ||
-          receiverName == "undefined undefined"
-        ) {
-          return;
-        }
-        dispatch(getAllChats(name, receiverName));
-      }, 2000);
-    }
-  }, [name, receiverName]);
+      const fetchMsgs = async () => {
+        console.log(name, receiverName)
+        var chats = await getChats(name, receiverName);
+        var c = chats.data.result;;
+        var allChats = [];
+        c.forEach((e) => {
+          var tmpObj = [];
+          e.chats.forEach((e2) => {
+            var side = "right";
+            if (e2.sender != name) {
+              side = "left";
+            }
+      
+            tmpObj.push({
+              message: e2.message,
+              title: e2.sender,
+              side: side,
+              time: e2.time,
+            });
+          });
+          allChats.push({
+            participants: e.participants,
+            msgs: tmpObj,
+          });
+        });
+        setMessages({messages: allChats});
+      }
+      fetchMsgs();
+  }, [tmp])
 
-  function handleSubmit(e) {
-    dispatch(sendChat(name, receiverName, message));
+  async function handleSubmit(e) {
     if (messageTarget != null) {
       messageTarget.value = "";
     }
+    await sendChat(name, receiverName, curMessage);
+    play()
+    setTmp(!tmp)
   }
 
-  var message = "";
   var messageTarget = null;
   function messageChange(e) {
     messageTarget = e.target;
-    message = e.target.value;
+    setCurMessage(e.target.value);
   }
   return (
     <Drawer
@@ -198,7 +194,9 @@ export default function Chat(props) {
         <Divider />
       </div>{" "}
       <div className={classes.chat}>
-        {messages.map((item) => {
+      
+         { messages.messages != undefined &&
+         messages.messages.map((item) => {
           if (item.participants.includes(receiverName)) {
             const listItems = item.msgs.map((m) => (
               <MessageBox
@@ -214,6 +212,7 @@ export default function Chat(props) {
           }
         })}
       </div>
+
       <div>
         <MessageList
           className={classes.chat}
