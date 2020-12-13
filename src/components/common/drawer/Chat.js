@@ -13,8 +13,6 @@ import { Eco } from "@material-ui/icons";
 var messages = [];
 
 export const setMessages = (data, senderName) => {
-  console.log("oki i'm here...")
-  console.log("")
   messages = [];
   var c = data.data.result;
   console.log(data)
