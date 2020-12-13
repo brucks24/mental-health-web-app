@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, setState } from "react";
 import classNames from "classnames";
 import { Drawer, List, InputBase, Divider, Fab } from "@material-ui/core";
 import chatbarStyles from "./chatbarStyles";
@@ -8,11 +8,14 @@ import ChatCard from "./components/ChatCard";
 import AddIcon from "@material-ui/icons/Add";
 import {
   sendChat,
-  getAllChats
+  getAllChats,
+  getChats,
 } from "../../../redux/actions/chatActions";
 import { useDispatch } from "react-redux";
 import Popup from "./components/Popup";
+import { SentimentSatisfiedTwoTone } from "@material-ui/icons";
 
+/*
 var openChats = [];
 
 /*
@@ -22,7 +25,7 @@ const openChats = [{
     image: '/static/images/avatar/1.jpg',
     previewMessage: 'Hey just wanted to check in with you about',
 }]
-*/
+
 
 export function setChat(data, senderName) {
   openChats = [];
@@ -49,6 +52,7 @@ export function setChat(data, senderName) {
     })
   });
 }
+*/
 
 var lastDispatch = new Date().getTime();
 
@@ -72,25 +76,56 @@ function Chatbar(props) {
     user: state.user,
   }));
 
-  const [chats, setChats] = useState(openChats);
-
+  const [chatCards, setChatCards] = useState([]);
   useEffect(() => {
-    if (name == undefined) {
-      return;
-    } else {
-      setInterval(() => {
-        var tmp = name;
-        if (tmp == "undefined undefined") {
-          return;
+    const fetchMsgs = async () => {
+      var chats = await getAllChats(name);
+      var c = chats.data.result;
+      var allChats = [];
+      c.forEach((e) => {
+        var tmpObj = [];
+        e.chats.forEach((e2) => {
+          var side = "right";
+          if (e2.sender != name) {
+            side = "left";
+          }
+
+          tmpObj.push({
+            message: e2.message,
+            title: e2.sender,
+            side: side,
+            time: e2.time,
+          });
+        });
+
+        var names = e.participants;
+        var oppo = names[0];
+        if (names[0] == name) {
+          oppo = names[1];
         }
-        if (shouldDispatch()) {
-          dispatch(getAllChats(name));
+        var numChats = e.chats.length;
+        var preview = "Click to start the conversation.";
+        if (e.chats.length > 0) {
+          preview = e.chats[numChats - 1].message.substring(0, 30) + "...";
         }
-      }, 1000);
-    }
+
+        var chatCard = {
+          name: oppo,
+          image: "/static/images/avatar/1.jpg",
+          previewMessage: preview,
+        };
+
+        allChats.push({
+          participants: e.participants,
+          msgs: tmpObj,
+          cc: chatCard,
+        });
+      });
+
+      setChatCards(allChats);
+    };
+    fetchMsgs();
   }, [name]);
-
-
 
   return (
     <Drawer
@@ -126,16 +161,21 @@ function Chatbar(props) {
       </div>{" "}
       <Divider />
       <div className={classes.chatList}>
-        <List className={classes.root}>
-          {" "}
-          {openChats.map(item => (
-            <ChatCard
-              name={item.name}
-              image={item.image}
-              previewMessage={item.previewMessage}
-            />
-          ))}{" "}
-        </List>{" "}
+        {
+          <List className={classes.root}>
+            {chatCards != undefined &&
+              chatCards.map((item) => {
+                const listItems = chatCards.map((m) => (
+                  <ChatCard
+                    name={m.cc.name}
+                    image={m.cc.image}
+                    previewMessage={m.cc.previewMessage}
+                  />
+                ));
+                return listItems;
+              })}
+          </List>
+        }
       </div>
       <div className={classes.newChat}>
         <Fab

@@ -29,7 +29,7 @@ async function sendChat(req, res) {
   if (order != null) {
     await Chat.findOneAndUpdate({'participants': order}, {chats: chatArray})
   }
-  return res.status(200);
+  return res.status(200).json({})
 }
 
 async function getChat(req, res) {
