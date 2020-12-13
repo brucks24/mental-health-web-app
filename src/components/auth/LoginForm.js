@@ -84,7 +84,7 @@ function LoginForm(props) {
             </Button>{" "}
           </div>{" "}
           <Typography className={classes.signUpText}>
-            Don 't have an account? <Link to={" / register "}>Sign up</Link>
+            Don't have an account? <Link to={"/register"}>Sign up</Link>
           </Typography>{" "}
         </form>{" "}
       </div>{" "}
