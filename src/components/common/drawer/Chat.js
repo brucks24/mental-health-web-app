@@ -31,13 +31,11 @@ export const setMessages = (data, senderName) => {
       if (names[0] == senderName) {
         var side = "right";
       }
-  
-      console.log(e2);
-  
       messages.push({
         message: e2.message,
         title: e2.sender,
-        side: side
+        side: side,
+        value: e2.time
       });
     });
     })
