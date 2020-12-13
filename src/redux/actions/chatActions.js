@@ -11,7 +11,7 @@ export const getAllChats = (sender) => (dispatch) => {
     });
 }
 
-export const getChats = (sender, receiver) => (dispatch) => {
+export const fuck = (sender, receiver) => (dispatch) => {
     console.log(sender + " - " + receiver);
     console.log("2 posted.");
     axios.post('chat/fetch/chat', {

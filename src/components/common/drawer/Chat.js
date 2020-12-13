@@ -7,7 +7,7 @@ import { IconButton, Avatar, InputBase, Divider } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
 import { MessageBox } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllChats, sendChat, getChats } from "../../../redux/actions/chatActions";
+import { getAllChats, sendChat, fuck } from "../../../redux/actions/chatActions";
 import { Eco } from "@material-ui/icons";
 
 var messages = [];
@@ -21,10 +21,11 @@ message template:
 */
 
 export const setMessages = (data, senderName) => {
+  
   console.log(data)
   console.log('Setting messages.')
   messages = [];
-  var c = data.data.result;
+  var c = data.data.chat;
   c.forEach(e => {
     e.chats.forEach(e2 => {
       var names = e.participants;
@@ -42,6 +43,17 @@ export const setMessages = (data, senderName) => {
     });
     })
 }
+
+var lastDispatch = new Date().getTime();
+function shouldDispatch() {
+  if (new Date().getTime() > lastDispatch + 1000) {
+    lastDispatch = new Date().getTime();
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -130,7 +142,11 @@ export default function Chat(props) {
 }));
 
   const dispatch = useDispatch();
-  dispatch(getChats(name, receiverName));
+  if (shouldDispatch()) {
+    console.log(name + " - " + receiverName)
+    dispatch(fuck(name, receiverName));
+  }
+
 
   function handleSubmit(e) {
     dispatch(sendChat(name, receiverName, message));
