@@ -44,8 +44,6 @@ export function setChat(data, senderName) {
       previewMessage: preview
     })
   });
-  console.log(chats);
-  console.log(chats);
 }
 
 var lastDispatch = new Date().getTime();

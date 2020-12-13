@@ -8,6 +8,7 @@ import "react-chat-elements/dist/main.css";
 import { MessageBox } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllChats, sendChat } from "../../../redux/actions/chatActions";
+import { Eco } from "@material-ui/icons";
 
 var messages = [];
 
@@ -18,6 +19,31 @@ message template:
   side: 'left/right'
 }
 */
+
+export const setMessages = (data, senderName) => {
+  messages = [];
+  var c = data.data.result;
+  c.forEach(e => {
+    console.log(e);
+    e.chats.forEach(e2 => {
+      var names = e.participants;
+      var side = "left";
+      if (names[0] == senderName) {
+        var side = "right";
+      }
+  
+      console.log(e2);
+  
+      messages.push({
+        message: e2.message,
+        title: e2.sender,
+        side: side
+      });
+    });
+    })
+
+  console.log(messages);
+}
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -108,7 +134,8 @@ export default function Chat(props) {
   const dispatch = useDispatch();
 
   function handleSubmit(e) {
-
+    dispatch(sendChat(name, receiverName, message));
+    e.target.value = "";
   }
 
   var message = "";
@@ -146,7 +173,7 @@ export default function Chat(props) {
             <MessageBox
               position={value.side} //outgoing message is right
               type={"text"}
-              title={"test"}
+              title={value.title}
               text={value.message} //message
               date={new Date(value.time)}
               data={{
