@@ -1,9 +1,9 @@
-import React, {forceUpdate} from "react";
+import React, {forceUpdate, useRef,useState,useEffect} from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import SendIcon from "@material-ui/icons/Send";
-import { IconButton, Avatar, InputBase, Divider } from "@material-ui/core";
+import { IconButton, Avatar, InputBase, Divider, Grid } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
 import { MessageBox } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import { getAllChats, sendChat, getChats } from "../../../redux/actions/chatActi
 import { Eco } from "@material-ui/icons";
 
 var messages = [];
+
 
 /*
 message template:
@@ -20,44 +21,33 @@ message template:
 }
 */
 
-// this takes in the name of the 
+
+
 export const setMessages = (data, senderName) => {
+  console.log("oki i'm here...")
+  console.log("")
   messages = [];
   var c = data.data.result;
+  console.log(data)
   c.forEach(e => {
     e.chats.forEach(e2 => {
+      console.log(e2)
       var names = e.participants;
-      var homeside = "left"
-      var opposite = "right";
+      var side = "left";
       if (names[0] == senderName) {
-         homeside = "right"
-         opposite = "left";
+        var side = "right";
       }
 
-      var home = e.participants[0];
-      if (names[0] != home) {
-        home = e.participants[1];
-      }
-
-      if (e2.sender == home) {
-        messages.push({
-          message: e2.message,
-          title: e2.sender,
-          side: homeside,
-          time: e2.time
-        });
-      } else {
-        messages.push({
-          message: e2.message,
-          title: e2.sender,
-          side: opposite,
-          time: e2.time
-        });
-      }
-
+      messages.push({
+        message: e2.message,
+        title: e2.sender,
+        side: side,
+        time: e2.time
+      });
     });
     })
 }
+
 
 var lastDispatch = new Date().getTime();
 function shouldDispatch() {
@@ -68,7 +58,6 @@ function shouldDispatch() {
     return false;
   }
 }
-
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -94,8 +83,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     marginLeft: 0,
     marginTop: 0,
-    marginBottom: 12,
+    marginBottom: 7,
     width: "100%",
+    height:"95%",
     background: "white",
   },
   chat: {
@@ -103,12 +93,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     marginLeft: 0,
     marginTop: 0,
-    marginBottom: 7,
+    marginBottom: 55,
     width: "100%",
   },
   inputArea: {
     background: "white",
-    position: "absolute",
+    position: "fixed",
     bottom: theme.spacing(0),
     width: "100%",
     height: "6ch",
@@ -143,6 +133,7 @@ const useStyles = makeStyles((theme) => ({
     //display: 'flex',
     justifyContent: "center",
   },
+  
 }));
 
 
@@ -156,16 +147,16 @@ export default function Chat(props) {
     user: state.user,
 }));
 
+  
   const dispatch = useDispatch();
   if (shouldDispatch()) {
+    console.log(name + " - " + receiverName)
     dispatch(getChats(name, receiverName));
   }
 
   function handleSubmit(e) {
-    if (messageTarget != null) {
-      messageTarget.value = "";
-    }
     dispatch(sendChat(name, receiverName, message));
+    e.target.value = "";
   }
 
   var message = "";
@@ -174,7 +165,6 @@ export default function Chat(props) {
     messageTarget = e.target;
     message = e.target.value;
   }
-
   return (
     <Drawer
       variant="persistent"
@@ -186,6 +176,7 @@ export default function Chat(props) {
       }}
     >
       <div className={classes.toolbar} />{" "}
+      
       <div className={classes.header}>
         <IconButton onClick={handleToggleWindow} aria-label="back">
           <ArrowBackIosIcon />
@@ -199,25 +190,28 @@ export default function Chat(props) {
       <div className={classes.chat}>
         {messages.map((value, index) => {
           return (
+            
             <MessageBox
+            
               position={value.side} //outgoing message is right
               type={"text"}
               title={value.title}
-              multiline={true}
               text={value.message} //message
               date={new Date(value.time)}
               data={{
                 uri: "https://facebook.github.io/react/img/logo.svg",
               }}
-            />
+            />            
           );
-        })}
+          
+        })}        
       </div>
       <form>
         <div className={classes.inputArea}>
           <Divider />
           <InputBase
             placeholder="Send a Message..."
+
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
@@ -231,7 +225,13 @@ export default function Chat(props) {
             <SendIcon color="primary" />
           </IconButton>{" "}
         </div>{" "}
+        
       </form>
+      
+      
+      
     </Drawer>
+    
+    
   );
 }
