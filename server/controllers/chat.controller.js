@@ -18,7 +18,11 @@ async function sendChat(req, res) {
   var msg = req.body.message;
 
   var chat = await getChatHelper(sender, receiver);
-  var chatArray = chat[0].chats;
+  console.log(chat);
+  var chatArray = [];
+  if (chat.length > 0) {
+    chatArray = chat[0].chats;
+  }
   var timeNow = new Date().getTime();
   chatArray.push({ message: msg, sender: sender, time: timeNow })
 
@@ -39,10 +43,13 @@ function getChatHelper(sender, receiver) {
       if (chat == null || chat == undefined || chat.length == 0) {
         const newChat = new Chat({
           participants: [sender, receiver],
-          chats: [],
+          chats: []
         });
         newChat.save();
-        resolve(newChat);
+        resolve({
+          participants: [sender, receiver],
+          chats: []
+        });
       } else {
         resolve(chat);
       }

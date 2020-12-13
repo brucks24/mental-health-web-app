@@ -26,7 +26,7 @@ export default function Popup(props) {
 
   const handleClose = () => {
     dispatch(sendChat(name, receiver, message))
-    
+    setOpenPopup(false);
   };
 
   const messageChange = (e) => {
