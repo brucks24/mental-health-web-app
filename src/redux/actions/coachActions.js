@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setTeams } from "../../components/teams/Teams";
 
 export const createTeam = (team) => (dispatch) => {
     axios.post('team/create', team).then(res => {
@@ -20,7 +21,7 @@ export const updateTeam = (update) => (dispatch) => {
 
 export const getTeam = (name) => (dispatch) => {
     axios.get(`team/${name}`).then(res => {
-        console.log(res.data);
+        setTeams(res.data);
     })
     .catch(res => {
         console.log(res.data);

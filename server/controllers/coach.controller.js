@@ -20,7 +20,7 @@ const updateTeam = (req, res) => {
     let newDesc = req.body.description;
     Team.findOneAndUpdate({teamName: req.body.oldname, coach: req.body.coach}, {teamName: newName, description: newDesc}, (err, data) => {
         if(err) return console.error(err);
-        console.log(data);
+        
     });
 };
 
