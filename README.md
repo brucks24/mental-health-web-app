@@ -84,7 +84,7 @@ To get a local copy up and running follow these simple steps.
 ### Prerequisites
 
 UWW SASS requires [Node.js](https://nodejs.org/) v10+ to run.
-UWW SASS requires a backend server and a front end server
+UWW SASS requires a backend server and a front client.
 
 ### Installation
 
