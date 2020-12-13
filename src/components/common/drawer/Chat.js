@@ -15,7 +15,6 @@ var messages = [];
 export const setMessages = (data, senderName) => {
   messages = [];
   var c = data.data.result;
-  console.log(data)
   c.forEach(e => {
     e.chats.forEach(e2 => {
 
@@ -24,7 +23,6 @@ export const setMessages = (data, senderName) => {
         side = "left";
       }
 
-      console.log(e._id);
       messages.push({
         message: e2.message,
         title: e2.sender,
@@ -136,10 +134,23 @@ export default function Chat(props) {
 
   
   const dispatch = useDispatch();
-  if (shouldDispatch()) {
-    console.log(name + " - " + receiverName)
-    dispatch(getChats(name, receiverName));
-  }
+
+  const [msgs, setMessages] = useState(messages);
+  useEffect(() => {
+    if (name == undefined || receiverName == undefined) {
+      return;
+    } else {
+      setInterval(() => {
+        var tmp = name;
+        if (tmp == "undefined undefined" || receiverName == "undefined undefined") {
+          return;
+        }
+        if (shouldDispatch()) {
+          dispatch(getChats(name, receiverName));
+        }
+      }, 1000);
+    }
+  }, [name, receiverName]);
 
   function handleSubmit(e) {
     dispatch(sendChat(name, receiverName, message));
