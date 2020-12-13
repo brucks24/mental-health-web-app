@@ -26,7 +26,7 @@ import { Eco } from "@material-ui/icons";
 
 var lastDispatch = new Date().getTime();
 function shouldDispatch() {
-  if (new Date().getTime() > lastDispatch + 1000) {
+  if (new Date().getTime() > lastDispatch + 1500) {
     lastDispatch = new Date().getTime();
     return true;
   } else {
@@ -133,6 +133,9 @@ export default function Chat(props) {
   const [messages, setMessages] = useState({messages: []});
   useEffect(() => {
       const fetchMsgs = async () => {
+        if (!shouldDispatch()) {
+          return;
+        }
         console.log(name, receiverName)
         var chats = await getChats(name, receiverName);
         var c = chats.data.result;;
