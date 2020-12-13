@@ -21,7 +21,6 @@ if (config.connectionString != null) {
     module.exports = {
         User: require('../models/user.model'),
         Chat: require('../models/chat.model'),
-        ChatIds: require('../models/chatIds.model'),
         Team: require('../models/team.model')
     }
 } else {

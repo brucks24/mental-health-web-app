@@ -1,172 +1,51 @@
-const config = require('../config.json');
-const db = require('../helpers/db');
+const config = require("../config.json");
+const db = require("../helpers/db");
 const Chat = db.Chat;
-const ChatIds = db.ChatIds;
 const User = db.User;
 
-// Returns all the of the chats for the userId.
+// Returns each document that the person is in.
 async function getChats(req, res) {
-    ChatIds.findOne({conversationId: req.body.convo_id}).then(convoObj => {
-        Chat.find({ conversationId: req.body.convo_id }).then(chats => {
-            // let's format the chats...
-            var newChats = [];
-            chats.forEach(element => {
-                var side = "right";
-                if (req.body.sender == convoObj.user_one && element.userOneSent) {
-                    side = "left";
-                }
-                
-                var tmp = {
-                    message: element.message,
-                    side: side,
-                    time: element.createdAt
-                };
-                newChats.push(tmp);
-            });
-            return res.status(200).json({ chats: newChats })
-        });
-    });
-
-}
-
-function getConvos(req, res) {
-    var convos = [];
-    const user = req.body.user;
-
-    if (user == undefined) {
-        return convos;
-    }
-
-    ChatIds.find({ user_one: `${user}` }).then(convo => {
-        if (convo.length > 0) { convos.push(convo); }
-        ChatIds.find({ user_two: `${user}` }).then(convo => {
-            if (convo.length > 0) { convos.push(convo); }
-            return res.status(200).json(convos);
-        });
-    });
-}
-
-// Returns boolean value wheter or not user has new unread chats
-async function hasUnreadChats(req, res) {
-    var id = await getConversationId("test1", "test2");
-    Chat.find({ conversationId: id, isRead: false }).then(chats => {
-        var hasUnread = chats.length > 0 ? true : false;
-        return res.status(200).json({ hasUnread: hasUnread });
-    });
-    return null;
-}
-
-async function getConvoId(req, res) {
-    var id = await getConversationId(req.body.sender, req.body.receiver);
-    return res.status(200).json({ id: id });
-}
-
-// Returns the conversation id that is between the two users.
-function getConversationId(sender, receiver) {
-    return new Promise(function(resolve, reject) {
-        ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
-            if (convo == null) {
-                ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo2 => {
-                    if (convo2 == null) {
-                        const id = new ChatIds({
-                            user_one: sender,
-                            user_two: receiver,
-                            conversationId: `${makeid(10)}`
-                        });
-                        id.save();
-                        resolve(id.conversationId);
-                    } else {
-                        resolve(convo2.conversationId);
-                    }
-                });
-            } else {
-                resolve(convo.conversationId);
-            }
-
-        });
-    })
-}
-
-function getConvoObject(sender, receiver) {
-    return new Promise(function(resolve, reject) {
-        ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
-            if (convo == null) {
-                ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo => {
-                    if (convo == null) {
-                        const id = new ChatIds({
-                            user_one: sender,
-                            user_two: receiver,
-                            conversationId: `${makeid(10)}`
-                        });
-                        id.save();
-                        resolve(id);
-                    } else {
-                        resolve(convo2);
-                    }
-                });
-            } else {
-                resolve(convo);
-            }
-
-        });
-    })
-}
-
-function didUserOneSend(sender, receiver) {
-    return new Promise((resolve, reject) => {
-        ChatIds.findOne({ user_one: sender, user_two: receiver }).then(convo => {
-            if (convo == null || convo == undefined) {
-                ChatIds.findOne({ user_one: receiver, user_two: sender }).then(convo => {
-                    resolve(false)
-                });
-            } else {
-                resolve(true)
-            }
-        });
-    });
+  var sender = req.body.sender;
+  await Chat.find({'participants': sender}).then((result) => {
+      return res.status(200).json({result});
+  });
 }
 
 // Adds the chat to the database
 async function sendChat(req, res) {
-    var id = await getConversationId(req.body.sender, req.body.receiver);
-    var userOneSent = await didUserOneSend(req.body.sender, req.body.receiver);
-    var message = req.body.msg;
-    const chat = new Chat({
-        message: message,
-        conversationId: id,
-        userOneSent: userOneSent,
-        isRead: false
-    })
-    chat.save();
-    getConvos(req, res);
+  var sender = req.body.sender;
+  var receiver = req.body.receiver;
+  var msg = req.body.message;
+
+  var chat = await getChat(sender, receiver);
+  var chatArray = chat[0].chats;
+  var timeNow = new Date().getTime();
+  chatArray.push({ message: msg, sender: sender, time: timeNow })
+
+  await Chat.findOneAndUpdate({'participants': [sender, receiver]}, {chats: chatArray})
+  return res.status(200);
 }
 
-// Marks the conversation as read
-function markAsRead(req, res) {
-    var conversation = req.body.conversation;
-    Chat.updateMany({ conversationId: conversation }, { $set: { isRead: true } }, (err) => {
-        if (err) {
-            console.log(err);
-        }
+// Returns the object that holds convo between these two.
+function getChat(sender, receiver) {
+  return new Promise((resolve, reject) => {
+    Chat.find({ participants: [sender, receiver]}).then((chat) => {
+      if (chat == null || chat == undefined || chat.length == 0) {
+        const newChat = new Chat({
+          participants: [sender, receiver],
+          chats: [],
+        });
+        newChat.save();
+        resolve(newChat);
+      } else {
+        resolve(chat);
+      }
     });
-    getChats(req, res);
-}
-
-function makeid(length) {
-    var result = '';
-    var characters = '0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
+  });
 }
 
 module.exports = {
-    getChats,
-    hasUnreadChats,
-    sendChat,
-    markAsRead,
-    getConvos,
-    getConvoId
+  getChat,
+  getChats,
+  sendChat,
 };

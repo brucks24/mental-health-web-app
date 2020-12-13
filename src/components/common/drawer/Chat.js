@@ -7,21 +7,9 @@ import { IconButton, Avatar, InputBase, Divider } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
 import { MessageBox } from "react-chat-elements";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserChats, getConvoId, sendUserMessage } from "../../../redux/actions/chatActions";
+import { getAllChats, sendChat } from "../../../redux/actions/chatActions";
 
 var messages = [];
-
-var lastDispatch = Date.now();
-
-function shouldDispatch() {
-  const rightNow = Date.now();
-  if (rightNow - lastDispatch > 500) {
-    lastDispatch = Date.now();
-    return true;
-  } else {
-    return false;
-  }
-}
 
 /*
 message template:
@@ -106,9 +94,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function setMessages(msgs) {
-  messages = msgs;
-}
 
 export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, image } = props;
@@ -122,18 +107,8 @@ export default function Chat(props) {
 
   const dispatch = useDispatch();
 
-  if (shouldDispatch()) {
-    dispatch(getUserChats(name, receiverName));
-  }
-
   function handleSubmit(e) {
-    dispatch(sendUserMessage(name, receiverName, message));
-    if (messageTarget != null) {
-      messageTarget.value = "";
-    }
-    setTimeout(() => {
-      dispatch(getUserChats(name, receiverName));
-    }, 2000);
+
   }
 
   var message = "";
@@ -171,6 +146,7 @@ export default function Chat(props) {
             <MessageBox
               position={value.side} //outgoing message is right
               type={"text"}
+              title={"test"}
               text={value.message} //message
               date={new Date(value.time)}
               data={{

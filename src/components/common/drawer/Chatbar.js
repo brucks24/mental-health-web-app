@@ -7,10 +7,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import ChatCard from "./components/ChatCard";
 import AddIcon from "@material-ui/icons/Add";
 import {
-  getUserChats,
-  sendUserMessage,
-  markMessageRead,
-  getUserConvos,
+  sendChat,
+  getAllChats
 } from "../../../redux/actions/chatActions";
 import { useDispatch } from "react-redux";
 import Popup from "./components/Popup";
@@ -26,23 +24,38 @@ const openChats = [{
 }]
 */
 
-export function setChat(data, name) {
-  const convos = data.data[0];
+export function setChat(data, senderName) {
   openChats = [];
+  var chats = data.data.result;
+  chats.forEach(e => {
 
-  if (convos !== undefined) {
-    convos.forEach((e) => {
-      var user = e.user_one;
-      if (user === name) {
-        user = e.user_two;
-      }
+    var names = e.participants;
+    var name = names[0];
+    if (names[0] == senderName) {
+      name = names[1];
+    }
 
-      openChats.push({
-        id: e._id,
-        name: user,
-        previewMessage: "Clck to view conversation",
-      });
-    });
+    var numChats = e.chats.length;
+    var preview = e.chats[numChats - 1].message.substring(0, 30) + "..."
+
+    openChats.push({
+      name: name,
+      image: '/static/images/avatar/1.jpg',
+      previewMessage: preview
+    })
+  });
+  console.log(chats);
+  console.log(chats);
+}
+
+var lastDispatch = new Date().getTime();
+
+function shouldDispatch() {
+  if (new Date().getTime() > lastDispatch + 1000) {
+    lastDispatch = new Date().getTime();
+    return true;
+  } else {
+    return false;
   }
 }
 
@@ -51,13 +64,16 @@ function Chatbar(props) {
   const classes = chatbarStyles();
   const dispatch = useDispatch();
   const [openPopup, setOpenPopup] = useState(false);
+
   const { name } = useSelector((state) => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
     user: state.user,
   }));
 
-  // Load the chats on initilize
-  dispatch(getUserConvos(name));
+  if (shouldDispatch()) {
+    console.log(name);
+    dispatch(getAllChats(name));
+  }
 
   return (
     <Drawer
