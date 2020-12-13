@@ -41,6 +41,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#helpful-links">Helpful Links</a></li>
       </ul>
     </li>
     <li>
@@ -70,11 +71,21 @@ manner. In order to achieve this, the system will be able to:
 
 ### Built With
 
-* [Bootstrap](https://getbootstrap.com/)
-* [MongoDB](https://www.mongodb.com/)
-* [NodeJS](https://nodejs.org/en/)
-* [React](https://reactjs.org/)
-* [Express](https://expressjs.com/)
+* [Bootstrap]
+* [MongoDB]
+* [NodeJS]
+* [React]
+* [Express]
+
+### Helpful Links
+
+* JSON Web Tokens(jwt) - [jsonwebtoken]
+* Predictable state container - [Redux]
+* A React component library implementing Google's Material Design - [Material-UI]
+* Redux Form - [Redux Form]
+* Declarative routing for React - [React-Router]
+* Promise based HTTP client - [Axios]
+* Code linting tool - [ESLint]
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -176,3 +187,18 @@ See the [open issues](https://github.com/uww-student-athlete-success/stuath-succ
 [issues-url]: https://github.com/uww-student-athlete-success/stuath-success-web/issues
 <!-- [license-shield]: https://img.shields.io/github/license/uww-student-athlete-success/repo.svg?style=plastic
 [license-url]: https://github.com/uww-student-athlete-success/repo/blob/master/LICENSE.txt -->
+
+[//]: #
+   [Redux]: <https://react-redux.js.org/>
+   [Express]: <http://expressjs.com/>
+   [jsonwebtoken]: <https://www.npmjs.com/package/jsonwebtoken>
+   [React]: <https://facebook.github.io/react/>
+   [Redux]: <http://redux.js.org/>
+   [Material-UI]: <https://material-ui-1dab0.firebaseapp.com/>
+   [Redux Form]: <https://redux-form.com/8.3.0/>
+   [React-Router]: <https://reacttraining.com/react-router/>
+   [Axios]: <https://github.com/mzabriskie/axios>
+   [ESLint]: <http://eslint.org/>
+   [Bootstrap]: <https://getbootstrap.com/>
+   [MongoDB]: <https://www.mongodb.com/>
+   [NodeJS]: <https://nodejs.org/en/>
