@@ -75,7 +75,6 @@ function Chatbar(props) {
   const [chats, setChats] = useState(openChats);
 
   useEffect(() => {
-    console.log("Effect called....")
     if (name == undefined) {
       return;
     } else {
