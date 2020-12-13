@@ -12,17 +12,6 @@ import { Eco } from "@material-ui/icons";
 
 var messages = [];
 
-
-/*
-message template:
-{
-  message: 'some text'
-  side: 'left/right'
-}
-*/
-
-
-
 export const setMessages = (data, senderName) => {
   console.log("oki i'm here...")
   console.log("")
@@ -31,11 +20,10 @@ export const setMessages = (data, senderName) => {
   console.log(data)
   c.forEach(e => {
     e.chats.forEach(e2 => {
-      console.log(e2)
-      var names = e.participants;
-      var side = "left";
-      if (names[0] == senderName) {
-        var side = "right";
+
+      var side = "right";
+      if (e2.sender != senderName) {
+        side = "left";
       }
 
       messages.push({
