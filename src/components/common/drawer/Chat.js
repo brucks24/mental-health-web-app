@@ -59,15 +59,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     marginBottom: 7,
     width: "100%",
-    height: "95%",
+    height: 50,
     background: "white",
   },
   chat: {
     position: "relative",
     marginRight: theme.spacing(1),
     marginLeft: 0,
-    marginTop: 0,
     marginBottom: 55,
+    paddingTop: 0,
     width: "100%",
   },
   inputArea: {
@@ -76,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(0),
     width: "100%",
     height: "6ch",
+    overflow: "scroll",
   },
   inputRoot: {
     color: "inherited",
@@ -234,6 +235,7 @@ export default function Chat(props) {
               "aria-label": "Send Message",
             }}
             onChange={messageChange}
+            margin="dense"
           />{" "}
           <IconButton aria-label="send" onClick={handleSubmit}>
             <SendIcon color="primary" />
