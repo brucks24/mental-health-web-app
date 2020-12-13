@@ -14,7 +14,6 @@ export default function ChatCard(props) {
   });
 
   const handleChatWindow = () => setChatWindowState({ open: !stateChatWindow.open });
-
   return (
     <React.Fragment>
       <ListItem button onClick={handleChatWindow} alignItems="flex-start">

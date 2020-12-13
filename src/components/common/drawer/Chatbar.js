@@ -127,7 +127,6 @@ function Chatbar(props) {
       <Divider />
       <div className={classes.chatList}>
         <List className={classes.root}>
-          {" "}
           {openChats.map(item => (
             <ChatCard
               name={item.name}
