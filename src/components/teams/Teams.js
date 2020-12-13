@@ -3,17 +3,17 @@
 *	Time: Fall 2020 semester
 *	Description: Working on implementing team features for coaches
 */
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { Typography } from '@material-ui/core';
 import useStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import Team from './teamObj';
 import Menu from './Coach/CoachMenu';
 import { getTeam } from '../../redux/actions/coachActions';
-
+import { getUserData } from '../../redux/actions/userActions';
 
 //Replace with teams that user is part of
-const teams = [
+/*const teams = [
 	//Test team data
 	{
 		name: 'COD Esports',
@@ -36,9 +36,23 @@ const teams = [
 		members: 34,
 		description: 'Er mer gerd'
 	},
-]
+]*/
+var teams = [];
 
-const Teams = (props) => {
+export function setTeams(teamData){
+	teams = [];
+	teamData.forEach((info) => {
+		teams.push({
+			name: info.teamName,
+			coach: info.coach,
+			id: info.id,
+			members: info.members.length,
+			description: info.description
+		});
+	});
+}
+
+function Teams(){
    	const classes = useStyles();
 	const dispatch = useDispatch();
 	
@@ -48,10 +62,11 @@ const Teams = (props) => {
       user: state.user,
     }));
 	var account = user.accountType;
-	
+
 	useEffect(() => {
-		dispatch(getTeam(name, props.history));
-	}, []);
+		dispatch(getUserData());
+		dispatch(getTeam(name));
+	}, [name]);
 
 	if (account === 0){
 		//If user account is 0 (student) return all team objects that user is part of
@@ -78,6 +93,5 @@ const Teams = (props) => {
    		)
 	}
 }
-
 
 export default Teams;
