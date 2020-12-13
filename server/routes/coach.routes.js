@@ -14,8 +14,8 @@ router.route("/:coach").get((req, res) => {
     coachController.getTeams(req, res);
 });
 
-router.route("/students").get((req, res) => {
-    coachController.getStudents(req, res);
+router.route("/students/:teamId").get((req, res) => {
+    coachController.getStudentsByTeam(req, res);
 });
 
 module.exports = router;

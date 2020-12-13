@@ -3,7 +3,7 @@
 *	Time: Fall 2020 semester
 *	Description: Working on implementing team features for coaches
 */
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Typography } from '@material-ui/core';
 import useStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
