@@ -23,7 +23,7 @@ async function sendChat(req, res) {
     chatArray = chat[0].chats;
   }
   var timeNow = new Date().getTime();
-  chatArray.push({ message: msg, sender: sender, time: timeNow };
+  chatArray.push({ message: msg, sender: sender, time: timeNow });
 
   var order = await getOrder(sender, receiver);
   if (order != null) {
