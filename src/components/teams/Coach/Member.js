@@ -48,7 +48,7 @@ function Member(props){
 	
 	function handleAdd(){
 		//Add feature to add new member to team
-		alert('Adding member');
+		prompt('Enter Name to add to team:');
 	}
 	
 	if (type === 0){
