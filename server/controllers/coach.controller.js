@@ -18,9 +18,15 @@ const makeTeam = (req, res) => {
 const updateTeam = (req, res) => {
     let newName = req.body.newname;
     let newDesc = req.body.description;
+    
+    if(newDesc === ""){
+        newDesc = req.body.olddescription;
+    }
+    if(newName === ""){
+        newName = req.body.oldname;
+    }
     Team.findOneAndUpdate({teamName: req.body.oldname, coach: req.body.coach}, {teamName: newName, description: newDesc}, (err, data) => {
         if(err) return console.error(err);
-        
     });
 };
 
@@ -31,10 +37,10 @@ const getTeams = (req, res) => {
     });
 };
 
-const getStudents = (req, res) => {
-    User.find({accountType: 0}, (err, data) => {
+const getStudentsByTeam = (req, res) => {
+    Team.findById({_id: req.params.teamId}, (err, data) => {
         if(err) return console.error(err);
-        return res.json(data);
+        return res.json(data.members);
     });
 };
 
@@ -42,5 +48,5 @@ module.exports = {
     makeTeam,
     updateTeam,
     getTeams,
-    getStudents
+    getStudentsByTeam
 };

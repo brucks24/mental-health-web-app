@@ -4,28 +4,14 @@
 *	Description: This object will contain the members that are part of a team.
 */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 import Member from './Member';
+import { useDispatch } from 'react-redux';
+import { getStudents } from '../../../redux/actions/coachActions';
 
 //Test member data
 //Replace with members of the given team
-const members = [
-	{
-		name: 'Master Chief',
-		id: 1
-	},
-	{
-		name: 'The President',
-		id: 2
-	},
-	{
-		name: 'Some Dude',
-		id: 3
-	},
-]
-
-
 
 const membersStyle = makeStyles({
 	Box: {
@@ -42,11 +28,24 @@ const membersStyle = makeStyles({
 		color: 'purple'
 	},
 });
-
+var members = [];
+export function setStudents(students){
+	members = [];
+	students.forEach((mem) => {
+		members.push({
+			name: mem
+		});
+	});
+}
 
 function MembersContainer(props){
 	const {teamId} = props;
 	const classes = membersStyle();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getStudents(teamId, props.history));
+	}, []);
 	
 	return (
 		<div  className={classes.Box}>
@@ -56,7 +55,6 @@ function MembersContainer(props){
 				<Member 
 					type={1}
 					name={item.name}
-					id={item.id}
 					teamId={teamId}
 				/>
 			))}

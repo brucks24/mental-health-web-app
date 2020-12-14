@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,24 +9,23 @@ import {
 } from "@material-ui/core";
 import {
   sendChat,
-  getAllChats
 } from "../../../../redux/actions/chatActions";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 export default function Popup(props) {
   const { openPopup, setOpenPopup } = props;
-  const dispatch = useDispatch();
   const { name } = useSelector((state) => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
     user: state.user,
   }));
+  const [tmp, setTmp] = useState(true);
 
   var receiver = "";
   var message = "";
 
-  const handleSendClose = () => {
-    dispatch(sendChat(name, receiver, message))
+  async function handleSendClose() {
+    await sendChat(name, receiver, message);
+    setTmp(!tmp);
     setOpenPopup(false);
   };
   const handleClose = () => {

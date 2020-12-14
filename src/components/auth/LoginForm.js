@@ -10,7 +10,6 @@ function LoginForm(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   // handle props from passed from LoginContainer
-  const { errorMessages } = props;
   const [userData, setUserData] = React.useState({});
 
   function handleChange(e) {

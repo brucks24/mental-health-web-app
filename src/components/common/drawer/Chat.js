@@ -1,4 +1,4 @@
-import React, { forceUpdate, useRef, useState, useEffect, setState } from "react";
+import React, { useState, useEffect } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -7,27 +7,28 @@ import {
   IconButton,
   Avatar,
   InputBase,
-  Divider,
-  Grid,
+  Divider
 } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
 import useSound from 'use-sound';
 import send from '../../sounds/send.mp3'
 import receive from '../../sounds/receive.mp3'
 import { MessageBox, MessageList } from "react-chat-elements";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
-  getAllChats,
   sendChat,
-  getChats,
+  getChats
 } from "../../../redux/actions/chatActions";
-import { Eco } from "@material-ui/icons";
 
 
-var lastDispatch = new Date().getTime();
-function shouldDispatch() {
-  if (new Date().getTime() > lastDispatch + 1500) {
-    lastDispatch = new Date().getTime();
+var map = new Map();
+function shouldDispatch(receiverName) {
+  if (!map.has(receiverName)) {
+    map.set(receiverName, -1);
+  }
+
+  if (map.get(receiverName) < new Date().getTime()) {
+    map.set(receiverName, new Date().getTime() + 2500)
     return true;
   } else {
     return false;
@@ -113,14 +114,14 @@ chat: {
     justifyContent: "center",
   },
 }));
+var oldNumMessages = null;
 
 export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, image } = props;
   var receiverName = props.name;
   const classes = useStyles();
-  const [playSend, { sendSound }] = useSound(send);
-  const [playReceive, {receiveSound}] = useSound(receive);
-  var oldNumMessages = null;
+  const [playSend] = useSound(send);
+  const [playReceive] = useSound(receive);
 
   const { name } = useSelector((state) => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
@@ -129,17 +130,16 @@ export default function Chat(props) {
 
   setInterval(() => {
     setTmp(!tmp)
-  }, 5000)
+  }, 2500)
 
   const [curMessage, setCurMessage] = useState("");
   const [tmp, setTmp] = useState(false);
   const [messages, setMessages] = useState({messages: []});
   useEffect(() => {
       const fetchMsgs = async () => {
-        if (!shouldDispatch()) {
+        if (!shouldDispatch(receiverName)) {
           return;
         }
-        console.log(name, receiverName)
         var chats = await getChats(name, receiverName);
         var c = chats.data.result;;
         var allChats = [];
@@ -147,7 +147,7 @@ export default function Chat(props) {
           var tmpObj = [];
           e.chats.forEach((e2) => {
             var side = "right";
-            if (e2.sender != name) {
+            if (e2.sender !== name) {
               side = "left";
             }
       
@@ -164,12 +164,11 @@ export default function Chat(props) {
             oldNumMessages = new Map();
           }
           if (oldNumMessages.has(e._id)) {
-            if (tmpObj.title != name && newMessages > oldNumMessages.get(e._id)) {
+            if (tmpObj.title !== name && newMessages > oldNumMessages.get(e._id)) {
               playReceive();
             }
           }
           oldNumMessages.set(e._id, {'length': e.chats.length})
-
 
           allChats.push({
             participants: e.participants,
@@ -182,7 +181,7 @@ export default function Chat(props) {
   }, [tmp])
 
   async function handleSubmit(e) {
-    if (messageTarget != null) {
+    if (messageTarget !== null) {
       messageTarget.value = "";
     }
     await sendChat(name, receiverName, curMessage);
@@ -218,7 +217,7 @@ export default function Chat(props) {
       </div>{" "}
       <div className={classes.chat}>
       
-         { messages.messages != undefined &&
+         { messages.messages !== undefined &&
          messages.messages.map((item) => {
           if (item.participants.includes(receiverName)) {
             const listItems = item.msgs.map((m) => (
