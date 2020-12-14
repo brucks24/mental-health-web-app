@@ -15,23 +15,27 @@ import useSound from 'use-sound';
 import send from '../../sounds/send.mp3'
 import receive from '../../sounds/receive.mp3'
 import { MessageBox, MessageList } from "react-chat-elements";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
-  getAllChats,
   sendChat,
-  getChats,
+  getChats
 } from "../../../redux/actions/chatActions";
-import { Eco } from "@material-ui/icons";
 
 
-var lastDispatch = new Date().getTime();
-function shouldDispatch() {
-  if (new Date().getTime() > lastDispatch + 2500) {
-    lastDispatch = new Date().getTime();
+var map = new Map();
+function shouldDispatch(receiverName) {
+  if (!map.has(receiverName)) {
+    map.set(receiverName, -1);
+  }
+
+  if (map.get(receiverName) < new Date().getTime()) {
+    map.set(receiverName, new Date().getTime() + 2500)
     return true;
   } else {
     return false;
   }
+
+
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -110,6 +114,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
 }));
+var oldNumMessages = null;
 
 export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, image } = props;
@@ -117,7 +122,6 @@ export default function Chat(props) {
   const classes = useStyles();
   const [playSend, { sendSound }] = useSound(send);
   const [playReceive, {receiveSound}] = useSound(receive);
-  var oldNumMessages = null;
 
   const { name } = useSelector((state) => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
@@ -126,17 +130,16 @@ export default function Chat(props) {
 
   setInterval(() => {
     setTmp(!tmp)
-  }, 10000)
+  }, 2500)
 
   const [curMessage, setCurMessage] = useState("");
   const [tmp, setTmp] = useState(false);
   const [messages, setMessages] = useState({messages: []});
   useEffect(() => {
       const fetchMsgs = async () => {
-        if (!shouldDispatch()) {
+        if (!shouldDispatch(receiverName)) {
           return;
         }
-        console.log(name, receiverName)
         var chats = await getChats(name, receiverName);
         var c = chats.data.result;;
         var allChats = [];
@@ -166,7 +169,6 @@ export default function Chat(props) {
             }
           }
           oldNumMessages.set(e._id, {'length': e.chats.length})
-
 
           allChats.push({
             participants: e.participants,
