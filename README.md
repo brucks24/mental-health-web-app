@@ -106,7 +106,7 @@ To start the Client
    ```
 2. Install NPM packages
    ```sh
-   npm install
+   yarn
    ```
 3. Start yarn
    ```sh
