@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     width: 310,
   },
   toolbar: {
+    
     ...theme.mixins.toolbar,
     [theme.breakpoints.down("sm")]: {
       display: "none",
@@ -54,30 +55,32 @@ const useStyles = makeStyles((theme) => ({
     background: "#f2f2f2",
   },
   header: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    marginLeft: 0,
-    marginTop: 0,
-    marginBottom: 7,
-    width: "100%",
-    height: 50,
-    background: "white",
-  },
-  chat: {
-    position: "relative",
-    marginRight: theme.spacing(1),
-    marginLeft: 0,
-    marginBottom: 55,
-    paddingTop: 0,
-    width: "100%",
-  },
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  marginLeft: 0,
+  marginTop: 0,
+  marginBottom: 7,
+  width: "100%",
+  height: 50,
+  background: "white",
+},
+chat: {
+  position: "relative",
+  marginRight: theme.spacing(1),
+  marginLeft: 0,
+  marginBottom: 20,
+  paddingTop: 0,
+  width: "100%",
+},
   inputArea: {
     background: "white",
     position: "fixed",
     bottom: theme.spacing(0),
+    paddingLeft: theme.spacing(3),
     width: "100%",
-    height: "6ch",
-    overflow: "scroll",
+    height: "7ch",
+    //overflow: "scroll",
+    //disableScrollLock: true
   },
   inputRoot: {
     color: "inherited",
@@ -198,9 +201,9 @@ export default function Chat(props) {
       className={classes.drawerOpen}
       classes={{
         paper: classes.drawerOpen,
-      }}
+      }}     
     >
-      <div className={classes.toolbar} />{" "}
+      <div className={classes.toolbar} />{" "} 
       <div className={classes.header}>
         <IconButton onClick={handleToggleWindow} aria-label="back">
           <ArrowBackIosIcon />
@@ -243,6 +246,7 @@ export default function Chat(props) {
           <Divider />
           <InputBase
             placeholder="Send a Message..."
+            rowsMax = "2"
             multiline={true}
             classes={{
               root: classes.inputRoot,
@@ -255,7 +259,7 @@ export default function Chat(props) {
             margin="dense"
           />{" "}
           <IconButton aria-label="send" onClick={handleSubmit}>
-            <SendIcon color="primary" />
+            <SendIcon color="primary"/>
           </IconButton>{" "}
         </div>{" "}
       </form>
