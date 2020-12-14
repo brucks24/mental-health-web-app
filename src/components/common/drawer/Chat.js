@@ -20,7 +20,6 @@ import {
   getChats
 } from "../../../redux/actions/chatActions";
 
-
 var map = new Map();
 function shouldDispatch(receiverName) {
   if (!map.has(receiverName)) {

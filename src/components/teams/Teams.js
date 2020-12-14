@@ -46,12 +46,16 @@ function Teams(){
 	if (account === 1){
 		return (
 			<div>
-				<Typography variant="h5" className={classes.titleText}></Typography>
 				<Menu teams={teams}/>
 			</div>
-		)	
+			)	
 	}else{
+	if (teams.length == 0){
     	return (	
+		<Typography variant="h5">You are not part of any teams at the moment.</Typography>
+		)
+	}else{	
+		return (	
 			<div>
 	 			{teams.map(item => (
 					<Team
@@ -59,10 +63,11 @@ function Teams(){
 		 				coach = {item.coach}
 		 				id = {item.id}
 						nummembers = {item.members}
-					/>
-				))}
+						/>
+					))}
 		 	</div>
-		)
+			)
+		}
 	}
 }
 
