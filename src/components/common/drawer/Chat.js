@@ -129,7 +129,7 @@ export default function Chat(props) {
 
   setInterval(() => {
     setTmp(!tmp)
-  }, 2500)
+  }, 5000)
 
   const [curMessage, setCurMessage] = useState("");
   const [tmp, setTmp] = useState(false);
