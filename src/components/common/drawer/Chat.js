@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     width: 310,
   },
   toolbar: {
+    
     ...theme.mixins.toolbar,
     [theme.breakpoints.down("sm")]: {
       display: "none",
@@ -54,23 +55,23 @@ const useStyles = makeStyles((theme) => ({
     background: "#f2f2f2",
   },
   header: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    marginLeft: 0,
-    marginTop: 0,
-    marginBottom: 7,
-    width: "100%",
-    height: 50,
-    background: "white",
-  },
-  chat: {
-    position: "relative",
-    marginRight: theme.spacing(1),
-    marginLeft: 0,
-    marginBottom: 55,
-    paddingTop: 0,
-    width: "100%",
-  },
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  marginLeft: 0,
+  marginTop: 0,
+  marginBottom: 7,
+  width: "100%",
+  height: 50,
+  background: "white",
+},
+chat: {
+  position: "relative",
+  marginRight: theme.spacing(1),
+  marginLeft: 0,
+  marginBottom: 20,
+  paddingTop: 0,
+  width: "100%",
+},
   inputArea: {
     background: "white",
     position: "fixed",
@@ -201,9 +202,9 @@ export default function Chat(props) {
       className={classes.drawerOpen}
       classes={{
         paper: classes.drawerOpen,
-      }}
+      }}     
     >
-      <div className={classes.toolbar} />{" "}
+      <div className={classes.toolbar} />{" "} 
       <div className={classes.header}>
         <IconButton onClick={handleToggleWindow} aria-label="back">
           <ArrowBackIosIcon />
@@ -245,7 +246,6 @@ export default function Chat(props) {
         <div className={classes.inputArea}>
           <Divider />
           <InputBase
-            top = "theme.spacing(2)"
             placeholder="Send a Message..."
             rowsMax = "2"
             multiline={true}
