@@ -1,4 +1,4 @@
-import React, { useState, useEffect, setState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Drawer, List, InputBase, Divider, Fab } from "@material-ui/core";
 import chatbarStyles from "./chatbarStyles";
