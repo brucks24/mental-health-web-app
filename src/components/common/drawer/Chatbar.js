@@ -7,68 +7,13 @@ import SearchIcon from "@material-ui/icons/Search";
 import ChatCard from "./components/ChatCard";
 import AddIcon from "@material-ui/icons/Add";
 import {
-  sendChat,
-  getAllChats,
-  getChats,
+  getAllChats
 } from "../../../redux/actions/chatActions";
-import { useDispatch } from "react-redux";
 import Popup from "./components/Popup";
-import { SentimentSatisfiedTwoTone } from "@material-ui/icons";
-
-/*
-var openChats = [];
-
-/*
-const openChats = [{
-    id: 0,
-    name: 'Remy Sharp',
-    image: '/static/images/avatar/1.jpg',
-    previewMessage: 'Hey just wanted to check in with you about',
-}]
-
-
-export function setChat(data, senderName) {
-  openChats = [];
-  var chats = data.data.result;
-  chats.forEach(e => {
-
-    var names = e.participants;
-    var name = names[0];
-    if (names[0] == senderName) {
-      name = names[1];
-    }
-
-    var numChats = e.chats.length;
-    var preview = "Click to start the conversation.";
-    if (e.chats.length > 0) {
-      preview = e.chats[numChats - 1].message.substring(0, 30) + "..."
-    }
-
-
-    openChats.push({
-      name: name,
-      image: '/static/images/avatar/1.jpg',
-      previewMessage: preview
-    })
-  });
-}
-*/
-
-var lastDispatch = new Date().getTime();
-
-function shouldDispatch() {
-  if (new Date().getTime() > lastDispatch + 1000) {
-    lastDispatch = new Date().getTime();
-    return true;
-  } else {
-    return false;
-  }
-}
 
 function Chatbar(props) {
   let { ChatOpen } = props;
   const classes = chatbarStyles();
-  const dispatch = useDispatch();
   const [openPopup, setOpenPopup] = useState(false);
 
   const { name } = useSelector((state) => ({
@@ -86,7 +31,7 @@ function Chatbar(props) {
         var tmpObj = [];
         e.chats.forEach((e2) => {
           var side = "right";
-          if (e2.sender != name) {
+          if (e2.sender !== name) {
             side = "left";
           }
 
@@ -100,7 +45,7 @@ function Chatbar(props) {
 
         var names = e.participants;
         var oppo = names[0];
-        if (names[0] == name) {
+        if (names[0] === name) {
           oppo = names[1];
         }
         var numChats = e.chats.length;
@@ -162,7 +107,7 @@ function Chatbar(props) {
       <Divider />
       <div className={classes.chatList}>
         <List className={classes.root}>
-          {chatCards != undefined &&
+          {chatCards !== undefined &&
             chatCards.map((m) => (
               <ChatCard
                 name={m.cc.name}

@@ -1,4 +1,4 @@
-import React, { forceUpdate, useRef, useState, useEffect, setState } from "react";
+import React, { useState, useEffect } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -7,8 +7,7 @@ import {
   IconButton,
   Avatar,
   InputBase,
-  Divider,
-  Grid,
+  Divider
 } from "@material-ui/core";
 import "react-chat-elements/dist/main.css";
 import useSound from 'use-sound';
@@ -34,8 +33,6 @@ function shouldDispatch(receiverName) {
   } else {
     return false;
   }
-
-
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -120,8 +117,8 @@ export default function Chat(props) {
   let { ChatWindowOpen, handleToggleWindow, image } = props;
   var receiverName = props.name;
   const classes = useStyles();
-  const [playSend, { sendSound }] = useSound(send);
-  const [playReceive, {receiveSound}] = useSound(receive);
+  const [playSend] = useSound(send);
+  const [playReceive] = useSound(receive);
 
   const { name } = useSelector((state) => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
@@ -147,7 +144,7 @@ export default function Chat(props) {
           var tmpObj = [];
           e.chats.forEach((e2) => {
             var side = "right";
-            if (e2.sender != name) {
+            if (e2.sender !== name) {
               side = "left";
             }
       
@@ -164,7 +161,7 @@ export default function Chat(props) {
             oldNumMessages = new Map();
           }
           if (oldNumMessages.has(e._id)) {
-            if (tmpObj.title != name && newMessages > oldNumMessages.get(e._id)) {
+            if (tmpObj.title !== name && newMessages > oldNumMessages.get(e._id)) {
               playReceive();
             }
           }
@@ -181,7 +178,7 @@ export default function Chat(props) {
   }, [tmp])
 
   async function handleSubmit(e) {
-    if (messageTarget != null) {
+    if (messageTarget !== null) {
       messageTarget.value = "";
     }
     await sendChat(name, receiverName, curMessage);
@@ -217,7 +214,7 @@ export default function Chat(props) {
       </div>{" "}
       <div className={classes.chat}>
       
-         { messages.messages != undefined &&
+         { messages.messages !== undefined &&
          messages.messages.map((item) => {
           if (item.participants.includes(receiverName)) {
             const listItems = item.msgs.map((m) => (

@@ -9,14 +9,11 @@ import {
 } from "@material-ui/core";
 import {
   sendChat,
-  getAllChats
 } from "../../../../redux/actions/chatActions";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 export default function Popup(props) {
   const { openPopup, setOpenPopup } = props;
-  const dispatch = useDispatch();
   const { name } = useSelector((state) => ({
     name: `${state.user.firstName} ${state.user.lastName}`,
     user: state.user,
