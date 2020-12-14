@@ -25,6 +25,9 @@ yarn-error.log*
 /server/node_modules
 /server/.pnp
 
+yarn.lock
+package-lock.json
+
 # security
 dbConfig.json
 .env
