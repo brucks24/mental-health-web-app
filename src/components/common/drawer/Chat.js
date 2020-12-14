@@ -76,8 +76,9 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     bottom: theme.spacing(0),
     width: "100%",
-    height: "6ch",
-    overflow: "scroll",
+    height: "7ch",
+    //overflow: "scroll",
+    //disableScrollLock: true
   },
   inputRoot: {
     color: "inherited",
@@ -244,7 +245,9 @@ export default function Chat(props) {
         <div className={classes.inputArea}>
           <Divider />
           <InputBase
+            top = "theme.spacing(2)"
             placeholder="Send a Message..."
+            rowsMax = "2"
             multiline={true}
             classes={{
               root: classes.inputRoot,
@@ -257,7 +260,7 @@ export default function Chat(props) {
             margin="dense"
           />{" "}
           <IconButton aria-label="send" onClick={handleSubmit}>
-            <SendIcon color="primary" />
+            <SendIcon color="primary"/>
           </IconButton>{" "}
         </div>{" "}
       </form>
