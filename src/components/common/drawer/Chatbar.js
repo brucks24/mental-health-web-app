@@ -161,21 +161,17 @@ function Chatbar(props) {
       </div>{" "}
       <Divider />
       <div className={classes.chatList}>
-        {
-          <List className={classes.root}>
-            {chatCards != undefined &&
-              chatCards.map((item) => {
-                const listItems = chatCards.map((m) => (
-                  <ChatCard
-                    name={m.cc.name}
-                    image={m.cc.image}
-                    previewMessage={m.cc.previewMessage}
-                  />
-                ));
-                return listItems;
-              })}
-          </List>
-        }
+        <List className={classes.root}>
+          {chatCards != undefined &&
+            chatCards.map((m) => (
+              <ChatCard
+                name={m.cc.name}
+                image={m.cc.image}
+                previewMessage={m.cc.previewMessage}
+              />
+            ))
+          }
+        </List>
       </div>
       <div className={classes.newChat}>
         <Fab
