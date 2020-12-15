@@ -73,12 +73,12 @@ function Sidebar(props) {
             ]
         },
         {
-            id: 2,
-            label: 'Your Inbox',
-            link: '/inbox',
-            icon: < InboxIcon / >
-        },
-        {
+        //     id: 2,
+        //     label: 'Your Inbox',
+        //     link: '/inbox',
+        //     icon: < InboxIcon / >
+        // },
+        //{
             id: 3,
             label: 'Your Support Team',
             link: '/support-team',

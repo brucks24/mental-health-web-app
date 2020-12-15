@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -20,7 +20,6 @@ import {
   getChats
 } from "../../../redux/actions/chatActions";
 
-
 var map = new Map();
 function shouldDispatch(receiverName) {
   if (!map.has(receiverName)) {
@@ -40,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     width: 310,
   },
   toolbar: {
+    
     ...theme.mixins.toolbar,
     [theme.breakpoints.down("sm")]: {
       display: "none",
@@ -59,27 +59,30 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     marginLeft: 0,
     marginTop: 0,
-    marginBottom: 7,
+    marginBottom: 0,
     width: "100%",
     height: 50,
     background: "white",
-  },
+},
   chat: {
     position: "relative",
     marginRight: theme.spacing(1),
     marginLeft: 0,
     marginBottom: 20,
     paddingTop: 0,
+    paddingBottom: 10,
     width: "100%",
-    overflowY: "auto",
+    overflowY: "scroll"
   },
   inputArea: {
     background: "white",
     position: "fixed",
     bottom: theme.spacing(0),
+    paddingLeft: theme.spacing(3),
     width: "100%",
-    height: "6ch",
-    overflow: "scroll",
+    height: "7ch",
+    //overflow: "scroll",
+    //disableScrollLock: true
   },
   inputRoot: {
     color: "inherited",
@@ -100,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: theme.spacing(1),
     left: theme.spacing(10),
+    padding: theme.spacing(0)
   },
   name: {
     ...theme.typography,
@@ -107,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: theme.spacing(2),
     left: theme.spacing(15),
-    padding: theme.spacing(1),
+    paddingLeft: theme.spacing(1),
     //display: 'flex',
     justifyContent: "center",
   },
@@ -115,7 +119,6 @@ const useStyles = makeStyles((theme) => ({
 var oldNumMessages = null;
 
 export default function Chat(props) {
-  const messageRef = useRef();
   let { ChatWindowOpen, handleToggleWindow, image } = props;
   var receiverName = props.name;
   const classes = useStyles();
@@ -129,7 +132,7 @@ export default function Chat(props) {
 
   setInterval(() => {
     setTmp(!tmp)
-  }, 2500)
+  }, 5000)
 
   const [curMessage, setCurMessage] = useState("");
   const [tmp, setTmp] = useState(false);
@@ -201,9 +204,9 @@ export default function Chat(props) {
       className={classes.drawerOpen}
       classes={{
         paper: classes.drawerOpen,
-      }}
+      }}     
     >
-      <div className={classes.toolbar} />{" "}
+      <div className={classes.toolbar} />{" "} 
       <div className={classes.header}>
         <IconButton onClick={handleToggleWindow} aria-label="back">
           <ArrowBackIosIcon />
@@ -237,6 +240,7 @@ export default function Chat(props) {
       <div>
         <MessageList
           className={classes.chat}
+          lockable={true}
           toBottomHeight={"100%"}
         />
       </div>
@@ -245,6 +249,7 @@ export default function Chat(props) {
           <Divider />
           <InputBase
             placeholder="Send a Message..."
+            rowsMax = "2"
             multiline={true}
             classes={{
               root: classes.inputRoot,
@@ -257,7 +262,7 @@ export default function Chat(props) {
             margin="dense"
           />{" "}
           <IconButton aria-label="send" onClick={handleSubmit}>
-            <SendIcon color="primary" />
+            <SendIcon color="primary"/>
           </IconButton>{" "}
         </div>{" "}
       </form>

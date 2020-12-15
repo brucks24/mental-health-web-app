@@ -18,7 +18,7 @@ const makeTeam = (req, res) => {
 const updateTeam = (req, res) => {
     let newName = req.body.newname;
     let newDesc = req.body.description;
-    
+
     if(newDesc === ""){
         newDesc = req.body.olddescription;
     }
@@ -44,9 +44,27 @@ const getStudentsByTeam = (req, res) => {
     });
 };
 
+const addStudent = (req, res) => {
+    Team.findOne({teamName: req.body.teamName}, (err, data) => {
+        if(err) return console.error(err);
+        data.members.push(req.body.student);
+        data.save((err, data) => {
+            if(err) return console.error(err);
+        });
+    });
+};
+
+const deleteStudent = (req, res) => {
+    Team.findOneAndUpdate({teamName: req.body.teamName}, {$pull: {members: req.body.student}}, (err, data) => {
+        if(err) return console.error(err);
+    });
+};
+
 module.exports = {
     makeTeam,
     updateTeam,
     getTeams,
-    getStudentsByTeam
+    getStudentsByTeam,
+    addStudent,
+    deleteStudent
 };

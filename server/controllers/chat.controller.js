@@ -26,6 +26,7 @@ async function sendChat(req, res) {
   chatArray.push({ message: msg, sender: sender, time: timeNow });
 
   var order = await getOrder(sender, receiver);
+  console.log(chat);
   if (order != null) {
     await Chat.findOneAndUpdate({'participants': order}, {chats: chatArray})
   }
@@ -48,8 +49,9 @@ function getChatHelper(sender, receiver) {
               participants: [sender, receiver],
               chats: []
             });
-            newChat.save();
-            resolve(newChat.toJSON());
+            newChat.save().then((chat) => {
+              resolve(chat);
+            });
           } else {
             resolve(chat);
           }

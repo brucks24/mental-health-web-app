@@ -44,8 +44,8 @@ function MembersContainer(props){
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getStudents(teamId, props.history));
-	}, []);
+		dispatch(getStudents(teamId));
+	}, [teamId]);
 	
 	return (
 		<div  className={classes.Box}>

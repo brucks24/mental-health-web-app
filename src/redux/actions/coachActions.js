@@ -7,7 +7,7 @@ export const createTeam = (team) => (dispatch) => {
         console.log(res.data);
     })
     .catch(res => {
-        console.log(res.data);
+        console.log(res);
     });
 }
 
@@ -16,7 +16,7 @@ export const updateTeam = (update) => (dispatch) => {
         console.log(res.data);
     })
     .catch(res => {
-        console.log(res.data);
+        console.log(res);
     });
 }
 
@@ -25,7 +25,7 @@ export const getTeam = (name) => (dispatch) => {
         setTeams(res.data);
     })
     .catch(res => {
-        console.log(res.data);
+        console.log(res);
     });
 }
 
@@ -34,6 +34,6 @@ export const getStudents = (teamId) => (dispatch) => {
         setStudents(res.data);
     })
     .catch(res => {
-        console.log(res.data);
+        console.log(res);
     });
 }

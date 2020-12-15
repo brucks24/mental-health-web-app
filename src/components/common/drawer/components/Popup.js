@@ -25,11 +25,10 @@ export default function Popup(props) {
 
   async function handleSendClose() {
     await sendChat(name, receiver, message);
-    setTmp(!tmp);
     setOpenPopup(false);
+    setTmp(!tmp);
   };
   const handleClose = () => {
-    
     setOpenPopup(false);
   };
 
