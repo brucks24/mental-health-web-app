@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -68,9 +68,10 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     marginRight: theme.spacing(1),
     marginLeft: 0,
-    marginBottom: 55,
+    marginBottom: 20,
     paddingTop: 0,
     width: "100%",
+    overflowY: "auto",
   },
   inputArea: {
     background: "white",
@@ -114,6 +115,7 @@ const useStyles = makeStyles((theme) => ({
 var oldNumMessages = null;
 
 export default function Chat(props) {
+  const messageRef = useRef();
   let { ChatWindowOpen, handleToggleWindow, image } = props;
   var receiverName = props.name;
   const classes = useStyles();
@@ -235,7 +237,6 @@ export default function Chat(props) {
       <div>
         <MessageList
           className={classes.chat}
-          lockable={true}
           toBottomHeight={"100%"}
         />
       </div>
