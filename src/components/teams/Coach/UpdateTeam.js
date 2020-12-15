@@ -73,7 +73,8 @@ function UpdateTeam(props){
 			description: newdesc,
 			olddescription: description
 		 };
-		dispatch(updateTeam(updatedInfo, props.history));
+		dispatch(updateTeam(updatedInfo));
+		window.location.reload();
 	 }
 	
 	return (

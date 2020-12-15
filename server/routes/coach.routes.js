@@ -18,4 +18,12 @@ router.route("/students/:teamId").get((req, res) => {
     coachController.getStudentsByTeam(req, res);
 });
 
+router.route("/students/add").post((req, res) => {
+    coachController.addStudent(req, res);
+});
+
+router.route("/students/remove").post((req, res) => {
+    coachController.deleteStudent(req, res);
+});
+
 module.exports = router;

@@ -72,6 +72,7 @@ function CreateTeam(props){
 			description: description
 		 };
 		 dispatch(createTeam(teamData, props.history));
+		 window.location.reload();
 	 }
 	
 	return (

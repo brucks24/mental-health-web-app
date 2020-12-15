@@ -39,9 +39,11 @@ function Teams(){
 	var account = user.accountType;
 
 	useEffect(() => {
-		dispatch(getUserData());
-		dispatch(getTeam(name));
-	}, [user.loading]);
+		for(let i = 0; i < 2; i++){
+			dispatch(getUserData());
+			dispatch(getTeam(name));
+		}
+	}, [name]);
 
 	if (account === 1){
 		return (
