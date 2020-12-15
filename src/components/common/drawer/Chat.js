@@ -78,11 +78,8 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
     position: "fixed",
     bottom: theme.spacing(0),
-    paddingLeft: theme.spacing(3),
     width: "100%",
     height: "7ch",
-    //overflow: "scroll",
-    //disableScrollLock: true
   },
   inputRoot: {
     color: "inherited",
