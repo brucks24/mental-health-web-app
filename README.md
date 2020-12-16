@@ -104,9 +104,9 @@ To start the Client
    ```sh
    git clone https://github.com/uww-student-athlete-success/stuath-success-web.git
    ```
-2. Install NPM packages
+2. Install dependencies
    ```sh
-   yarn
+   yarn install
    ```
 3. Start yarn
    ```sh
