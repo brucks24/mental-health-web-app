@@ -49,19 +49,14 @@
 <body>
   <div class="main-container">
     <div class="header mdc-typography">
-      A USER HAS CLICKED THE PANIC BUTTON!
+      {subject}
     </div>
     <div class="message-content mdc-typography">
-      <p>Dear support member,</p>
       <p>
-        A user has clicked the panic button and needs attention at this time.
-        Please review the information below and follow up with the inquiry by
-        clicking the button below to start an chat session.
+        {
+          message
+        }
       </p>
-      <p>Reasons:</p>
-      {{#each panicReasons}}
-        <p><strong>{{this}}</strong></p>
-      {{/each}}
       <div class="user-info-container">
         <img style="border-radius: 50%; width: 100px; height: 100px;" src={{photoUrl}} alt="Profile Photo" />
         <p>{{firstName}} {{lastName}}</p>

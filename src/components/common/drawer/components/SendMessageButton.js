@@ -51,7 +51,6 @@ function SendMessageButton(props) {
     const handleChange = field => {
         if(field.target.id == "subject"){
             subject = field.target.value;
-            console.log(subject);
         }else{
             message = field.target.value;
         }

@@ -22,9 +22,10 @@ const readHTMLFile = (path, callback) => {
   })
 }
 
-function sendSendMessageEmail(req, res) {
+function sendMessageEmail(req, res) {
   console.log('Send Message button pressed. Initializing response...');
-  const sendMessageReasons = req.body;
+  const subject = req.subject;
+  const message = req.message;
   const userId = req.user.sub;
 
   User.findById(userId).select('-hash').then(user => {
@@ -32,7 +33,8 @@ function sendSendMessageEmail(req, res) {
       readHTMLFile(`${appDir}\\helpers\\templates\\sendMessageEmail.html`, (err, html) => {
         const template = handlebars.compile(html);
         const replacements = {
-          sendMessageReasons: sendMessageReasons,
+          subject: subject,
+          message: message,
           photoUrl: user.photoUrl,
           firstName: user.firstName,
           lastName: user.lastName,
@@ -74,5 +76,5 @@ function sendSendMessageEmail(req, res) {
 }
 
 module.exports = {
-  sendSendMessageEmail
+  sendMessageEmail
 }
