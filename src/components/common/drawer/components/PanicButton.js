@@ -116,7 +116,7 @@ function PanicButton(props) {
                 size="large"
                 color={state.button4}
                 onClick={() => handleChange('button4')}
-              >Concers about bullying and/or hazing</Button>
+              >Concerns about bullying and/or hazing</Button>
             </ThemeProvider>
           </DialogContentText>
         </DialogContent>

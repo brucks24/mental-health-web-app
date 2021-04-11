@@ -1,5 +1,5 @@
 /*
-*	Coded by: Solomon Paprocki
+*	Coded by: Solomon Paprocki (originally copied from PanicButton.js)
 *	Time: Spring 2021 Semester
 *	Description: This is connecting the Support Team Card to the Send Message Button Functionality
 */
@@ -16,7 +16,8 @@ import {
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import useStyles from './styles';
 import { purple } from '@material-ui/core/colors';
-//import { sendMessageButton } from '../../../../redux/actions/userActions';
+import { useDispatch } from 'react-redux';
+import { sendMessageButton } from '../../../../redux/actions/userActions';
 
 const theme = createMuiTheme({
     palette: {
@@ -29,6 +30,9 @@ function SendMessageButton(props) {
     const lastName = props.lastName;
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch();
+    let subject = "";
+    let message = "";
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -39,8 +43,18 @@ function SendMessageButton(props) {
     }
 
     const handleConfirm = () => {
-        /*dispatch(sendMessageButton(buttonsClicked));*/
+        let props = {subject, message};
+        dispatch(sendMessageButton(props));
         setOpen(false);
+    }
+
+    const handleChange = field => {
+        if(field.target.id == "subject"){
+            subject = field.target.value;
+            console.log(subject);
+        }else{
+            message = field.target.value;
+        }
     }
 
     return (
@@ -59,21 +73,35 @@ function SendMessageButton(props) {
             <Dialog
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
+                aria-labelledby="message-dialog-title"
+                aria-describedby="message-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">
+                <DialogTitle id="message-dialog-title">
                     {`Type the message that you want to send to ${firstName} ${lastName}.`}
                 </DialogTitle>
-                <DialogContent>
-                <TextField autoFocus
-                    multiline
-                    margin = "dense"
-                    id = "message"
-                    label = "Message"
-                    type = "userMessage"
-                    fullWidth 
-                />
+                <DialogContent id="message-dialog-description">
+                    <TextField onChange = {handleChange}
+                        autoFocus
+                        multiline
+                        rows={1}
+                        rowsMax={1}
+                        margin = "dense"
+                        id = "subject"
+                        label = "Subject"
+                        type = "userSubject"
+                        fullWidth 
+                    />
+                    <TextField onChange = {handleChange}
+                        autoFocus
+                        multiline
+                        rows={6}
+                        rowsMax={6}
+                        margin = "dense"
+                        id = "message"
+                        label = "Message"
+                        type = "userMessage"
+                        fullWidth 
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">Close</Button>
