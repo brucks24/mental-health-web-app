@@ -1,9 +1,3 @@
-/*
-*	Coded by: Solomon Paprocki (originally copied from PanicButton.js)
-*	Time: Spring 2021 Semester
-*	Description: This is connecting the Support Team Card to the Send Message Button Functionality
-*/
-
 import React from 'react';
 import {
     Button,

@@ -1,9 +1,3 @@
-/*
-*	Coded by: Solomon Paprocki (originally copied from panic.controller.js)
-*	Time: Spring 2021 Semester
-*	Description: This is the Send Message Button Functionality.  It will send an email to the Support Team Member.
-*/
-
 const { transport } = require('../helpers/nodemailer');
 const handlebars = require('handlebars');
 const fs = require('fs');
@@ -48,7 +42,7 @@ function sendMessageEmail(req, res) {
         const mailOptions = {
           from: user.email,
           to: 'paprockisj04@uww.edu',
-          subject: 'sendMessage BUTTON ALERT',
+          subject: subject,
           html: htmlToSend
         };
 
