@@ -11,7 +11,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import useStyles from './styles';
 import { purple } from '@material-ui/core/colors';
 import { useDispatch } from 'react-redux';
-import { sendMessageButton } from '../../../../redux/actions/userActions';
+import { sendMessageAction } from '../../../../redux/actions/userActions';
 
 const theme = createMuiTheme({
     palette: {
@@ -38,7 +38,7 @@ function SendMessageButton(props) {
 
     const handleConfirm = () => {
         let props = {subject, message};
-        dispatch(sendMessageButton(props));
+        dispatch(sendMessageAction(props));
         setOpen(false);
     }
 

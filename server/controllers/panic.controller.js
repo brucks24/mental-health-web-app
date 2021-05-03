@@ -38,8 +38,8 @@ function sendPanicEmail(req, res) {
 
         const htmlToSend = template(replacements);
         const mailOptions = {
-          from: user.email,
-          to: 'paprockisj04@uww.edu',
+          from: 'stuathsuccess@gmail.com',
+          to: 'stuathsuccess@gmail.com',
           subject: 'PANIC BUTTON ALERT',
           html: htmlToSend
         };

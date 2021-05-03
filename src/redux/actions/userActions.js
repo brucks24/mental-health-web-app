@@ -80,7 +80,7 @@ export const panicButton = reasons => dispatch => {
     })
 }
 
-export const sendMessageButton = props => dispatch => {
+export const sendMessageAction = props => dispatch => {
     axios.post('/sendMessage', props).then(res => {
         console.log(res);
         dispatch({

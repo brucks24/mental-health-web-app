@@ -18,8 +18,8 @@ const readHTMLFile = (path, callback) => {
 
 function sendMessageEmail(req, res) {
   console.log('Send Message button pressed. Initializing response...');
-  const subject = req.subject;
-  const message = req.message;
+  const subject = req.body.subject;
+  const message = req.body.message;
   const userId = req.user.sub;
 
   User.findById(userId).select('-hash').then(user => {
@@ -27,7 +27,6 @@ function sendMessageEmail(req, res) {
       readHTMLFile(`${appDir}\\helpers\\templates\\sendMessageEmail.html`, (err, html) => {
         const template = handlebars.compile(html);
         const replacements = {
-          subject: subject,
           message: message,
           photoUrl: user.photoUrl,
           firstName: user.firstName,
@@ -41,7 +40,7 @@ function sendMessageEmail(req, res) {
         const htmlToSend = template(replacements);
         const mailOptions = {
           from: 'stuathsuccess@gmail.com',
-          to: 'paprockisj04@uww.edu',
+          to: 'stuathsuccess@gmail.com',
           subject: subject,
           html: htmlToSend
         };
