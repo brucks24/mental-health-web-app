@@ -80,6 +80,22 @@ export const panicButton = reasons => dispatch => {
     })
 }
 
+export const sendMessageAction = props => dispatch => {
+    axios.post('/sendMessage', props).then(res => {
+        console.log(res);
+        dispatch({
+            type: SHOW_SUCCESS_SNACKBAR,
+            payload: res.data.message
+        });
+    }).catch(err => {
+        console.log(err);
+        dispatch({
+            type: SET_ERRORS,
+            payload: err.message
+        })
+    })
+}
+
 const setAuthorizationHeader = (token) => {
     const FBIdToken = `Bearer ${token}`;
     localStorage.setItem('FBIdToken', FBIdToken);

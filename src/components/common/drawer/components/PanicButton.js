@@ -51,7 +51,7 @@ function PanicButton(props) {
     if (state.button3 === 'secondary')
       buttonsClicked.push('Sexual harassment and/or assult');
     if (state.button4 === 'secondary')
-      buttonsClicked.push('Concers about bullying and/or hazing');
+      buttonsClicked.push('Concerns about bullying and/or hazing');
 
     dispatch(panicButton(buttonsClicked));
     setOpen(false);
@@ -116,7 +116,7 @@ function PanicButton(props) {
                 size="large"
                 color={state.button4}
                 onClick={() => handleChange('button4')}
-              >Concers about bullying and/or hazing</Button>
+              >Concerns about bullying and/or hazing</Button>
             </ThemeProvider>
           </DialogContentText>
         </DialogContent>

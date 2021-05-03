@@ -1,6 +1,7 @@
 const express = require('express');
 const userRoutes = require('./users.routes');
 const panicRoutes = require('./panic.routes');
+const sendMessageRoutes = require('./sendMessage.routes');
 const chatRoutes = require('./chat.routes');
 const coachRoutes = require('./coach.routes')
 
@@ -11,6 +12,9 @@ router.use('/user', userRoutes);
 
 // mount panic routes at /panic
 router.use('/panic', panicRoutes);
+
+// mount send message routes at /sendMessage
+router.use('/sendMessage', sendMessageRoutes);
 
 // mount chat routes at /chat
 router.use('/chat', chatRoutes)

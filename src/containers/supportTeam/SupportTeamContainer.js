@@ -8,7 +8,8 @@ const supportMembers = [
     id: 0,
     photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/photo.jpg',
     firstName: 'Kristina',
-    lastName: 'Navarro, PhD',
+    lastName: 'Navarro',
+    title: 'PhD',
     providerType: 'Athletics Department Support',
     phone: '608-628-9187',
     email: 'navarrok@uww.edu',
@@ -19,7 +20,8 @@ const supportMembers = [
     id: 1,
     photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/2.jpg',
     firstName: 'Logan',
-    lastName: 'Edwards, PhD',
+    lastName: 'Edwards',
+    title: 'PhD',
     providerType: 'Team Mental Skills Coach',
     phone: '262-472-1374',
     email: 'edwardsl@uww.edu',
@@ -30,7 +32,8 @@ const supportMembers = [
     id: 2,
     photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/omdoll_150x200.png',
     firstName: 'Rachael',
-    lastName: 'Omdoll, RD',
+    lastName: 'Omdoll',
+    title: 'RD',
     providerType: 'Team Dietitian',
     phone: '262-472-1375',
     email: 'omdollr@uww.edu',
@@ -41,7 +44,8 @@ const supportMembers = [
     id: 3,
     photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/Steve-Hilmer.jpg',
     firstName: 'Steve',
-    lastName: 'Hillmer, ATC',
+    lastName: 'Hillmer',
+    title: 'ATC',
     providerType: 'Head Athletic Trainer',
     phone: '262-472-5555',
     email: 'hillmers@uww.edu',
@@ -52,7 +56,8 @@ const supportMembers = [
     id: 4,
     photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/15219368_10103882127277919_8056818553640390465_n.jpg',
     firstName: 'Lindsey',
-    lastName: 'Greviskes, PhD',
+    lastName: 'Greviskes',
+    title: 'PhD',
     providerType: 'Sport Psychologist',
     phone: '630-699-4119',
     email: 'greviskesl@uww.edu',
@@ -75,6 +80,7 @@ export default function SupportTeamContainer(props) {
             photoUrl={member.photoUrl} 
             firstName={member.firstName}
             lastName={member.lastName}
+            title={member.title}
             providerType={member.providerType}
             phone={member.phone}
             email={member.email}
