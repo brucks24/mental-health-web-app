@@ -40,7 +40,7 @@ function sendMessageEmail(req, res) {
 
         const htmlToSend = template(replacements);
         const mailOptions = {
-          from: user.email,
+          from: 'stuathsuccess@gmail.com',
           to: 'paprockisj04@uww.edu',
           subject: subject,
           html: htmlToSend
