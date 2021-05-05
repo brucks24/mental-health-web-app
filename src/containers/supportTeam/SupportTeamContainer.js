@@ -6,7 +6,7 @@ import { SupportTeamCard } from '../../components/supportTeam/SupportTeamCard';
 const supportMembers = [
   {
     id: 0,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/photo.jpg',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Kristina_Navarro_mxvldn.jpg',
     firstName: 'Kristina',
     lastName: 'Navarro',
     title: 'PhD',
@@ -18,7 +18,7 @@ const supportMembers = [
   },
   {
     id: 1,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/2.jpg',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Logan_Edwards_wnqwjf.jpg',
     firstName: 'Logan',
     lastName: 'Edwards',
     title: 'PhD',
@@ -30,7 +30,7 @@ const supportMembers = [
   },
   {
     id: 2,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/omdoll_150x200.png',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Rachael_Omdoll_cycnlz.png',
     firstName: 'Rachael',
     lastName: 'Omdoll',
     title: 'RD',
@@ -42,7 +42,7 @@ const supportMembers = [
   },
   {
     id: 3,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/Steve-Hilmer.jpg',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Steve_Hillmer_sku7i3.jpg',
     firstName: 'Steve',
     lastName: 'Hillmer',
     title: 'ATC',
@@ -54,7 +54,7 @@ const supportMembers = [
   },
   {
     id: 4,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/15219368_10103882127277919_8056818553640390465_n.jpg',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Lindsey_Greviskes_nbaemu.jpg',
     firstName: 'Lindsey',
     lastName: 'Greviskes',
     title: 'PhD',
