@@ -23,7 +23,7 @@ const transport = nodemailer.createTransport({
 readHTMLFile(`${__dirname}\\test.html`, (err, html) => {
   const template = handlebars.compile(html);
   const replacements = {
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/IMG_20200119_162845_Bokeh+(2).jpg',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187318/Jack_Butler_wl0esw.jpg',
     firstName: 'Jack',
     lastName: 'Butler',
     email: 'guitar423@gmail.com',
