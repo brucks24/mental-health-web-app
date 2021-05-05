@@ -20,14 +20,15 @@ function Profile(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const paramId = props.id;
-  const user = useSelector((state) => state.data.user);
+  const userBeingViewed = useSelector(state => state.data.user);
+  const currentUser = useSelector(state => state.user);
 
   const initialState = {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    phone: user.phone ? user.phone : "",
-    bio: user.bio ? user.bio : "",
+    firstName: userBeingViewed.firstName,
+    lastName: userBeingViewed.lastName,
+    email: userBeingViewed.email,
+    phone: userBeingViewed.phone ? userBeingViewed.phone : "",
+    bio: userBeingViewed.bio ? userBeingViewed.bio : "",
   };
 
   const [showEditProfile, setShowEditProfile] = React.useState(false);
@@ -35,6 +36,10 @@ function Profile(props) {
 
   const handleEditProfile = () => {
     setShowEditProfile(!showEditProfile);
+  };
+
+  const handleEditPhoto = () => {
+    //@todo: handle adding photo functionality
   };
 
   const handleFormChange = (event) => {
@@ -45,16 +50,16 @@ function Profile(props) {
     });
   };
 
+  function isCurrentUser() {
+    if (currentUser.id !== userBeingViewed.id) {
+      setShowEditProfile(false);
+    }
+  }
+
   useEffect(() => {
     dispatch(getUserData(paramId));
     isCurrentUser();
   }, []);
-
-  function isCurrentUser() {
-    if (paramId !== user.id) {
-      setShowEditProfile(false);
-    }
-  }
 
   return (
     <Fragment>
@@ -62,27 +67,30 @@ function Profile(props) {
         Profile
       </Typography>
       <Card className={classes.card} elevation={3}>
-        <CardMedia
-          className={classes.photo}
-          image={user.photoUrl}
-          title="Profile"
-        />
+        <Button onClick={() => handleEditPhoto()}>
+          {userBeingViewed.photoUrl ? (<CardMedia
+            className={classes.photo}
+            image={userBeingViewed.photoUrl}
+            title="Profile"
+          />)
+          : "Add Profile Photo"}
+        </Button>
         <div className={classes.details}>
           <div className={classes.content}>
             <div className={classes.text}>
               <Typography className={classes.typography} variant="h4">
-                {user.firstName}
+                {userBeingViewed.firstName}
               </Typography>
               <Typography className={classes.typography} variant="h4">
-                {user.lastName}
+                {userBeingViewed.lastName}
               </Typography>
               <div style={{ marginTop: 16 }}>
-                {user.accountType === 0 ? (
+                {userBeingViewed.accountType === 0 ? (
                   <Chip label="Student Athlete" color="secondary" />
                 ) : (
                   <Chip label="Coach" color="secondary" />
                 )}
-                {showEditProfile ? (
+                {currentUser.id === userBeingViewed.id ? (
                   <Button
                     style={{ marginLeft: 8 }}
                     color="primary"
@@ -99,7 +107,7 @@ function Profile(props) {
               Biography
             </Typography>
             <Typography variant="body2">
-              {user.bio ? user.bio : "No biography yet!"}
+              {userBeingViewed.bio ? userBeingViewed.bio : "No biography yet!"}
             </Typography>
           </div>
         </div>
