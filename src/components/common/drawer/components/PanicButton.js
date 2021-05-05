@@ -1,11 +1,13 @@
 import React from 'react';
 import {
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControlLabel
 } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import useStyles from './styles';
@@ -89,13 +91,17 @@ function PanicButton(props) {
           <DialogContentText id="alert-dialog-description">
             Select the boxes that apply to you, then select "I Understand":
             <ThemeProvider theme={buttonTheme}>
-              <Button
-                className={classes.reasonButton}
-                variant="contained"
-                size="large"
-                color={state.button1}
-                onClick={() => handleChange('button1')}
-              >Concerns of suicide</Button>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                  className={classes.reasonButton}
+                  size="medium"
+                  color={state.button1}
+                  onClick={() => handleChange('button1')}
+                ></Checkbox>
+                }
+                label="Concerns of suicide"
+              />
               <Button
                 className={classes.reasonButton}
                 variant="contained"
