@@ -144,7 +144,7 @@ This project uses Cloudinary to host images, replacing AWS S3. Cloudinary does n
 
 To log into Cloudinary:
 1. Visit https://cloudinary.com/users/login
-2. Username: waxekit985@cnxingye.com
+2. Username: stuathsuccess@gmail.com
 3. Password: 7o0@7VNKMum*aRGX
 
 To add a new photo
