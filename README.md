@@ -139,6 +139,20 @@ A successful connection to the Server looks like this on the terminal:
   Database connected
   ```
 
+### Image Hosting
+This project uses Cloudinary to host images, replacing AWS S3. Cloudinary does not require a credit card attached to the account. The free tier consists of 25 monthly credits. 1 credit = 1,000 transformations, 1GB storage, or 1 GB Bandwidth
+
+To log into Cloudinary:
+1. Visit https://cloudinary.com/users/login
+2. Username: waxekit985@cnxingye.com
+3. Password: 7o0@7VNKMum*aRGX
+
+To add a new photo
+1. After logging in, go to the Media Library tab
+2. Navigate to the correct folder and drag/drop the image
+3. Once the image is added, simply hover over it and click on the chain hyperlink icon
+4. Use this direct link to reference the picture in the project
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
