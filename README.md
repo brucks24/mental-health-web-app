@@ -153,22 +153,22 @@ To add a new photo
 3. Once the image is added, simply hover over it and click on the chain hyperlink icon
 4. Use this direct link to reference the picture in the project
 
+<!-- USAGE EXAMPLES -->
+## Usage
+
 ### Registering a New User
 
 To log into SAS:
 1. Initialize a localhost connection ```npm start```
-2. Run the server ```
-yarn server```
+2. Run the server ```yarn server```
+
+3. Click Sign up
 
 ![Main Page](imgs/mainPage.png)
 
-3. Click Sign up
 4. Complete fields for registration
 
 ![Register Page](imgs/register.png)
-
-<!-- USAGE EXAMPLES -->
-## Usage
 
 ### Additional Screenshots
 
