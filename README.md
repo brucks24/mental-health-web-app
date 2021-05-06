@@ -160,13 +160,11 @@ To log into SAS:
 2. Run the server ```
 yarn server```
 
-### Main Page
 ![Main Page](imgs/mainPage.png)
 
 3. Click Sign up
 4. Complete fields for registration
 
-### Registration Page
 ![Register Page](imgs/register.png)
 
 <!-- USAGE EXAMPLES -->
