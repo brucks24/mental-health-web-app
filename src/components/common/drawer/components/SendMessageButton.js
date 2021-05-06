@@ -47,7 +47,7 @@ function SendMessageButton(props) {
 
     //Keeps the variables synced up with the text fields
     const handleChange = field => {
-        if(field.target.id == "subject"){
+        if(field.target.id === "subject"){
             subject = field.target.value;
         }else{
             message = field.target.value;

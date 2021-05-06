@@ -7,7 +7,7 @@ import {
     Settings as SettingsIcon,
     ArrowBack as ArrowBackIcon,
     SentimentSatisfiedAltOutlined as SupportTeamIcon,
-    Drafts as InboxIcon,
+    //Drafts as InboxIcon,
     Group as YourTeammates
 } from '@material-ui/icons';
 import { useTheme } from '@material-ui/styles';
@@ -154,23 +154,23 @@ function Sidebar(props) {
                 root: classNames(classes.headerIcon, classes.headerIconCollapse),
             }
         }
-        /> <
-        /IconButton> <
-        /div> <
-        List className = { classes.sidebarList } > {
+        /> 
+        </IconButton> 
+        </div> 
+        <List className = { classes.sidebarList } > {
             structure.map(link => ( <
                 SidebarLink key = { link.id }
                 location = { window.location }
                 isSidebarOpened = { navDrawerOpen } {...link }
                 />
             ))
-        } <
-        /List> <
+        } 
+        </List> <
         PanicButton {...props }
         handleSnackbarToggle = { handleSnackbarToggle }
-        /> <
-        /Drawer>
+        /> 
+        </Drawer>
     )
 }
 
-export default Sidebar
+export default Sidebar;

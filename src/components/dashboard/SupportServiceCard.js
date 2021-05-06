@@ -54,7 +54,6 @@ export default function SupportServiceCard(props) {
     <Grid item lg={3} sm={6} xl={3} xs={12}>
       {notifications ? (
         <Badge
-          Badge
           color="secondary"
           overlap="rectangle"
           badgeContent={notifications}
@@ -64,7 +63,9 @@ export default function SupportServiceCard(props) {
             style={{ backgroundColor: color, color: "#fff" }}
           >
             <CardMedia className={classes.media} image={image} title={header} />
-            <CardContent>
+            <CardContent
+              style={{ height: '150px' }}
+            >
               <Typography gutterBottom variant="h5" component="h2">
                 {header}
               </Typography>
@@ -78,8 +79,7 @@ export default function SupportServiceCard(props) {
                   [classes.expandOpen]: expanded,
                 })}
                 onClick={handleExpandClick}
-                aria-expand={expanded}
-                aria-label="show more"
+                aria-expanded={expanded}
               >
                 <ExpandMore />
               </IconButton>
@@ -97,7 +97,9 @@ export default function SupportServiceCard(props) {
           style={{ backgroundColor: color, color: "#fff" }}
         >
           <CardMedia className={classes.media} image={image} title={header} />
-          <CardContent>
+          <CardContent
+            style={{ height: '150px' }}
+          >
             <Typography gutterBottom variant="h5" component="h2">
               {header}
             </Typography>
@@ -111,7 +113,7 @@ export default function SupportServiceCard(props) {
                 [classes.expandOpen]: expanded,
               })}
               onClick={handleExpandClick}
-              aria-expand={expanded}
+              aria-expanded={expanded}
               aria-label="show more"
             >
               <ExpandMore />

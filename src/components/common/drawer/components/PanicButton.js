@@ -6,17 +6,15 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
   FormControlLabel,
   FormGroup
 } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import useStyles from './styles';
 import WarningIcon from '@material-ui/icons/WarningRounded';
-import { purple, red } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 import { useDispatch } from 'react-redux';
 import { panicButton } from '../../../../redux/actions/userActions';
-import { LabelSharp } from '@material-ui/icons';
 
 const theme = createMuiTheme({
   palette: {
@@ -111,10 +109,11 @@ function PanicButton(props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogContent>
-        <ThemeProvider theme={buttonTheme, theme}>
-          <DialogContentText id="alert-dialog-description" color="black">
+        <ThemeProvider theme={buttonTheme}>
+          <DialogContentText id="alert-dialog-description">
           If you are in a life threatening situation, or this is a medical emergency, please, close this app and dial 911 immediately.  Select the boxes that apply to you, then select "I Understand":
-            <FormGroup>
+          </DialogContentText>
+          <FormGroup>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -164,7 +163,6 @@ function PanicButton(props) {
                 label={labels.bullying}
               />
             </FormGroup>
-          </DialogContentText>
           </ThemeProvider>
         </DialogContent>
         <DialogActions>
