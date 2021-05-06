@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picture Upload</title>
+</head>
+<body>
+    <input type = "file">
+    <img src = "" id="myImg" width="250" height ="250">
+
+    <script>
+        window.addEventListener('load',function(){
+
+            if(this.files && this.files[0]){
+
+            
+            document.querySelector('input[type="file"]').addEventListener('change',function(){
+
+                var img = document.getElementByID("myImg");
+
+                img.src=URL.createObjectURL(this.files[0]);
+
+                img.onload = imgLoaded;
+            })
+        }
+        })
+
+        function imgLoaded(e){
+            alert(e);
+        }
+    
+    </script>
+    
+</body>
+</html>

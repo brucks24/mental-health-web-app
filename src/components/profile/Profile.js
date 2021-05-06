@@ -56,10 +56,7 @@ function Profile(props) {
     }
   }
 
-  useEffect(() => {
-    dispatch(getUserData(paramId));
-    isCurrentUser();
-  }, []);
+  
 
   return (
     <Fragment>
@@ -107,10 +104,24 @@ function Profile(props) {
               Biography
             </Typography>
             <Typography variant="body2">
-              {userBeingViewed.bio ? userBeingViewed.bio : "No biography yet!"}
+              {user.bio ? user.bio : "Write something about yourself!"}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              Contact Info
+            </Typography>
+            <Typography variant="body2">
+              {user.info ? user.info : user.email}
             </Typography>
           </div>
         </div>
+        
+        
+        
+        
+        
+          
+      
+
       </Card>
       <Grow in={showEditProfile}>
         <Card className={classes.infoCard}>
