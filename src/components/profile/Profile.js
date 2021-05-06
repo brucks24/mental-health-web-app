@@ -104,13 +104,13 @@ function Profile(props) {
               Biography
             </Typography>
             <Typography variant="body2">
-              {user.bio ? user.bio : "Write something about yourself!"}
+              {userBeingViewed.bio ? userBeingViewed.bio : "Write something about yourself!"}
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
               Contact Info
             </Typography>
             <Typography variant="body2">
-              {user.info ? user.info : user.email}
+              {userBeingViewed.info ? userBeingViewed.info : userBeingViewed.email}
             </Typography>
           </div>
         </div>
