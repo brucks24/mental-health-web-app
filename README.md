@@ -170,6 +170,15 @@ To log into SAS:
 
 ![Register Page](imgs/register.png)
 
+###Usage of the Panic Button
+
+To report an emergency situation:
+
+1. Select the panic button on the main page
+2. Select the boxes that apply to you, then click I understand.
+3. ![Panic Button](imgs/panicButton.png)
+4. Notification "Support has been notified" will prompt.
+
 ### Additional Screenshots
 
 ### Home Page
