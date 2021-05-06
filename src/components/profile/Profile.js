@@ -56,7 +56,10 @@ function Profile(props) {
     }
   }
 
-  
+  useEffect(() => {
+    dispatch(getUserData(paramId));
+    isCurrentUser();
+  }, []);
 
   return (
     <Fragment>
