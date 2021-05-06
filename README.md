@@ -156,8 +156,8 @@ To add a new photo
 ### Registering a New User
 
 To log into SAS:
-1. Initialize a localhost connection (npm start)
-2. Run the server ```sh 
+1. Initialize a localhost connection ```npm start```
+2. Run the server ```
 yarn server```
 
 3. Complete fields in registering new account
