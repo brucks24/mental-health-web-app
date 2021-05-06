@@ -159,8 +159,8 @@ To log into SAS:
 1. Initialize a localhost connection ```npm start```
 2. Run the server ```
 yarn server```
-
-3. Complete fields in registering new account
+3. Click Sign up
+4. Complete fields for registration
 
 <!-- USAGE EXAMPLES -->
 ## Usage
