@@ -113,6 +113,7 @@ function Chatbar(props) {
                 name={m.cc.name}
                 image={m.cc.image}
                 previewMessage={m.cc.previewMessage}
+                key={m.cc.name}
               />
             ))
           }
@@ -128,7 +129,6 @@ function Chatbar(props) {
           Create{" "}
         </Fab>
       </div>{" "}
-      <newMessageForm />
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup>
     </Drawer>
   );

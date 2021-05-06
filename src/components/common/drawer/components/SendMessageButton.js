@@ -28,28 +28,33 @@ function SendMessageButton(props) {
     let subject = "";
     let message = "";
 
+    //Opens the modal
     const handleClickOpen = () => {
         setOpen(true);
     }
 
+    //Closes the modal
     const handleClose = () => {
         setOpen(false);
     }
 
+    //Sends the subject and message to userActions.js, closes the modal
     const handleConfirm = () => {
         let props = {subject, message};
         dispatch(sendMessageAction(props));
         setOpen(false);
     }
 
+    //Keeps the variables synced up with the text fields
     const handleChange = field => {
-        if(field.target.id == "subject"){
+        if(field.target.id === "subject"){
             subject = field.target.value;
         }else{
             message = field.target.value;
         }
     }
 
+    //Displays the modal
     return (
         <div>
             <ThemeProvider theme={theme}>

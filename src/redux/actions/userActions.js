@@ -64,6 +64,7 @@ export const getUserData = () => dispatch => {
     });
 };
 
+//Posts to panic.routes.js
 export const panicButton = reasons => dispatch => {
     axios.post('/panic', reasons).then(res => {
         console.log(res);
@@ -80,6 +81,7 @@ export const panicButton = reasons => dispatch => {
     })
 }
 
+//Posts to sendMessage.routes.js
 export const sendMessageAction = props => dispatch => {
     axios.post('/sendMessage', props).then(res => {
         console.log(res);

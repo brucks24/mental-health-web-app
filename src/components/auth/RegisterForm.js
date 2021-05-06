@@ -19,10 +19,6 @@ const styles = theme => ({
       marginLeft: theme.spacing(2),
     },
   },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 150
-  },
   selectEmpty: {
     marginTop: theme.spacing(2)
   },
@@ -83,9 +79,6 @@ const styles = theme => ({
   formControl: {
     marginBottom: theme.spacing(1),
     minWidth: 140,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
   },
   tab: {
     fontWeight: 400,

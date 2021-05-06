@@ -5,7 +5,7 @@
 */
 import React, { useEffect } from 'react';
 import { Typography } from '@material-ui/core';
-import useStyles from './styles';
+//import useStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import Team from './teamObj';
 import Menu from './Coach/CoachMenu';
@@ -28,7 +28,7 @@ export function setTeams(teamData){
 }
 
 function Teams(){
-   	const classes = useStyles();
+   	//const classes = useStyles();
 	const dispatch = useDispatch();
 	
 	//Get user status
@@ -52,7 +52,7 @@ function Teams(){
 			</div>
 			)	
 	}else{
-	if (teams.length == 0){
+	if (teams.length === 0){
     	return (	
 		<Typography variant="h5">You are not part of any teams at the moment.</Typography>
 		)

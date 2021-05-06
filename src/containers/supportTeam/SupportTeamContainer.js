@@ -86,6 +86,7 @@ export default function SupportTeamContainer(props) {
             email={member.email}
             officeHours={member.officeHours}
             status={member.status}
+            key={member.id}
           />
         ))}
       </Grid>

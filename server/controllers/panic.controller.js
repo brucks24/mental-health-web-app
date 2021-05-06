@@ -23,7 +23,7 @@ function sendPanicEmail(req, res) {
 
   User.findById(userId).select('-hash').then(user => {
     if (user) {
-      readHTMLFile(`${appDir}\\helpers\\templates\\test.html`, (err, html) => {
+      readHTMLFile(`${appDir}\\helpers\\templates\\panicEmail.html`, (err, html) => {
         const template = handlebars.compile(html);
         const replacements = {
           panicReasons: panicReasons,

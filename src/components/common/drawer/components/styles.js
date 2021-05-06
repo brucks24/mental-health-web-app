@@ -60,11 +60,10 @@ export default makeStyles(theme => ({
     margin: theme.spacing(2),
   },
   reasonButton: {
-    display: 'flex',
     alignItems: 'center',
+    textAlign: 'center',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
-    width: '100%'
   },
   reasonButtonText: {
     fontWeight: 'bold'
