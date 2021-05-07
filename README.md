@@ -181,7 +181,7 @@ To report an non-life-threatening situation or concern:
 
 3. A "Support has been notified" message will pop up to confirm success.
 
-![Support Team Notified](imgs/support-team-notified.png)
+![Support Team Notified](imgs/support-team-notified.PNG)
 
 ### Send Message Button
 
@@ -199,7 +199,7 @@ To send a message to a support team member:
 4. Click "Send Message".
 5. A "Support has been notified" message will pop up to confirm success. 
 
-![Support Team Notified](imgs/support-team-notified.png)
+![Support Team Notified](imgs/support-team-notified.PNG)
 
 ## Additional Screenshots
 
