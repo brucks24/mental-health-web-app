@@ -159,29 +159,49 @@ To add a new photo
 ### Registering a New User
 
 To log into SAS:
-1. Initialize a localhost connection ```npm start```
-2. Run the server ```yarn server```
+1. Initialize a localhost connection. ```npm start```
+2. Run the server. ```yarn server```
 
-3. Click Sign up
+3. Click "Sign up".
 
 ![Main Page](imgs/mainPage.png)
 
-4. Complete fields for registration
+4. Complete fields for registration.
 
 ![Register Page](imgs/register.png)
 
 ### Usage of the Panic Button
 
-To report an emergency situation:
+To report an non-life-threatening situation or concern:
 
-1. Select the panic button on the main page
-2. Select the boxes that apply to you, then click I understand.
+1. Click the panic button on the main page.
+2. Select the boxes that apply to you, then click "I understand".
 
 ![Panic Button](imgs/panic-button-image.png)
 
-4. Notification "Support has been notified" will prompt.
+3. A "Support has been notified" message will pop up to confirm success.
 
-### Additional Screenshots
+![Support Team Notified](imgs/support-team-notified.png)
+
+### Send Message Button
+
+To send a message to a support team member:
+
+1. Select the "Your Support Team" tab.
+
+![Support Teams](imgs/supportTeams.png)
+
+2. Click on a "Send Message" button.
+
+![Send Message Button](imgs/send-message-button.png)
+
+3. Fill in a subject and message.
+4. Click "Send Message".
+5. A "Support has been notified" message will pop up to confirm success. 
+
+![Support Team Notified](imgs/support-team-notified.png)
+
+## Additional Screenshots
 
 ### Home Page
 ![Home Page](imgs/home.png)
@@ -189,8 +209,6 @@ To report an emergency situation:
 ![User profile](imgs/userProfile.png)
 ### "Your Teams" Page
 ![Your teams](imgs/yourTeams.png)
-### "Support Teams" Page
-![Support Teams](imgs/supportTeams.png)
 ### Panic Button
 ![Panic Button](imgs/panicButton.png)
 ### Creating a Message
