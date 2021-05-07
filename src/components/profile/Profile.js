@@ -22,31 +22,39 @@ function Profile(props) {
   const paramId = props.id;
   const userBeingViewed = useSelector(state => state.data.user);
   const currentUser = useSelector(state => state.user);
-
-  const initialState = {
-    firstName: userBeingViewed.firstName,
-    lastName: userBeingViewed.lastName,
-    email: userBeingViewed.email,
+  const [form, setForm] = React.useState({
+    firstName: userBeingViewed.firstName ? userBeingViewed.firstName : "",
+    lastName: userBeingViewed.lastName ? userBeingViewed.lastName : "",
+    email: userBeingViewed.email ? userBeingViewed.email : "",
     phone: userBeingViewed.phone ? userBeingViewed.phone : "",
     bio: userBeingViewed.bio ? userBeingViewed.bio : "",
-  };
+  });
+
+  const resetForm = () => {
+    setForm({
+      firstName: userBeingViewed.firstName ? userBeingViewed.firstName : "",
+      lastName: userBeingViewed.lastName ? userBeingViewed.lastName : "",
+      email: userBeingViewed.email ? userBeingViewed.email : "",
+      phone: userBeingViewed.phone ? userBeingViewed.phone : "",
+      bio: userBeingViewed.bio ? userBeingViewed.bio : "",
+    });
+  }
 
   const [showEditProfile, setShowEditProfile] = React.useState(false);
-  const [form, setForm] = React.useState(initialState);
 
   const handleEditProfile = () => {
     setShowEditProfile(!showEditProfile);
+    resetForm();
   };
 
   const handleEditPhoto = () => {
     //@todo: handle adding photo functionality
   };
 
-  const handleFormChange = (event) => {
-    event.preventDefault();
+  const handleFormChange = field => {
     setForm({
       ...form,
-      [event.target.name]: event.target.value,
+      [field.target.name]: field.target.value,
     });
   };
 
@@ -117,14 +125,6 @@ function Profile(props) {
             </Typography>
           </div>
         </div>
-        
-        
-        
-        
-        
-          
-      
-
       </Card>
       <Grow in={showEditProfile}>
         <Card className={classes.infoCard}>
