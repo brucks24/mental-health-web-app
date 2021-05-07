@@ -177,7 +177,7 @@ To report an emergency situation:
 1. Select the panic button on the main page
 2. Select the boxes that apply to you, then click I understand.
 
-![Panic Button](imgs/panicButton.png)
+![Panic Button](imgs/panic-button-image.png)
 
 4. Notification "Support has been notified" will prompt.
 
