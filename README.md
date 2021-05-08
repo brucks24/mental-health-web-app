@@ -20,7 +20,7 @@
   <h3 align="center">Student Athlete Success</h3>
 
   <p align="center">
-    UWW SASS is a information/social media support platform for student athletes and coaches.
+    UWW SASS is an information/social media support platform for student athletes and coaches.
     <br />
     <a href="https://github.com/uww-student-athlete-success/stuath-success-web"><strong>Explore the docs »</strong></a>
     <br />
