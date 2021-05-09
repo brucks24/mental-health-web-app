@@ -10,11 +10,12 @@ import {
   Typography,
   CardActions,
 } from "@material-ui/core";
-import React, { Fragment, useEffect } from "react";
+import React, { Component, Fragment, useEffect } from "react";
 import { getUserData } from "../../redux/actions/dataActions";
-
 import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
+
+
 
 function Profile(props) {
   const classes = useStyles();
@@ -28,6 +29,7 @@ function Profile(props) {
     email: userBeingViewed.email ? userBeingViewed.email : "",
     phone: userBeingViewed.phone ? userBeingViewed.phone : "",
     bio: userBeingViewed.bio ? userBeingViewed.bio : "",
+    teams: userBeingViewed.teams ? userBeingViewed.teams : "",
   });
 
   const resetForm = () => {
@@ -37,6 +39,7 @@ function Profile(props) {
       email: userBeingViewed.email ? userBeingViewed.email : "",
       phone: userBeingViewed.phone ? userBeingViewed.phone : "",
       bio: userBeingViewed.bio ? userBeingViewed.bio : "",
+      teams: userBeingViewed.teams ? userBeingViewed.teams : "",
     });
   }
 
@@ -48,7 +51,7 @@ function Profile(props) {
   };
 
   const handleEditPhoto = () => {
-    //@todo: handle adding photo functionality
+    //HandleEditPhoto
   };
 
   const handleFormChange = field => {
@@ -64,6 +67,7 @@ function Profile(props) {
     }
   }
 
+  
   useEffect(() => {
     dispatch(getUserData(paramId));
     isCurrentUser();
@@ -91,7 +95,7 @@ function Profile(props) {
               </Typography>
               <Typography className={classes.typography} variant="h4">
                 {userBeingViewed.lastName}
-              </Typography>
+              </Typography>             
               <div style={{ marginTop: 16 }}>
                 {userBeingViewed.accountType === 0 ? (
                   <Chip label="Student Athlete" color="secondary" />
@@ -116,6 +120,12 @@ function Profile(props) {
             </Typography>
             <Typography variant="body2">
               {userBeingViewed.bio ? userBeingViewed.bio : "Write something about yourself!"}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              Teams
+            </Typography>
+            <Typography variant="body2">
+              {userBeingViewed.sports ? userBeingViewed.sports : userBeingViewed.sports }
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
               Contact Info
@@ -179,6 +189,16 @@ function Profile(props) {
                   fullWidth={true}
                 />
               </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  name="teams"
+                  variant="outlined"
+                  label="Teams"
+                  value={form.teams}
+                  onChange={handleFormChange}
+                  fullWidth={true}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   name="bio"
@@ -199,7 +219,11 @@ function Profile(props) {
         </Card>
       </Grow>
     </Fragment>
+    
   );
 }
 
+
+
 export default Profile;
+
