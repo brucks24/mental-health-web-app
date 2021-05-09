@@ -64,6 +64,42 @@ const supportMembers = [
     officeHours: 'Mon - Fri 8AM-3:30PM',
     status: 'away'
   },
+  {
+    id: 5,
+    photoUrl: ' ',
+    firstName: 'Ryan',
+    lastName: 'Callahan',
+    title: '',
+    providerType: 'Athletics Director',
+    phone: '262-472-4661',
+    email: 'callahanRM19@uww.edu',
+    officeHours: 'Mon - Fri 9AM-5PM',
+    status: 'online'
+  },
+  {
+    id: 6,
+    photoUrl: ' ',
+    firstName: 'Steve',
+    lastName: 'Hillmer',
+    title: '',
+    providerType: 'Head Athletic Trainer',
+    phone: '262-472-3716',
+    email: 'hillmers@uww.edu',
+    officeHours: 'Mon - Fri 9AM-5PM',
+    status: 'online'
+  },
+  {
+    id: 7,
+    photoUrl: ' ',
+    firstName: 'Cameron',
+    lastName: 'Clinton-Earl',
+    title: '',
+    providerType: 'Academic Advisor',
+    phone: '262-472-7588',
+    email: 'clintonc@uww.edu',
+    officeHours: 'Mon - Fri 9AM-5PM',
+    status: 'online'
+  },
 ];
 
 export default function SupportTeamContainer(props) {
