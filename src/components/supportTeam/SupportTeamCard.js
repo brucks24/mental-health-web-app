@@ -67,7 +67,9 @@ export function SupportTeamCard({
   return (
     <Grid item key={id} lg={3} sm={6} xl={3} xs={12}>
       <Card className={classes.paper} elevation={3}>
-        <CardContent>
+        <CardContent
+          style={{ height: '320px' }}
+        >
           <div className={classes.avatarContainer}>
             <ThemeProvider theme={theme}>
               {status === 'online' ?
