@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import useStyles from './styles'
 
-const Chat = () => {
+const Chat1 = () => {
     const classes = useStyles()
 
     return (
@@ -12,4 +12,4 @@ const Chat = () => {
     )
 }
 
-export default Chat;
+export default Chat1;
