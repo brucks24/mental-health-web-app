@@ -209,8 +209,6 @@ To send a message to a support team member:
 ![User profile](imgs/userProfile.png)
 ### "Your Teams" Page
 ![Your teams](imgs/yourTeams.png)
-### Panic Button
-![Panic Button](imgs/panicButton.png)
 ### Creating a Message
 ![Chat Message](imgs/createMessage.png)
 
