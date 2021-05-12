@@ -1,6 +1,8 @@
 import React from 'react';
 import useStyles from './styles';
 import clsx from "clsx";
+import ChatFeed from '../chat/ChatFeed.js';
+
 import {
   Avatar,
   Typography,
@@ -23,9 +25,11 @@ import {
   PhoneAndroid,
   Email,
   ExpandMore,
-  AccessTime as OfficeHoursIcon
+  AccessTime as OfficeHoursIcon,
+  Chat
 } from "@material-ui/icons";
 import { green, red, yellow } from '@material-ui/core/colors';
+import { render } from '@testing-library/react';
 import SendMessageButton from '../common/drawer/components/SendMessageButton';
 
 const theme = createMuiTheme({
@@ -56,11 +60,13 @@ export function SupportTeamCard({
 }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [showChat, setChat] = React.useState(false);
   const name = {firstName, lastName};
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  
 
   // TODO: Add logic to handle button presses
   //sm={6} xl={3} xs={12}
@@ -103,6 +109,7 @@ export function SupportTeamCard({
             </Grid>
             <Grid item xs={6}>
               <Button
+                onClick={() => setChat(true)}
                 className={classes.button}
                 variant="contained"
                 color="primary"
@@ -151,7 +158,9 @@ export function SupportTeamCard({
           </List>
         </Collapse>
       </Card>
+      {showChat === true && <ChatFeed />}
     </Grid>
+   
   );
 }
 
