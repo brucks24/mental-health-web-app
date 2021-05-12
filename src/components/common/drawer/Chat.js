@@ -207,8 +207,9 @@ export default function Chat(props) {
       <div className={classes.chat}>
         {messages.messages !== undefined &&
           messages.messages.map((item) => {
+            let listItems;
             if (item.participants.includes(receiverName)) {
-              const listItems = item.msgs.map((m) => (
+              listItems = item.msgs.map((m) => (
                 <MessageBox
                   position={m.side}
                   type={"text"}
@@ -218,10 +219,11 @@ export default function Chat(props) {
                   data={{
                     uri: "https://facebook.github.io/react/img/logo.svg",
                   }}
+                  key={m.title + m.time}
                 />
               ));
-              return listItems;
             }
+            return (typeof listItems !== 'undefined') ? listItems : "";
           })}
       </div>
       <div>

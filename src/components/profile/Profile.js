@@ -10,51 +10,68 @@ import {
   Typography,
   CardActions,
 } from "@material-ui/core";
-import React, { Fragment, useEffect } from "react";
+import React, { Component, Fragment, useEffect } from "react";
 import { getUserData } from "../../redux/actions/dataActions";
-
 import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
+
+
 
 function Profile(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const paramId = props.id;
-  const user = useSelector((state) => state.data.user);
+  const userBeingViewed = useSelector(state => state.data.user);
+  const currentUser = useSelector(state => state.user);
+  const [form, setForm] = React.useState({
+    firstName: userBeingViewed.firstName ? userBeingViewed.firstName : "",
+    lastName: userBeingViewed.lastName ? userBeingViewed.lastName : "",
+    email: userBeingViewed.email ? userBeingViewed.email : "",
+    phone: userBeingViewed.phone ? userBeingViewed.phone : "",
+    bio: userBeingViewed.bio ? userBeingViewed.bio : "",
+    teams: userBeingViewed.teams ? userBeingViewed.teams : "",
+  });
 
-  const initialState = {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    phone: user.phone ? user.phone : "",
-    bio: user.bio ? user.bio : "",
-  };
+  const resetForm = () => {
+    setForm({
+      firstName: userBeingViewed.firstName ? userBeingViewed.firstName : "",
+      lastName: userBeingViewed.lastName ? userBeingViewed.lastName : "",
+      email: userBeingViewed.email ? userBeingViewed.email : "",
+      phone: userBeingViewed.phone ? userBeingViewed.phone : "",
+      bio: userBeingViewed.bio ? userBeingViewed.bio : "",
+      teams: userBeingViewed.teams ? userBeingViewed.teams : "",
+    });
+  }
 
   const [showEditProfile, setShowEditProfile] = React.useState(false);
-  const [form, setForm] = React.useState(initialState);
 
   const handleEditProfile = () => {
     setShowEditProfile(!showEditProfile);
+    resetForm();
   };
 
-  const handleFormChange = (event) => {
-    event.preventDefault();
+  const handleEditPhoto = () => {
+    //HandleEditPhoto
+  };
+
+  const handleFormChange = field => {
     setForm({
       ...form,
-      [event.target.name]: event.target.value,
+      [field.target.name]: field.target.value,
     });
   };
 
+  function isCurrentUser() {
+    if (currentUser.id !== userBeingViewed.id) {
+      setShowEditProfile(false);
+    }
+  }
+
+  
   useEffect(() => {
     dispatch(getUserData(paramId));
     isCurrentUser();
   }, []);
-
-  function isCurrentUser() {
-    if (paramId !== user.id) {
-      setShowEditProfile(false);
-    }
-  }
 
   return (
     <Fragment>
@@ -62,27 +79,30 @@ function Profile(props) {
         Profile
       </Typography>
       <Card className={classes.card} elevation={3}>
-        <CardMedia
-          className={classes.photo}
-          image={user.photoUrl}
-          title="Profile"
-        />
+        <Button onClick={() => handleEditPhoto()}>
+          {userBeingViewed.photoUrl ? (<CardMedia
+            className={classes.photo}
+            image={userBeingViewed.photoUrl}
+            title="Profile"
+          />)
+          : "Add Profile Photo"}
+        </Button>
         <div className={classes.details}>
           <div className={classes.content}>
             <div className={classes.text}>
               <Typography className={classes.typography} variant="h4">
-                {user.firstName}
+                {userBeingViewed.firstName}
               </Typography>
               <Typography className={classes.typography} variant="h4">
-                {user.lastName}
-              </Typography>
+                {userBeingViewed.lastName}
+              </Typography>             
               <div style={{ marginTop: 16 }}>
-                {user.accountType === 0 ? (
+                {userBeingViewed.accountType === 0 ? (
                   <Chip label="Student Athlete" color="secondary" />
                 ) : (
                   <Chip label="Coach" color="secondary" />
                 )}
-                {showEditProfile ? (
+                {currentUser.id === userBeingViewed.id ? (
                   <Button
                     style={{ marginLeft: 8 }}
                     color="primary"
@@ -99,7 +119,19 @@ function Profile(props) {
               Biography
             </Typography>
             <Typography variant="body2">
-              {user.bio ? user.bio : "No biography yet!"}
+              {userBeingViewed.bio ? userBeingViewed.bio : "Write something about yourself!"}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              Teams
+            </Typography>
+            <Typography variant="body2">
+              {userBeingViewed.sports ? userBeingViewed.sports : userBeingViewed.sports }
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              Contact Info
+            </Typography>
+            <Typography variant="body2">
+              {userBeingViewed.info ? userBeingViewed.info : userBeingViewed.email}
             </Typography>
           </div>
         </div>
@@ -157,6 +189,16 @@ function Profile(props) {
                   fullWidth={true}
                 />
               </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  name="teams"
+                  variant="outlined"
+                  label="Teams"
+                  value={form.teams}
+                  onChange={handleFormChange}
+                  fullWidth={true}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   name="bio"
@@ -177,7 +219,11 @@ function Profile(props) {
         </Card>
       </Grow>
     </Fragment>
+    
   );
 }
 
+
+
 export default Profile;
+

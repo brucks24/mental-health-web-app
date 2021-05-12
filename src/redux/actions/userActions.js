@@ -64,8 +64,26 @@ export const getUserData = () => dispatch => {
     });
 };
 
+//Posts to panic.routes.js
 export const panicButton = reasons => dispatch => {
     axios.post('/panic', reasons).then(res => {
+        console.log(res);
+        dispatch({
+            type: SHOW_SUCCESS_SNACKBAR,
+            payload: res.data.message
+        });
+    }).catch(err => {
+        console.log(err);
+        dispatch({
+            type: SET_ERRORS,
+            payload: err.message
+        })
+    })
+}
+
+//Posts to sendMessage.routes.js
+export const sendMessageAction = props => dispatch => {
+    axios.post('/sendMessage', props).then(res => {
         console.log(res);
         dispatch({
             type: SHOW_SUCCESS_SNACKBAR,

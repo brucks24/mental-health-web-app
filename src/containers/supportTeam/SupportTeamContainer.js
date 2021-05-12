@@ -6,9 +6,10 @@ import { SupportTeamCard } from '../../components/supportTeam/SupportTeamCard';
 const supportMembers = [
   {
     id: 0,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/photo.jpg',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Kristina_Navarro_mxvldn.jpg',
     firstName: 'Kristina',
-    lastName: 'Navarro, PhD',
+    lastName: 'Navarro',
+    title: 'PhD',
     providerType: 'Athletics Department Support',
     phone: '608-628-9187',
     email: 'navarrok@uww.edu',
@@ -17,9 +18,10 @@ const supportMembers = [
   },
   {
     id: 1,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/2.jpg',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Logan_Edwards_wnqwjf.jpg',
     firstName: 'Logan',
-    lastName: 'Edwards, PhD',
+    lastName: 'Edwards',
+    title: 'PhD',
     providerType: 'Team Mental Skills Coach',
     phone: '262-472-1374',
     email: 'edwardsl@uww.edu',
@@ -28,9 +30,10 @@ const supportMembers = [
   },
   {
     id: 2,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/omdoll_150x200.png',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Rachael_Omdoll_cycnlz.png',
     firstName: 'Rachael',
-    lastName: 'Omdoll, RD',
+    lastName: 'Omdoll',
+    title: 'RD',
     providerType: 'Team Dietitian',
     phone: '262-472-1375',
     email: 'omdollr@uww.edu',
@@ -39,9 +42,10 @@ const supportMembers = [
   },
   {
     id: 3,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/Steve-Hilmer.jpg',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Steve_Hillmer_sku7i3.jpg',
     firstName: 'Steve',
-    lastName: 'Hillmer, ATC',
+    lastName: 'Hillmer',
+    title: 'ATC',
     providerType: 'Head Athletic Trainer',
     phone: '262-472-5555',
     email: 'hillmers@uww.edu',
@@ -50,14 +54,51 @@ const supportMembers = [
   },
   {
     id: 4,
-    photoUrl: 'https://sass-profile-photos.s3.us-east-2.amazonaws.com/15219368_10103882127277919_8056818553640390465_n.jpg',
+    photoUrl: 'https://res.cloudinary.com/stuathsuccess/image/upload/v1620187405/staff-photos/Lindsey_Greviskes_nbaemu.jpg',
     firstName: 'Lindsey',
-    lastName: 'Greviskes, PhD',
+    lastName: 'Greviskes',
+    title: 'PhD',
     providerType: 'Sport Psychologist',
     phone: '630-699-4119',
     email: 'greviskesl@uww.edu',
     officeHours: 'Mon - Fri 8AM-3:30PM',
     status: 'away'
+  },
+  {
+    id: 5,
+    photoUrl: ' ',
+    firstName: 'Ryan',
+    lastName: 'Callahan',
+    title: '',
+    providerType: 'Athletics Director',
+    phone: '262-472-4661',
+    email: 'callahanRM19@uww.edu',
+    officeHours: 'Mon - Fri 9AM-5PM',
+    status: 'online'
+  },
+  {
+    id: 6,
+    photoUrl: ' ',
+    firstName: 'Steve',
+    lastName: 'Hillmer',
+    title: '',
+    providerType: 'Head Athletic Trainer',
+    phone: '262-472-3716',
+    email: 'hillmers@uww.edu',
+    officeHours: 'Mon - Fri 9AM-5PM',
+    status: 'online'
+  },
+  {
+    id: 7,
+    photoUrl: ' ',
+    firstName: 'Cameron',
+    lastName: 'Clinton-Earl',
+    title: '',
+    providerType: 'Academic Advisor',
+    phone: '262-472-7588',
+    email: 'clintonc@uww.edu',
+    officeHours: 'Mon - Fri 9AM-5PM',
+    status: 'online'
   },
 ];
 
@@ -75,11 +116,13 @@ export default function SupportTeamContainer(props) {
             photoUrl={member.photoUrl} 
             firstName={member.firstName}
             lastName={member.lastName}
+            title={member.title}
             providerType={member.providerType}
             phone={member.phone}
             email={member.email}
             officeHours={member.officeHours}
             status={member.status}
+            key={member.id}
           />
         ))}
       </Grid>

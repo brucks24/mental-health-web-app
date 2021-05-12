@@ -30,6 +30,7 @@ import {
 } from "@material-ui/icons";
 import { green, red, yellow } from '@material-ui/core/colors';
 import { render } from '@testing-library/react';
+import SendMessageButton from '../common/drawer/components/SendMessageButton';
 
 const theme = createMuiTheme({
   palette: {
@@ -50,6 +51,7 @@ export function SupportTeamCard({
   photoUrl,
   firstName,
   lastName,
+  title,
   providerType,
   phone,
   email,
@@ -59,6 +61,7 @@ export function SupportTeamCard({
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [showChat, setChat] = React.useState(false);
+  const name = {firstName, lastName};
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -70,7 +73,9 @@ export function SupportTeamCard({
   return (
     <Grid item key={id} lg={3} sm={6} xl={3} xs={12}>
       <Card className={classes.paper} elevation={3}>
-        <CardContent>
+        <CardContent
+          style={{ height: '320px' }}
+        >
           <div className={classes.avatarContainer}>
             <ThemeProvider theme={theme}>
               {status === 'online' ?
@@ -90,7 +95,7 @@ export function SupportTeamCard({
           </div>
           <div className={classes.nameContainer}>
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {firstName} {lastName}
+              {firstName} {lastName}, {title}
             </Typography>
             <Typography className={classes.typeText}>
               {providerType}
@@ -98,14 +103,9 @@ export function SupportTeamCard({
           </div>
           <Grid container justify="center" spacing={1}>
             <Grid item xs={6}>
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                fullWidth={true}
-              >
-                Send Message
-              </Button>
+            <
+            SendMessageButton { ...name }
+            />
             </Grid>
             <Grid item xs={6}>
               <Button

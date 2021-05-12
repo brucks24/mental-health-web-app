@@ -20,7 +20,7 @@
   <h3 align="center">Student Athlete Success</h3>
 
   <p align="center">
-    UWW SASS is a information/social media support platform for student athletes and coaches.
+    UWW SASS is an information/social media support platform for student athletes and coaches.
     <br />
     <a href="https://github.com/uww-student-athlete-success/stuath-success-web"><strong>Explore the docs »</strong></a>
     <br />
@@ -139,22 +139,76 @@ A successful connection to the Server looks like this on the terminal:
   Database connected
   ```
 
+### Image Hosting
+This project uses Cloudinary to host images, replacing AWS S3. Cloudinary does not require a credit card attached to the account. The free tier consists of 25 monthly credits. 1 credit = 1,000 transformations, 1GB storage, or 1 GB Bandwidth
+
+To log into Cloudinary:
+1. Visit https://cloudinary.com/users/login
+2. Username: stuathsuccess@gmail.com
+3. Password: 7o0@7VNKMum*aRGX
+
+To add a new photo
+1. After logging in, go to the Media Library tab
+2. Navigate to the correct folder and drag/drop the image
+3. Once the image is added, simply hover over it and click on the chain hyperlink icon
+4. Use this direct link to reference the picture in the project
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### Additional Screenshots
-### Main Page
+### Registering a New User
+
+To log into SAS:
+1. Initialize a localhost connection. ```npm start```
+2. Run the server. ```yarn server```
+
+3. Click "Sign up".
+
 ![Main Page](imgs/mainPage.png)
-### Registration Page
+
+4. Complete fields for registration.
+
 ![Register Page](imgs/register.png)
+
+### Usage of the Panic Button
+
+To report an non-life-threatening situation or concern:
+
+1. Click the panic button on the main page.
+2. Select the boxes that apply to you, then click "I understand".
+
+![Panic Button](imgs/panic-button-image.png)
+
+3. A "Support has been notified" message will pop up to confirm success.
+
+![Support Team Notified](imgs/support-team-notified.PNG)
+
+### Send Message Button
+
+To send a message to a support team member:
+
+1. Select the "Your Support Team" tab.
+
+![Support Teams](imgs/supportTeams.png)
+
+2. Click on a "Send Message" button.
+
+![Send Message Button](imgs/send-message-button.png)
+
+3. Fill in a subject and message.
+4. Click "Send Message".
+5. A "Support has been notified" message will pop up to confirm success. 
+
+![Support Team Notified](imgs/support-team-notified.PNG)
+
+## Additional Screenshots
+
 ### Home Page
 ![Home Page](imgs/home.png)
 ### User Profile
 ![User profile](imgs/userProfile.png)
 ### "Your Teams" Page
 ![Your teams](imgs/yourTeams.png)
-### "Support Teams" Page
-![Support Teams](imgs/supportTeams.png)
 ### Panic Button
 ![Panic Button](imgs/panicButton.png)
 ### Creating a Message

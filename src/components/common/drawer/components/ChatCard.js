@@ -22,7 +22,6 @@ export default function ChatCard(props) {
         <ListItemText
           primary={name}
           secondary={
-            <React.Fragment>
               <Typography
                 variant="body2"
                 color="textPrimary"
@@ -30,7 +29,6 @@ export default function ChatCard(props) {
               >
                 {previewMessage}
               </Typography>
-            </React.Fragment>
           }
         />
 
